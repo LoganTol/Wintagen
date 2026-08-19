@@ -3,6 +3,7 @@ import { ArrowRight, Boxes, Compass, Layers, Workflow, Code2, Globe } from "luci
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { LogoMark } from "@/components/site/Logo";
+import { Reveal } from "@/components/site/Reveal";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -63,7 +64,8 @@ const PRODUCTS = [
 
 function ProductCard({ item }: { item: (typeof PRODUCTS)[number] }) {
   return (
-    <article className="card-surface reveal flex flex-col gap-4 p-7 sm:p-9">
+    <Reveal>
+      <article className="card-surface flex h-full flex-col gap-4 p-7 sm:p-9">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <span className="text-xs font-semibold uppercase tracking-[0.14em] text-brand">
           {item.label}
@@ -73,8 +75,9 @@ function ProductCard({ item }: { item: (typeof PRODUCTS)[number] }) {
         </span>
       </div>
       <h3 className="text-xl font-semibold tracking-tight sm:text-2xl">{item.title}</h3>
-      <p className="max-w-2xl text-muted-foreground">{item.description}</p>
-    </article>
+        <p className="max-w-2xl text-muted-foreground">{item.description}</p>
+      </article>
+    </Reveal>
   );
 }
 
@@ -86,7 +89,7 @@ function Index() {
         {/* Hero */}
         <section className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-            <div className="reveal">
+            <Reveal>
               <p className="text-sm font-semibold tracking-[0.12em] text-brand uppercase">
                 Products. Services. One standard.
               </p>
@@ -105,10 +108,10 @@ function Index() {
                   View our services
                 </a>
               </div>
-            </div>
+            </Reveal>
 
-            <div aria-hidden="true" className="reveal relative">
-              <div className="card-surface grid gap-4 p-6 sm:p-8">
+            <Reveal delay={120} className="relative">
+              <div aria-hidden="true" className="card-surface grid gap-4 p-6 sm:p-8">
                 <div className="flex items-center gap-3 rounded-xl border border-border bg-surface p-4">
                   <LogoMark className="h-6 w-6 shrink-0" />
                   <div className="h-2 w-28 rounded-full bg-brand/70" />
@@ -138,7 +141,7 @@ function Index() {
                   </div>
                 </div>
               </div>
-            </div>
+            </Reveal>
           </div>
         </section>
 
