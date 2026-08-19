@@ -110,8 +110,8 @@ function Index() {
               </div>
             </Reveal>
 
-            <Reveal delay={120} className="relative" >
-              <div className="card-surface grid gap-4 p-6 sm:p-8">
+            <Reveal delay={120} className="relative">
+              <div aria-hidden="true" className="card-surface grid gap-4 p-6 sm:p-8">
                 <div className="flex items-center gap-3 rounded-xl border border-border bg-surface p-4">
                   <LogoMark className="h-6 w-6 shrink-0" />
                   <div className="h-2 w-28 rounded-full bg-brand/70" />
