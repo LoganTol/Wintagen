@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { Wordmark } from "./Logo";
+import wintagenLogo from "@/assets/Wintagen_Logo_Final.png.asset.json";
 
 const NAV = [
   { label: "Products", href: "#products" },
@@ -34,7 +34,11 @@ export function Header() {
           className="min-w-0 rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
           aria-label="Wintagen — back to top"
         >
-          <Wordmark />
+          <img
+            src={wintagenLogo.url}
+            alt="Wintagen"
+            className="h-9 w-auto max-w-[190px] object-contain sm:h-10 sm:max-w-[220px]"
+          />
         </a>
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
