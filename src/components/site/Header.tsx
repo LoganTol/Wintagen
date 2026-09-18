@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import wintagenLogo from "@/assets/Wintagen_Logo_Final.png.asset.json";
+import wintagenLogo from "@/assets/Wintagen_Logo_Transparent.png.asset.json";
 
 const NAV = [
   { label: "Products", href: "#products" },
