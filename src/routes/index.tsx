@@ -138,7 +138,7 @@ function Index() {
                     <div className="mt-4 grid grid-cols-3 gap-3">
                       <div className="h-12 rounded-lg border border-border bg-surface" />
                       <div className="h-12 rounded-lg border border-border bg-surface" />
-                      <div className="h-12 rounded-lg border border-brand/30 bg-brand-soft" />
+                      <div className="h-12 rounded-lg border border-brand-accent/40 bg-brand-accent/10" />
                     </div>
                   </div>
                 </div>
