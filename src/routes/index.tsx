@@ -138,7 +138,7 @@ function Index() {
                     <div className="mt-4 grid grid-cols-3 gap-3">
                       <div className="h-12 rounded-lg border border-border bg-surface" />
                       <div className="h-12 rounded-lg border border-border bg-surface" />
-                      <div className="h-12 rounded-lg border border-brand/30 bg-brand-soft" />
+                      <div className="h-12 rounded-lg border border-brand-accent/40 bg-brand-accent/10" />
                     </div>
                   </div>
                 </div>
@@ -153,6 +153,7 @@ function Index() {
             <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
               Two ways we create value.
             </h2>
+            <span aria-hidden="true" className="mt-4 block h-1 w-12 rounded-full bg-brand-accent" />
             <div className="mt-10 grid gap-6 md:grid-cols-2">
               <article className="card-surface flex flex-col p-8 transition-shadow hover:shadow-md">
                 <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand-soft">
@@ -167,7 +168,7 @@ function Index() {
                   className="group mt-8 inline-flex items-center gap-2 rounded-md text-sm font-semibold text-brand focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
                 >
                   Explore products
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  <ArrowRight className="h-4 w-4 transition-all group-hover:translate-x-0.5 group-hover:text-brand-accent" />
                 </a>
               </article>
 
@@ -185,7 +186,7 @@ function Index() {
                   className="group mt-8 inline-flex items-center gap-2 rounded-md text-sm font-semibold text-brand focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
                 >
                   Explore services
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  <ArrowRight className="h-4 w-4 transition-all group-hover:translate-x-0.5 group-hover:text-brand-accent" />
                 </a>
               </article>
             </div>
@@ -194,9 +195,10 @@ function Index() {
 
         {/* Products */}
         <section id="products" className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
-          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-            Products built with purpose.
-          </h2>
+            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+              Products built with purpose.
+            </h2>
+            <span aria-hidden="true" className="mt-4 block h-1 w-12 rounded-full bg-brand-accent" />
           <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
             Our portfolio is designed to grow. Each product starts with a specific problem and a
             straightforward reason to exist.
@@ -214,6 +216,7 @@ function Index() {
             <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
               Technology services, shaped around the work.
             </h2>
+            <span aria-hidden="true" className="mt-4 block h-1 w-12 rounded-full bg-brand-accent" />
             <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {SERVICES.map(({ icon: Icon, title, body }) => (
                 <article
@@ -243,6 +246,7 @@ function Index() {
               <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
                 Built to create useful things.
               </h2>
+              <span aria-hidden="true" className="mt-4 block h-1 w-12 rounded-full bg-brand-accent" />
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
                 Wintagen is a software company built around a simple idea: good technology should
                 have a clear purpose. We develop our own products and apply the same practical
@@ -272,6 +276,7 @@ function Index() {
             <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
               Have a product to explore or a project to discuss?
             </h2>
+            <span aria-hidden="true" className="mx-auto mt-4 block h-1 w-12 rounded-full bg-brand-accent" />
             <p className="mx-auto mt-5 max-w-xl text-lg text-muted-foreground">
               See what we're building or start a conversation about what you need.
             </p>

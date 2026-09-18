@@ -15,7 +15,8 @@ export function Footer() {
       <div className="mx-auto flex max-w-6xl flex-col gap-8 px-5 py-12 md:flex-row md:items-start md:justify-between md:px-8">
         <div className="max-w-sm">
           <Wordmark />
-          <p className="mt-3 text-sm text-muted-foreground">
+          <p className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
+            <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
             Software products and technology services.
           </p>
         </div>
