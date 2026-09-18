@@ -37,7 +37,7 @@ export function Header() {
           <img
             src={wintagenLogo.url}
             alt="Wintagen"
-            className="h-9 w-auto max-w-[190px] object-contain sm:h-10 sm:max-w-[220px]"
+            className="h-11 w-auto max-w-[230px] object-contain sm:h-12 sm:max-w-[260px]"
           />
         </a>
 
