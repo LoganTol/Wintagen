@@ -70,7 +70,8 @@ function ProductCard({ item }: { item: (typeof PRODUCTS)[number] }) {
         <span className="text-xs font-semibold uppercase tracking-[0.14em] text-brand">
           {item.label}
         </span>
-        <span className="rounded-full border border-border bg-brand-soft px-3 py-1 text-xs font-medium text-foreground">
+        <span className="inline-flex items-center gap-2 rounded-full border border-border bg-brand-soft px-3 py-1 text-xs font-medium text-foreground">
+          <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
           {item.status}
         </span>
       </div>
@@ -90,7 +91,8 @@ function Index() {
         <section className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
             <Reveal>
-              <p className="text-sm font-semibold tracking-[0.12em] text-brand uppercase">
+              <p className="flex items-center gap-3 text-sm font-semibold tracking-[0.12em] text-brand uppercase">
+                <span aria-hidden="true" className="h-2 w-2 rounded-full bg-brand-accent" />
                 Products. Services. One standard.
               </p>
               <h1 className="mt-5 text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl">
@@ -115,7 +117,7 @@ function Index() {
                 <div className="flex items-center gap-3 rounded-xl border border-border bg-surface p-4">
                   <LogoMark className="h-6 w-6 shrink-0" />
                   <div className="h-2 w-28 rounded-full bg-brand/70" />
-                  <div className="ml-auto h-2 w-10 rounded-full bg-border" />
+                  <div className="ml-auto h-2 w-10 rounded-full bg-brand-accent" />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="rounded-xl border border-border bg-background p-4">
@@ -255,7 +257,7 @@ function Index() {
                     key={p}
                     className="flex items-center gap-3 rounded-xl border border-border bg-surface px-5 py-4"
                   >
-                    <span className="h-2.5 w-2.5 shrink-0 rounded-sm bg-brand" />
+                    <span className="h-2.5 w-2.5 shrink-0 rounded-sm bg-brand-accent" />
                     <span className="font-medium">{p}</span>
                   </li>
                 ),
