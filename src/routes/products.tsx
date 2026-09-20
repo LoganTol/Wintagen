@@ -207,10 +207,43 @@ function ProductLayer({
 
 function ProductsPage() {
   const [openProduct, setOpenProduct] = useState<number | null>(null);
+  const openTimer = useRef<number | null>(null);
+  const closeTimer = useRef<number | null>(null);
+
+  const clearTimer = (ref: React.MutableRefObject<number | null>) => {
+    if (ref.current !== null) {
+      window.clearTimeout(ref.current);
+      ref.current = null;
+    }
+  };
 
   useEffect(() => {
     if (window.matchMedia("(hover: none), (pointer: coarse)").matches) setOpenProduct(0);
+    return () => {
+      clearTimer(openTimer);
+      clearTimer(closeTimer);
+    };
   }, []);
+
+  // Hover intent: a band opens after a short dwell, and a band only closes
+  // when the pointer leaves the whole stack or settles on another band —
+  // so layout shifts while panels glide never drop the open state.
+  const requestOpen = (index: number) => {
+    clearTimer(closeTimer);
+    clearTimer(openTimer);
+    openTimer.current = window.setTimeout(() => setOpenProduct(index), 180);
+  };
+  const openNow = (index: number) => {
+    clearTimer(closeTimer);
+    clearTimer(openTimer);
+    setOpenProduct(index);
+  };
+  const scheduleStackClose = () => {
+    clearTimer(openTimer);
+    clearTimer(closeTimer);
+    closeTimer.current = window.setTimeout(() => setOpenProduct(null), 250);
+  };
+  const cancelStackClose = () => clearTimer(closeTimer);
 
   return (
     <div id="top" className="min-h-screen bg-background">
