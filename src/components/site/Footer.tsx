@@ -4,7 +4,7 @@ import wintagenLogo from "@/assets/Wintagen_Logo_Transparent.png.asset.json";
 const LINKS = [
   { label: "Products", href: "/products" },
   { label: "Services", href: "/services" },
-  { label: "About Us", href: "/#about" },
+  { label: "About Us", href: "/about" },
   { label: "Contact", href: "/#contact" },
   { label: "Privacy", href: "/privacy" },
   { label: "Terms", href: "/terms" },

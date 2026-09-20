@@ -209,63 +209,6 @@ function Index() {
           </div>
         </section>
 
-        {/* About */}
-        <section id="about" className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16">
-            <div>
-              <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-                Built to create useful things.
-              </h2>
-              <span aria-hidden="true" className="mt-4 block h-1 w-12 rounded-full bg-brand-accent" />
-              <div className="mt-6 max-w-2xl space-y-5">
-                <p className="text-lg leading-relaxed text-muted-foreground">
-                  Wintagen is a software company based in Atlanta, Georgia, where we develop digital
-                  products and work with businesses to create custom software, applications, and
-                  websites. We bring creative ideas and practical development together to build
-                  technology around the people who use it.
-                </p>
-                <p className="leading-relaxed text-muted-foreground">
-                  Every project starts with a conversation. We take time to understand your
-                  business, the challenges you face, and what you want to accomplish. Whether you
-                  have a detailed plan or an idea you're still exploring, we work with you to turn
-                  that vision into a clear direction.
-                </p>
-                <p className="leading-relaxed text-muted-foreground">
-                  Customer involvement remains important throughout development. Through open
-                  communication, regular feedback, and shared decisions, we keep the work connected
-                  to your goals. Your knowledge of your business helps shape what we build, from the
-                  features that matter most to the experience your customers will have.
-                </p>
-                <p className="leading-relaxed text-muted-foreground">
-                  Building our own products also informs how we approach client projects. We
-                  consider how software will be used, maintained, and improved after launch,
-                  alongside the work needed to get it there.
-                </p>
-                <p className="font-medium leading-relaxed text-foreground">
-                  At Wintagen, we're creating a home for useful products, creative thinking, and
-                  lasting customer relationships. Our goal is to make thoughtful software that helps
-                  businesses move forward and makes everyday tasks easier.
-                </p>
-              </div>
-            </div>
-            <ul className="grid gap-4 self-center">
-              {[
-                "Purpose first.",
-                "Practical by default.",
-                "Built to grow.",
-              ].map((line) => (
-                <li
-                  key={line}
-                  className="flex items-start gap-3 rounded-xl border border-border bg-surface px-5 py-4"
-                >
-                  <span aria-hidden="true" className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-sm bg-brand-accent" />
-                  <span className="font-medium">{line}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
         {/* Contact CTA */}
         <section id="contact" className="border-t border-border bg-surface">
           <div className="mx-auto max-w-3xl px-5 py-20 text-center md:px-8 md:py-28">
