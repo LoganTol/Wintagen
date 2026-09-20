@@ -208,6 +208,15 @@ function Index() {
               <ProductCard key={p.title} item={p} />
             ))}
           </div>
+          <div className="mt-10">
+            <Link
+              to="/products"
+              className="group inline-flex items-center gap-2 rounded-md text-sm font-semibold text-brand focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
+            >
+              View the full portfolio
+              <ArrowRight className="h-4 w-4 transition-all group-hover:translate-x-0.5 group-hover:text-brand-accent" />
+            </Link>
+          </div>
         </section>
 
         {/* Services */}
