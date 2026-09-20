@@ -2,8 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Boxes, Compass, Layers, Workflow, Code2, Globe } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { LogoMark } from "@/components/site/Logo";
 import { Reveal } from "@/components/site/Reveal";
+import heroSkyline from "@/assets/wintagen-hero-skyline-dawn.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -15,14 +15,22 @@ export const Route = createFileRoute("/")({
           "Wintagen creates focused software products and provides practical technology services for businesses building what comes next.",
       },
       { property: "og:title", content: "Wintagen | Software Products & Technology Services" },
+      { property: "og:url", content: "/" },
       {
         property: "og:description",
         content:
           "Wintagen creates focused software products and provides practical technology services for businesses building what comes next.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
+      {
+        property: "og:image",
+        content: `https://wintagen-builder-spark.lovable.app${heroSkyline.url}`,
+      },
       { name: "twitter:card", content: "summary_large_image" },
+      {
+        name: "twitter:image",
+        content: `https://wintagen-builder-spark.lovable.app${heroSkyline.url}`,
+      },
     ],
     links: [{ rel: "canonical", href: "/" }],
   }),
@@ -113,36 +121,15 @@ function Index() {
             </Reveal>
 
             <Reveal delay={120} className="relative">
-              <div aria-hidden="true" className="card-surface grid gap-4 p-6 sm:p-8">
-                <div className="flex items-center gap-3 rounded-xl border border-border bg-surface p-4">
-                  <LogoMark className="h-6 w-6 shrink-0" />
-                  <div className="h-2 w-28 rounded-full bg-brand/70" />
-                  <div className="ml-auto h-2 w-10 rounded-full bg-brand-accent" />
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="rounded-xl border border-border bg-background p-4">
-                    <div className="h-8 w-8 rounded-lg bg-brand" />
-                    <div className="mt-4 h-2 w-3/4 rounded-full bg-border" />
-                    <div className="mt-2 h-2 w-1/2 rounded-full bg-border" />
-                  </div>
-                  <div className="rounded-xl border border-border bg-brand-soft p-4">
-                    <div className="h-8 w-8 rounded-full bg-brand/60" />
-                    <div className="mt-4 h-2 w-2/3 rounded-full bg-border" />
-                    <div className="mt-2 h-2 w-1/2 rounded-full bg-border" />
-                  </div>
-                  <div className="col-span-2 rounded-xl border border-border bg-background p-4">
-                    <div className="flex items-center gap-3">
-                      <div className="h-2 flex-1 rounded-full bg-brand/50" />
-                      <div className="h-2 w-12 rounded-full bg-border" />
-                    </div>
-                    <div className="mt-4 grid grid-cols-3 gap-3">
-                      <div className="h-12 rounded-lg border border-border bg-surface" />
-                      <div className="h-12 rounded-lg border border-border bg-surface" />
-                      <div className="h-12 rounded-lg border border-brand-accent/40 bg-brand-accent/10" />
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <figure className="card-surface overflow-hidden p-2 sm:p-3">
+                <img
+                  src={heroSkyline.url}
+                  alt="A city skyline at dawn, with the first light catching the tops of the buildings"
+                  className="aspect-[8/5] w-full rounded-lg object-cover"
+                  width={1400}
+                  height={861}
+                />
+              </figure>
             </Reveal>
           </div>
         </section>
