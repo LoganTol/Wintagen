@@ -274,6 +274,11 @@
   --product-soft: oklch(0.965 0.025 286);
 }
 
+.product-layer--proplans {
+  --product-color: oklch(0.705 0.19 48);
+  --product-soft: oklch(0.97 0.03 50);
+}
+
 .product-layer::before {
   content: "";
   position: absolute;

@@ -4,11 +4,14 @@ import {
   ArrowLeft,
   ArrowRight,
   CalendarDays,
+  DraftingCompass,
   ExternalLink,
   LayoutTemplate,
   Repeat2,
+  ScrollText,
   Smartphone,
   Sparkles,
+  Store,
   Trophy,
   UsersRound,
   WandSparkles,
@@ -69,6 +72,22 @@ const PRODUCTS = [
       { label: "Mobile-first layouts", icon: Smartphone },
       { label: "No-code workflow", icon: LayoutTemplate },
       { label: "Rapid previews", icon: Sparkles },
+    ],
+  },
+  {
+    name: "ProPlans",
+    category: "Blueprint marketplace",
+    tagline: "Plans from the pros, for your next project.",
+    description:
+      "ProPlans is a peer-to-peer marketplace for home improvement, woodworking, and construction project plans — connecting creators who sell detailed blueprints with builders ready to get to work.",
+    url: "https://logantol.github.io/DIY-Market/",
+    domain: "logantol.github.io/DIY-Market",
+    theme: "proplans" as const,
+    capabilities: [
+      { label: "Curated project plans", icon: ScrollText },
+      { label: "Sell your blueprints", icon: Store },
+      { label: "Custom plan requests", icon: DraftingCompass },
+      { label: "Maker community", icon: UsersRound },
     ],
   },
 ] as const;
@@ -215,7 +234,7 @@ function ProductsPage() {
             <span aria-hidden="true" className="mt-4 block h-1 w-12 rounded-full bg-brand-accent" />
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
               Each Wintagen product starts with a specific problem and a straightforward reason to
-              exist. Meet the first two brands in our growing portfolio.
+              exist. Meet the first three brands in our growing portfolio.
             </p>
           </Reveal>
         </section>
