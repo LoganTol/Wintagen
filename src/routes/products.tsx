@@ -27,12 +27,12 @@ export const Route = createFileRoute("/products")({
       { title: "Products | Wintagen" },
       {
         name: "description",
-        content: "Explore Aether Tennis and QuickSite, two focused digital products in the Wintagen portfolio.",
+        content: "Explore Aether Tennis, QuickSite, and ProPlans — focused digital products in the Wintagen portfolio.",
       },
       { property: "og:title", content: "Products | Wintagen" },
       {
         property: "og:description",
-        content: "Explore Aether Tennis and QuickSite, two focused digital products in the Wintagen portfolio.",
+        content: "Explore Aether Tennis, QuickSite, and ProPlans — focused digital products in the Wintagen portfolio.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
