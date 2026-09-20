@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowLeft,
@@ -15,8 +16,7 @@ import {
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/Reveal";
-import aetherLogo from "@/assets/aether-tennis-logo.png.asset.json";
-import quickSiteLogo from "@/assets/quicksite-logo.png.asset.json";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/products")({
   head: () => ({
@@ -47,8 +47,6 @@ const PRODUCTS = [
       "Aether Tennis turns a group of players into an organized round-robin season, coordinating fixtures, scheduling responsibilities, scores, and standings in one shared place.",
     url: "https://aethertennis.com/",
     domain: "aethertennis.com",
-    logo: aetherLogo.url,
-    logoClassName: "max-h-24 max-w-[15rem]",
     theme: "aether" as const,
     capabilities: [
       { label: "Generated fixtures", icon: CalendarDays },
@@ -65,8 +63,6 @@ const PRODUCTS = [
       "QuickSite transforms an existing website into a modern, mobile-friendly experience. Enter a URL to generate a redesigned preview without writing code.",
     url: "https://www.get-quick-site.com/",
     domain: "get-quick-site.com",
-    logo: quickSiteLogo.url,
-    logoClassName: "max-h-28 max-w-28",
     theme: "quicksite" as const,
     capabilities: [
       { label: "URL-based redesign", icon: WandSparkles },
@@ -79,78 +75,105 @@ const PRODUCTS = [
 
 type Product = (typeof PRODUCTS)[number];
 
-function ProductShowcase({ product, index }: { product: Product; index: number }) {
-  const isReversed = index % 2 === 1;
-
+function ProductLayer({
+  product,
+  index,
+  isOpen,
+  onOpen,
+  onClose,
+  onToggle,
+}: {
+  product: Product;
+  index: number;
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+  onToggle: () => void;
+}) {
+  const panelId = `product-panel-${index}`;
   return (
-    <Reveal>
-      <article className={`product-fold product-fold--${product.theme}`}>
-        <div className="product-fold__underlay" aria-hidden="true" />
-        <div className="product-fold__sheet">
-          <div
-            className={`grid items-stretch lg:grid-cols-[0.86fr_1.14fr] ${
-              isReversed ? "lg:grid-cols-[1.14fr_0.86fr]" : ""
-            }`}
-          >
-            <div
-              className={`product-fold__visual flex min-h-72 items-center justify-center px-8 py-14 sm:min-h-80 sm:px-12 ${
-                isReversed ? "lg:order-2" : ""
-              }`}
-            >
-              <div className="product-fold__logo-stage">
-                <img
-                  src={product.logo}
-                  alt={`${product.name} logo`}
-                  className={`h-auto w-auto object-contain ${product.logoClassName}`}
-                />
-              </div>
-            </div>
+    <article
+      className={`product-layer product-layer--${product.theme} ${isOpen ? "is-open" : ""}`}
+      style={{ zIndex: PRODUCTS.length - index }}
+      onPointerEnter={(event) => {
+        if (event.pointerType === "mouse") onOpen();
+      }}
+      onPointerLeave={(event) => {
+        if (event.pointerType === "mouse") onClose();
+      }}
+      onFocus={onOpen}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) onClose();
+      }}
+    >
+      <Button
+        type="button"
+        variant="ghost"
+        className="product-layer__trigger h-auto w-full whitespace-normal rounded-none px-6 py-7 hover:bg-transparent sm:px-10 sm:py-9"
+        aria-expanded={isOpen}
+        aria-controls={panelId}
+        onPointerDown={(event) => {
+          if (event.pointerType !== "mouse") {
+            event.preventDefault();
+            onToggle();
+          }
+        }}
+        onClick={(event) => {
+          if (event.detail === 0) onToggle();
+        }}
+      >
+        <span className="text-center">
+          <span className="block text-2xl font-semibold leading-tight sm:text-3xl">{product.name}</span>
+          <span className="mt-2 block text-sm font-medium text-muted-foreground sm:text-base">
+            {product.tagline}
+          </span>
+        </span>
+      </Button>
 
-            <div
-              className={`flex flex-col justify-center px-7 py-10 sm:px-12 sm:py-14 lg:px-16 ${
-                isReversed ? "lg:order-1" : ""
-              }`}
-            >
-              <p className="product-fold__category text-xs font-semibold uppercase tracking-[0.14em]">
+      <div id={panelId} className="product-layer__panel" aria-hidden={!isOpen}>
+        <div className="product-layer__panel-inner">
+          <div className="mx-auto grid max-w-4xl gap-8 px-7 pb-10 pt-2 sm:px-12 sm:pb-12 md:grid-cols-[1.2fr_1fr] md:gap-12">
+            <div>
+              <p className="product-layer__category text-xs font-semibold uppercase tracking-[0.14em]">
                 {product.category}
               </p>
-              <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-normal sm:text-4xl">
-                {product.name}
-              </h2>
-              <p className="mt-2 text-lg font-semibold text-foreground">{product.tagline}</p>
-              <p className="mt-5 max-w-xl leading-relaxed text-muted-foreground">{product.description}</p>
-
-              <ul className="mt-8 grid gap-3 sm:grid-cols-2" aria-label={`${product.name} features`}>
-                {product.capabilities.map(({ label, icon: Icon }) => (
-                  <li key={label} className="flex items-center gap-3 text-sm font-medium text-foreground">
-                    <span className="product-fold__feature-icon" aria-hidden="true">
-                      <Icon className="h-4 w-4" strokeWidth={1.8} />
-                    </span>
-                    {label}
-                  </li>
-                ))}
-              </ul>
-
+              <p className="mt-4 leading-relaxed text-muted-foreground">{product.description}</p>
               <a
                 href={product.url}
                 target="_blank"
                 rel="noreferrer"
-                className="product-fold__link group mt-9 inline-flex w-fit items-center gap-2 rounded-md font-semibold focus-visible:outline-2 focus-visible:outline-offset-4"
+                tabIndex={isOpen ? 0 : -1}
+                className="product-layer__link group mt-7 inline-flex items-center gap-2 rounded-md font-semibold focus-visible:outline-2 focus-visible:outline-offset-4"
                 aria-label={`Visit ${product.name} at ${product.domain} (opens in a new tab)`}
               >
                 Visit {product.domain}
                 <ExternalLink className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </a>
             </div>
+            <ul className="grid content-start gap-3 sm:grid-cols-2 md:grid-cols-1" aria-label={`${product.name} features`}>
+              {product.capabilities.map(({ label, icon: Icon }) => (
+                <li key={label} className="flex items-center gap-3 text-sm font-medium text-foreground">
+                  <span className="product-layer__feature-icon" aria-hidden="true">
+                    <Icon className="h-4 w-4" strokeWidth={1.8} />
+                  </span>
+                  {label}
+                </li>
+              ))}
+            </ul>
           </div>
-          <span className="product-fold__corner" aria-hidden="true" />
         </div>
-      </article>
-    </Reveal>
+      </div>
+    </article>
   );
 }
 
 function ProductsPage() {
+  const [openProduct, setOpenProduct] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (window.matchMedia("(hover: none), (pointer: coarse)").matches) setOpenProduct(0);
+  }, []);
+
   return (
     <div id="top" className="min-h-screen bg-background">
       <Header />
@@ -181,11 +204,21 @@ function ProductsPage() {
 
         <section className="border-y border-border bg-surface" aria-label="Wintagen product portfolio">
           <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
-            <div className="space-y-8 md:space-y-12">
+            <Reveal>
+              <div className="product-stack">
               {PRODUCTS.map((product, index) => (
-                <ProductShowcase key={product.name} product={product} index={index} />
+                <ProductLayer
+                  key={product.name}
+                  product={product}
+                  index={index}
+                  isOpen={openProduct === index}
+                  onOpen={() => setOpenProduct(index)}
+                  onClose={() => setOpenProduct(null)}
+                  onToggle={() => setOpenProduct((current) => (current === index ? null : index))}
+                />
               ))}
-            </div>
+              </div>
+            </Reveal>
           </div>
         </section>
 
