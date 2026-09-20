@@ -118,9 +118,9 @@ function Index() {
                 <Link to="/products" className="btn-primary">
                   Explore our products
                 </Link>
-                <a href="#services" className="btn-secondary">
+                <Link to="/services" className="btn-secondary">
                   View our services
-                </a>
+                </Link>
               </div>
             </Reveal>
           </div>
@@ -172,13 +172,13 @@ function Index() {
                   Practical technology support for organizations building or improving digital
                   experiences.
                 </p>
-                <a
-                  href="#services"
+                <Link
+                  to="/services"
                   className="group mt-8 inline-flex items-center gap-2 rounded-md text-sm font-semibold text-brand focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
                 >
                   Explore services
                   <ArrowRight className="h-4 w-4 transition-all group-hover:translate-x-0.5 group-hover:text-brand-accent" />
-                </a>
+                </Link>
               </article>
             </div>
           </div>
@@ -218,23 +218,30 @@ function Index() {
             </h2>
             <span aria-hidden="true" className="mt-4 block h-1 w-12 rounded-full bg-brand-accent" />
             <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {SERVICES.map(({ icon: Icon, title, body }) => (
-                <article
+              {SERVICES.map(({ icon: Icon, title, body, slug }) => (
+                <Link
                   key={title}
-                  className="card-surface flex flex-col p-6 transition-shadow hover:shadow-md"
+                  to="/services"
+                  hash={slug}
+                  className="card-surface group flex flex-col p-6 transition-shadow hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
+                  aria-label={`${title} — see details on our services page`}
                 >
                   <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-brand-soft">
                     <Icon className="h-5 w-5 text-brand" />
                   </span>
                   <h3 className="mt-5 text-lg font-semibold tracking-tight">{title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{body}</p>
-                </article>
+                  <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand">
+                    Learn more
+                    <ArrowRight className="h-4 w-4 transition-all group-hover:translate-x-0.5 group-hover:text-brand-accent" />
+                  </span>
+                </Link>
               ))}
             </div>
             <div className="mt-10">
-              <a href="#contact" className="btn-primary">
-                Discuss a project
-              </a>
+              <Link to="/services" className="btn-primary">
+                Explore all services
+              </Link>
             </div>
           </div>
         </section>
