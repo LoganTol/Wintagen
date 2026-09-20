@@ -95,8 +95,12 @@ function ProductLayer({
     <article
       className={`product-layer product-layer--${product.theme} ${isOpen ? "is-open" : ""}`}
       style={{ zIndex: PRODUCTS.length - index }}
-      onMouseEnter={onOpen}
-      onMouseLeave={onClose}
+      onPointerEnter={(event) => {
+        if (event.pointerType === "mouse") onOpen();
+      }}
+      onPointerLeave={(event) => {
+        if (event.pointerType === "mouse") onClose();
+      }}
       onFocus={onOpen}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) onClose();
