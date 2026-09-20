@@ -6,8 +6,8 @@ const LINKS = [
   { label: "Services", href: "/services" },
   { label: "About Us", href: "/#about" },
   { label: "Contact", href: "/#contact" },
-  { label: "Privacy", href: privacyPolicy.url },
-  { label: "Terms", href: termsOfService.url },
+  { label: "Privacy", href: "/privacy" },
+  { label: "Terms", href: "/terms" },
 ];
 
 export function Footer() {
