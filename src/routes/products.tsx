@@ -98,50 +98,40 @@ function ProductLayer({
   product,
   index,
   isOpen,
-  onOpen,
+  onHoverOpen,
+  onFocusOpen,
   onClose,
   onToggle,
 }: {
   product: Product;
   index: number;
   isOpen: boolean;
-  onOpen: () => void;
+  onHoverOpen: () => void;
+  onFocusOpen: () => void;
   onClose: () => void;
   onToggle: () => void;
 }) {
   const panelId = `product-panel-${index}`;
-  const hoverTimer = useRef<number | null>(null);
   const toggledOnPointerDown = useRef(false);
-
-  const clearHoverTimer = () => {
-    if (hoverTimer.current !== null) {
-      window.clearTimeout(hoverTimer.current);
-      hoverTimer.current = null;
-    }
-  };
-
-  useEffect(() => clearHoverTimer, []);
+  // After a mouse user clicks a band closed, don't let the still-hovering
+  // pointer immediately reopen it — hover re-arms once the pointer leaves.
+  const hoverSuppressed = useRef(false);
 
   return (
     <article
       className={`product-layer product-layer--${product.theme} ${isOpen ? "is-open" : ""}`}
       style={{ zIndex: PRODUCTS.length - index }}
       onPointerEnter={(event) => {
-        if (event.pointerType !== "mouse") return;
-        clearHoverTimer();
-        hoverTimer.current = window.setTimeout(onOpen, 180);
+        if (event.pointerType !== "mouse" || hoverSuppressed.current) return;
+        onHoverOpen();
       }}
       onPointerLeave={(event) => {
         if (event.pointerType !== "mouse") return;
-        clearHoverTimer();
-        // Only close if this layer is still the open one when the timer fires,
-        // so a neighboring layer's open isn't cancelled by a stale timer.
-        hoverTimer.current = window.setTimeout(onClose, 200);
+        hoverSuppressed.current = false;
       }}
-      onFocus={onOpen}
+      onFocus={onFocusOpen}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) {
-          clearHoverTimer();
           onClose();
         }
       }}
@@ -166,6 +156,7 @@ function ProductLayer({
             toggledOnPointerDown.current = false;
             return;
           }
+          if (isOpen) hoverSuppressed.current = true;
           onToggle();
         }}
       >
