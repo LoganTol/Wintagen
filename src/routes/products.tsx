@@ -116,6 +116,9 @@ function ProductLayer({
   // After a mouse user clicks a band closed, don't let the still-hovering
   // pointer immediately reopen it — hover re-arms once the pointer leaves.
   const hoverSuppressed = useRef(false);
+  // A mouse press focuses the trigger; that focus must not also open the
+  // band, or it would fight the click toggle (focus opens, click closes).
+  const suppressFocusOpen = useRef(false);
 
   return (
     <article
@@ -129,7 +132,13 @@ function ProductLayer({
         if (event.pointerType !== "mouse") return;
         hoverSuppressed.current = false;
       }}
-      onFocus={onFocusOpen}
+      onFocus={() => {
+        if (suppressFocusOpen.current) {
+          suppressFocusOpen.current = false;
+          return;
+        }
+        onFocusOpen();
+      }}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) {
           onClose();
