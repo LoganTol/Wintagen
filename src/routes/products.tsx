@@ -111,6 +111,7 @@ function ProductLayer({
 }) {
   const panelId = `product-panel-${index}`;
   const hoverTimer = useRef<number | null>(null);
+  const toggledOnPointerDown = useRef(false);
 
   const clearHoverTimer = () => {
     if (hoverTimer.current !== null) {
@@ -133,6 +134,8 @@ function ProductLayer({
       onPointerLeave={(event) => {
         if (event.pointerType !== "mouse") return;
         clearHoverTimer();
+        // Only close if this layer is still the open one when the timer fires,
+        // so a neighboring layer's open isn't cancelled by a stale timer.
         hoverTimer.current = window.setTimeout(onClose, 200);
       }}
       onFocus={onOpen}
@@ -150,13 +153,20 @@ function ProductLayer({
         aria-expanded={isOpen}
         aria-controls={panelId}
         onPointerDown={(event) => {
+          toggledOnPointerDown.current = false;
           if (event.pointerType !== "mouse") {
             event.preventDefault();
+            toggledOnPointerDown.current = true;
             onToggle();
           }
         }}
-        onClick={(event) => {
-          if (event.detail === 0) onToggle();
+        onClick={() => {
+          // Touch already toggled on pointerdown; mouse and keyboard toggle here.
+          if (toggledOnPointerDown.current) {
+            toggledOnPointerDown.current = false;
+            return;
+          }
+          onToggle();
         }}
       >
         <span className="text-center">
