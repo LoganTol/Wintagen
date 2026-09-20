@@ -279,6 +279,27 @@
   --product-soft: oklch(0.97 0.03 50);
 }
 
+/* Service bands — restrained variations of the Wintagen palette */
+.product-layer--build {
+  --product-color: var(--brand);
+  --product-soft: var(--brand-soft);
+}
+
+.product-layer--web {
+  --product-color: oklch(0.55 0.105 215);
+  --product-soft: oklch(0.965 0.025 215);
+}
+
+.product-layer--strategy {
+  --product-color: oklch(0.62 0.15 60);
+  --product-soft: oklch(0.97 0.03 62);
+}
+
+.product-layer--automate {
+  --product-color: oklch(0.54 0.095 170);
+  --product-soft: oklch(0.965 0.03 170);
+}
+
 .product-layer::before {
   content: "";
   position: absolute;
