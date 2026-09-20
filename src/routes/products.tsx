@@ -339,15 +339,13 @@ function ProductsPage() {
                   key={product.name}
                   product={product}
                   index={index}
-                  isOpen={openProduct === index}
+                  isOpen={active === index || lingering === index}
                   onHoverOpen={() => requestOpen(index)}
                   onFocusOpen={() => openNow(index)}
-                  onClose={() => setOpenProduct((current) => (current === index ? null : current))}
-                  onToggle={() => {
-                    clearTimer(openTimer);
-                    clearTimer(closeTimer);
-                    setOpenProduct((current) => (current === index ? null : index));
+                  onClose={() => {
+                    if (activeRef.current === index) setActiveBoth(null);
                   }}
+                  onToggle={() => toggleBand(index)}
                 />
               ))}
             </div>
