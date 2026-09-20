@@ -1,13 +1,15 @@
 import { Link } from "@tanstack/react-router";
 import wintagenLogo from "@/assets/Wintagen_Logo_Transparent.png.asset.json";
 
+const LEGAL_PDF = "/wintagen-privacy-terms.pdf";
+
 const LINKS = [
   { label: "Products", href: "/products" },
   { label: "Services", href: "/services" },
   { label: "About Us", href: "/#about" },
   { label: "Contact", href: "/#contact" },
-  { label: "Privacy", href: "#" },
-  { label: "Terms", href: "#" },
+  { label: "Privacy", href: LEGAL_PDF },
+  { label: "Terms", href: LEGAL_PDF },
 ];
 
 export function Footer() {
@@ -38,6 +40,9 @@ export function Footer() {
               <li key={l.label}>
                 <a
                   href={l.href}
+                  {...(l.href.endsWith(".pdf")
+                    ? { target: "_blank", rel: "noreferrer" }
+                    : {})}
                   className="rounded-md text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
                 >
                   {l.label}
