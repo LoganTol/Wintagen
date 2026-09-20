@@ -153,6 +153,7 @@ function ProductLayer({
         aria-controls={panelId}
         onPointerDown={(event) => {
           toggledOnPointerDown.current = false;
+          suppressFocusOpen.current = event.pointerType === "mouse";
           if (event.pointerType !== "mouse") {
             event.preventDefault();
             toggledOnPointerDown.current = true;
