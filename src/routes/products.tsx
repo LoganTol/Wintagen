@@ -226,13 +226,10 @@ function ProductLayer({
 }
 
 function ProductsPage() {
-  // `active` is the current band; `lingering` is the previous band, kept open
-  // while the new one expands so the band above collapses only after the
-  // hovered band is fully open. Collapsing both at once yanks the hovered
-  // trigger out from under the pointer, which the browser reads as "left the
-  // stack" and instantly closes the band again — the flicker this avoids.
+  // One band open at a time. The outgoing band collapses in the same motion
+  // as the incoming one expands (same duration and easing in CSS), so the
+  // hovered band's bottom edge stays put and the pointer never slips off it.
   const [active, setActive] = useState<number | null>(null);
-  const [lingering, setLingering] = useState<number | null>(null);
   const activeRef = useRef<number | null>(null);
   const openedByRef = useRef<"hover" | "manual">("manual");
   const pendingIndexRef = useRef<number | null>(null);
@@ -240,7 +237,6 @@ function ProductsPage() {
   const stackRef = useRef<HTMLDivElement | null>(null);
   const openTimer = useRef<number | null>(null);
   const closeTimer = useRef<number | null>(null);
-  const lingerTimer = useRef<number | null>(null);
 
   // True when the pointer's last known position is still inside the element,
   // regardless of what boundary events layout shifts have fired.
@@ -267,7 +263,6 @@ function ProductsPage() {
     return () => {
       clearTimer(openTimer);
       clearTimer(closeTimer);
-      clearTimer(lingerTimer);
     };
   }, []);
 
