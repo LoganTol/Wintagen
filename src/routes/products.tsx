@@ -139,8 +139,8 @@ function ProductLayer({
         // Panels gliding open or closed shift the layout; the browser reads
         // that as the pointer leaving even though it never moved. Ignore
         // those phantom leaves and only trust ones where the pointer truly
-        // sits outside the band.
-        if (isPointerOver(event.currentTarget)) return;
+        // sits outside the band (checked with the event's own coordinates).
+        if (isPointerOver(event.currentTarget, { x: event.clientX, y: event.clientY })) return;
         hoverSuppressed.current = false;
         onLeave();
       }}
