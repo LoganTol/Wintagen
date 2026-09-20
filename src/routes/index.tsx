@@ -226,30 +226,16 @@ function Index() {
             </div>
             <ul className="grid gap-4 self-center">
               {[
-                {
-                  title: "Purpose before features",
-                  body: "Every product and project starts with a specific problem worth solving.",
-                },
-                {
-                  title: "Practical by default",
-                  body: "Simple, dependable solutions over clever, complicated ones.",
-                },
-                {
-                  title: "Room to grow",
-                  body: "Work built to hold up as your needs — and our portfolio — expand.",
-                },
-              ].map((p) => (
+                "Find the real problem before writing a line of code.",
+                "Simple and dependable beats clever and complicated.",
+                "Built to hold up as your needs grow.",
+              ].map((line) => (
                 <li
-                  key={p.title}
+                  key={line}
                   className="flex items-start gap-3 rounded-xl border border-border bg-surface px-5 py-4"
                 >
                   <span aria-hidden="true" className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-sm bg-brand-accent" />
-                  <div>
-                    <span className="block font-medium">{p.title}</span>
-                    <span className="mt-1 block text-sm leading-relaxed text-muted-foreground">
-                      {p.body}
-                    </span>
-                  </div>
+                  <span className="font-medium">{line}</span>
                 </li>
               ))}
             </ul>
