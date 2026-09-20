@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowLeft,
@@ -98,47 +99,60 @@ function ProductLayer({
   product,
   index,
   isOpen,
-  onOpen,
+  isPointerOver,
+  onHoverOpen,
+  onLeave,
+  onFocusOpen,
   onClose,
   onToggle,
 }: {
   product: Product;
   index: number;
   isOpen: boolean;
-  onOpen: () => void;
+  isPointerOver: (element: HTMLElement, point?: { x: number; y: number }) => boolean;
+  onHoverOpen: () => void;
+  onLeave: () => void;
+  onFocusOpen: () => void;
   onClose: () => void;
   onToggle: () => void;
 }) {
   const panelId = `product-panel-${index}`;
-  const hoverTimer = useRef<number | null>(null);
-
-  const clearHoverTimer = () => {
-    if (hoverTimer.current !== null) {
-      window.clearTimeout(hoverTimer.current);
-      hoverTimer.current = null;
-    }
-  };
-
-  useEffect(() => clearHoverTimer, []);
+  const toggledOnPointerDown = useRef(false);
+  // After a mouse user clicks a band closed, don't let the still-hovering
+  // pointer immediately reopen it — hover re-arms once the pointer leaves.
+  const hoverSuppressed = useRef(false);
+  // A mouse press focuses the trigger; that focus must not also open the
+  // band, or it would fight the click toggle (focus opens, click closes).
+  const suppressFocusOpen = useRef(false);
 
   return (
     <article
+      data-index={index}
       className={`product-layer product-layer--${product.theme} ${isOpen ? "is-open" : ""}`}
       style={{ zIndex: PRODUCTS.length - index }}
       onPointerEnter={(event) => {
-        if (event.pointerType !== "mouse") return;
-        clearHoverTimer();
-        hoverTimer.current = window.setTimeout(onOpen, 180);
+        if (event.pointerType !== "mouse" || hoverSuppressed.current) return;
+        onHoverOpen();
       }}
       onPointerLeave={(event) => {
         if (event.pointerType !== "mouse") return;
-        clearHoverTimer();
-        hoverTimer.current = window.setTimeout(onClose, 200);
+        // Panels gliding open or closed shift the layout; the browser reads
+        // that as the pointer leaving even though it never moved. Ignore
+        // those phantom leaves and only trust ones where the pointer truly
+        // sits outside the band (checked with the event's own coordinates).
+        if (isPointerOver(event.currentTarget, { x: event.clientX, y: event.clientY })) return;
+        hoverSuppressed.current = false;
+        onLeave();
       }}
-      onFocus={onOpen}
+      onFocus={() => {
+        if (suppressFocusOpen.current) {
+          suppressFocusOpen.current = false;
+          return;
+        }
+        onFocusOpen();
+      }}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) {
-          clearHoverTimer();
           onClose();
         }
       }}
@@ -150,13 +164,22 @@ function ProductLayer({
         aria-expanded={isOpen}
         aria-controls={panelId}
         onPointerDown={(event) => {
+          toggledOnPointerDown.current = false;
+          suppressFocusOpen.current = event.pointerType === "mouse";
           if (event.pointerType !== "mouse") {
             event.preventDefault();
+            toggledOnPointerDown.current = true;
             onToggle();
           }
         }}
-        onClick={(event) => {
-          if (event.detail === 0) onToggle();
+        onClick={() => {
+          // Touch already toggled on pointerdown; mouse and keyboard toggle here.
+          if (toggledOnPointerDown.current) {
+            toggledOnPointerDown.current = false;
+            return;
+          }
+          if (isOpen) hoverSuppressed.current = true;
+          onToggle();
         }}
       >
         <span className="text-center">
@@ -205,11 +228,134 @@ function ProductLayer({
 }
 
 function ProductsPage() {
-  const [openProduct, setOpenProduct] = useState<number | null>(null);
+  // One band open at a time. Panels gliding open or closed shift the layout,
+  // which makes the browser fire phantom enter/leave events for a pointer
+  // that never moved — so every boundary event is cross-checked against the
+  // pointer's real position, and after each hover-open finishes animating the
+  // open state is reconciled with whatever band the pointer is actually over.
+  const [active, setActive] = useState<number | null>(null);
+  const activeRef = useRef<number | null>(null);
+  const openedByRef = useRef<"hover" | "manual">("manual");
+  const pendingIndexRef = useRef<number | null>(null);
+  const lastPointerRef = useRef({ x: 0, y: 0 });
+  const stackRef = useRef<HTMLDivElement | null>(null);
+  const openTimer = useRef<number | null>(null);
+  const closeTimer = useRef<number | null>(null);
+  const reconcileTimer = useRef<number | null>(null);
+  const reconcileDepth = useRef(0);
+
+  // True when the pointer is still inside the element, regardless of what
+  // boundary events layout shifts have fired. Prefer the event's own
+  // coordinates (they are current even when the pointermove that updates
+  // lastPointerRef hasn't been dispatched yet); fall back to tracking.
+  const isPointerOver = (element: HTMLElement, point?: { x: number; y: number }) => {
+    const { x, y } = point ?? lastPointerRef.current;
+    const hit = document.elementFromPoint(x, y);
+    return hit !== null && element.contains(hit);
+  };
+
+  // Which band currently sits under the pointer (null when outside the stack).
+  const layerUnderPointer = () => {
+    const { x, y } = lastPointerRef.current;
+    const hit = document.elementFromPoint(x, y);
+    const layer = hit?.closest?.("article.product-layer");
+    if (!(layer instanceof HTMLElement)) return null;
+    if (!stackRef.current?.contains(layer)) return null;
+    const index = Number(layer.dataset["index"]);
+    return Number.isInteger(index) ? index : null;
+  };
+
+  const clearTimer = (ref: React.MutableRefObject<number | null>) => {
+    if (ref.current !== null) {
+      window.clearTimeout(ref.current);
+      ref.current = null;
+    }
+  };
+
+  const setActiveBoth = (value: number | null) => {
+    activeRef.current = value;
+    setActive(value);
+  };
+
+  // After the glide settles, make the open state match the pointer's real
+  // position — hover-opened bands only; click/keyboard choices are sticky.
+  const scheduleReconcile = () => {
+    clearTimer(reconcileTimer);
+    reconcileTimer.current = window.setTimeout(() => {
+      if (openedByRef.current !== "hover") return;
+      const under = layerUnderPointer();
+      if (under === activeRef.current) {
+        reconcileDepth.current = 0;
+        return;
+      }
+      if (reconcileDepth.current >= 3) return; // converge, never loop
+      reconcileDepth.current += 1;
+      setActiveBoth(under);
+      if (under !== null) scheduleReconcile();
+    }, 750);
+  };
 
   useEffect(() => {
-    if (window.matchMedia("(hover: none), (pointer: coarse)").matches) setOpenProduct(0);
+    if (window.matchMedia("(hover: none), (pointer: coarse)").matches) setActiveBoth(0);
+    const trackPointer = (event: PointerEvent) => {
+      lastPointerRef.current = { x: event.clientX, y: event.clientY };
+    };
+    window.addEventListener("pointermove", trackPointer, { passive: true });
+    return () => {
+      window.removeEventListener("pointermove", trackPointer);
+      clearTimer(openTimer);
+      clearTimer(closeTimer);
+      clearTimer(reconcileTimer);
+    };
   }, []);
+
+  // Hover intent: a band opens after a short dwell, then reconciles with the
+  // pointer's real position once the glide has settled.
+  const requestOpen = (index: number) => {
+    clearTimer(closeTimer);
+    clearTimer(openTimer);
+    pendingIndexRef.current = index;
+    reconcileDepth.current = 0;
+    openTimer.current = window.setTimeout(() => {
+      pendingIndexRef.current = null;
+      openedByRef.current = "hover";
+      setActiveBoth(index);
+      scheduleReconcile();
+    }, 180);
+  };
+
+  // A genuine pointer leave cancels a pending open for that band, so a quick
+  // sweep across bands never opens the ones passed along the way.
+  const cancelPending = (index: number) => {
+    if (pendingIndexRef.current === index) {
+      pendingIndexRef.current = null;
+      clearTimer(openTimer);
+    }
+  };
+
+  // Deliberate opens (click, tap, keyboard focus) swap instantly.
+  const openNow = (index: number) => {
+    clearTimer(openTimer);
+    clearTimer(closeTimer);
+    openedByRef.current = "manual";
+    setActiveBoth(index);
+  };
+
+  const toggleBand = (index: number) => {
+    clearTimer(openTimer);
+    clearTimer(closeTimer);
+    openedByRef.current = "manual";
+    setActiveBoth(activeRef.current === index ? null : index);
+  };
+
+  // Only hover-opened bands auto-close when the pointer leaves the stack;
+  // bands opened by click or keyboard stay until dismissed.
+  const scheduleStackClose = () => {
+    if (openedByRef.current !== "hover") return;
+    clearTimer(closeTimer);
+    closeTimer.current = window.setTimeout(() => setActiveBoth(null), 250);
+  };
+  const cancelStackClose = () => clearTimer(closeTimer);
 
   return (
     <div id="top" className="min-h-screen bg-background">
@@ -241,16 +387,38 @@ function ProductsPage() {
 
         <section className="border-y border-border" aria-label="Wintagen product portfolio">
           <Reveal>
-            <div className="product-stack">
+            <div
+              ref={stackRef}
+              className="product-stack"
+              onPointerMove={(event) => {
+                lastPointerRef.current = { x: event.clientX, y: event.clientY };
+              }}
+              onPointerEnter={(event) => {
+                if (event.pointerType === "mouse") cancelStackClose();
+              }}
+              onPointerLeave={(event) => {
+                if (event.pointerType !== "mouse") return;
+                // Ignore phantom leaves caused by panels shifting the layout.
+                if (isPointerOver(event.currentTarget, { x: event.clientX, y: event.clientY })) {
+                  return;
+                }
+                scheduleStackClose();
+              }}
+            >
               {PRODUCTS.map((product, index) => (
                 <ProductLayer
                   key={product.name}
                   product={product}
                   index={index}
-                  isOpen={openProduct === index}
-                  onOpen={() => setOpenProduct(index)}
-                  onClose={() => setOpenProduct(null)}
-                  onToggle={() => setOpenProduct((current) => (current === index ? null : index))}
+                  isOpen={active === index}
+                  isPointerOver={isPointerOver}
+                  onHoverOpen={() => requestOpen(index)}
+                  onLeave={() => cancelPending(index)}
+                  onFocusOpen={() => openNow(index)}
+                  onClose={() => {
+                    if (activeRef.current === index) setActiveBoth(null);
+                  }}
+                  onToggle={() => toggleBand(index)}
                 />
               ))}
             </div>
