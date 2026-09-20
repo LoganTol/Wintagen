@@ -258,7 +258,7 @@ function ProductsPage() {
     const layer = hit?.closest?.("article.product-layer");
     if (!(layer instanceof HTMLElement)) return null;
     if (!stackRef.current?.contains(layer)) return null;
-    const index = Number(layer.dataset.index);
+    const index = Number(layer.dataset["index"]);
     return Number.isInteger(index) ? index : null;
   };
 
