@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+// (pointer tracking helpers live in ProductsPage)
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowLeft,
@@ -276,7 +277,9 @@ function ProductsPage() {
   const requestOpen = (index: number) => {
     clearTimer(closeTimer);
     clearTimer(openTimer);
+    pendingIndexRef.current = index;
     openTimer.current = window.setTimeout(() => {
+      pendingIndexRef.current = null;
       openedByRef.current = "hover";
       const previous = activeRef.current;
       if (previous !== null && previous !== index) {
@@ -286,6 +289,15 @@ function ProductsPage() {
       }
       setActiveBoth(index);
     }, 180);
+  };
+
+  // A genuine pointer leave cancels a pending open for that band, so a quick
+  // sweep across bands never opens the ones passed along the way.
+  const cancelPending = (index: number) => {
+    if (pendingIndexRef.current === index) {
+      pendingIndexRef.current = null;
+      clearTimer(openTimer);
+    }
   };
 
   // Deliberate opens (click, tap, keyboard focus) swap instantly — no linger.
