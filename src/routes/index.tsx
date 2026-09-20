@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Boxes, Compass, Layers, Workflow, Code2, Globe } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -103,9 +103,9 @@ function Index() {
                 businesses ready to build, improve, or move an idea forward.
               </p>
               <div className="mt-9 flex flex-wrap gap-3">
-                <a href="#products" className="btn-primary">
+                <Link to="/products" className="btn-primary">
                   Explore our products
-                </a>
+                </Link>
                 <a href="#services" className="btn-secondary">
                   View our services
                 </a>
@@ -163,13 +163,13 @@ function Index() {
                 <p className="mt-3 text-muted-foreground">
                   Focused software designed around clear, real-world needs.
                 </p>
-                <a
-                  href="#products"
+                <Link
+                  to="/products"
                   className="group mt-8 inline-flex items-center gap-2 rounded-md text-sm font-semibold text-brand focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
                 >
                   Explore products
                   <ArrowRight className="h-4 w-4 transition-all group-hover:translate-x-0.5 group-hover:text-brand-accent" />
-                </a>
+                </Link>
               </article>
 
               <article className="card-surface flex flex-col border-brand/25 bg-brand-soft p-8 transition-shadow hover:shadow-md">
@@ -281,9 +281,9 @@ function Index() {
               See what we're building or start a conversation about what you need.
             </p>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <a href="#products" className="btn-primary">
+              <Link to="/products" className="btn-primary">
                 Explore products
-              </a>
+              </Link>
               {/* Configure the real destination here (e.g. mailto: or a contact URL). */}
               <a href="mailto:hello@wintagen.com" className="btn-secondary">
                 Contact Wintagen

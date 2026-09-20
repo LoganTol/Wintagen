@@ -1,10 +1,10 @@
 import { Wordmark } from "./Logo";
 
 const LINKS = [
-  { label: "Products", href: "#products" },
-  { label: "Services", href: "#services" },
-  { label: "About Us", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "Products", href: "/products" },
+  { label: "Services", href: "/#services" },
+  { label: "About Us", href: "/#about" },
+  { label: "Contact", href: "/#contact" },
   { label: "Privacy", href: "#" },
   { label: "Terms", href: "#" },
 ];
