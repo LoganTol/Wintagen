@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowLeft,
@@ -157,6 +157,10 @@ function ProductLayer({
 
 function ProductsPage() {
   const [openProduct, setOpenProduct] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (window.matchMedia("(hover: none), (pointer: coarse)").matches) setOpenProduct(0);
+  }, []);
 
   return (
     <div id="top" className="min-h-screen bg-background">
