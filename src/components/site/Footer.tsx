@@ -40,6 +40,9 @@ export function Footer() {
               <li key={l.label}>
                 <a
                   href={l.href}
+                  {...(l.href.endsWith(".pdf")
+                    ? { target: "_blank", rel: "noreferrer" }
+                    : {})}
                   className="rounded-md text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
                 >
                   {l.label}
