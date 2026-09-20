@@ -109,7 +109,7 @@ function ProductLayer({
   product: Product;
   index: number;
   isOpen: boolean;
-  isPointerOver: (element: HTMLElement) => boolean;
+  isPointerOver: (element: HTMLElement, point?: { x: number; y: number }) => boolean;
   onHoverOpen: () => void;
   onLeave: () => void;
   onFocusOpen: () => void;
