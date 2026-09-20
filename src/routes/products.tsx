@@ -227,9 +227,11 @@ function ProductLayer({
 }
 
 function ProductsPage() {
-  // One band open at a time. The outgoing band collapses in the same motion
-  // as the incoming one expands (same duration and easing in CSS), so the
-  // hovered band's bottom edge stays put and the pointer never slips off it.
+  // One band open at a time. Panels gliding open or closed shift the layout,
+  // which makes the browser fire phantom enter/leave events for a pointer
+  // that never moved — so every boundary event is cross-checked against the
+  // pointer's real position, and after each hover-open finishes animating the
+  // open state is reconciled with whatever band the pointer is actually over.
   const [active, setActive] = useState<number | null>(null);
   const activeRef = useRef<number | null>(null);
   const openedByRef = useRef<"hover" | "manual">("manual");
@@ -238,6 +240,8 @@ function ProductsPage() {
   const stackRef = useRef<HTMLDivElement | null>(null);
   const openTimer = useRef<number | null>(null);
   const closeTimer = useRef<number | null>(null);
+  const reconcileTimer = useRef<number | null>(null);
+  const reconcileDepth = useRef(0);
 
   // True when the pointer's last known position is still inside the element,
   // regardless of what boundary events layout shifts have fired.
@@ -245,6 +249,17 @@ function ProductsPage() {
     const { x, y } = lastPointerRef.current;
     const hit = document.elementFromPoint(x, y);
     return hit !== null && element.contains(hit);
+  };
+
+  // Which band currently sits under the pointer (null when outside the stack).
+  const layerUnderPointer = () => {
+    const { x, y } = lastPointerRef.current;
+    const hit = document.elementFromPoint(x, y);
+    const layer = hit?.closest?.("article.product-layer");
+    if (!(layer instanceof HTMLElement)) return null;
+    if (!stackRef.current?.contains(layer)) return null;
+    const index = Number(layer.dataset.index);
+    return Number.isInteger(index) ? index : null;
   };
 
   const clearTimer = (ref: React.MutableRefObject<number | null>) => {
@@ -259,11 +274,35 @@ function ProductsPage() {
     setActive(value);
   };
 
+  // After the glide settles, make the open state match the pointer's real
+  // position — hover-opened bands only; click/keyboard choices are sticky.
+  const scheduleReconcile = () => {
+    clearTimer(reconcileTimer);
+    reconcileTimer.current = window.setTimeout(() => {
+      if (openedByRef.current !== "hover") return;
+      const under = layerUnderPointer();
+      if (under === activeRef.current) {
+        reconcileDepth.current = 0;
+        return;
+      }
+      if (reconcileDepth.current >= 3) return; // converge, never loop
+      reconcileDepth.current += 1;
+      setActiveBoth(under);
+      if (under !== null) scheduleReconcile();
+    }, 750);
+  };
+
   useEffect(() => {
     if (window.matchMedia("(hover: none), (pointer: coarse)").matches) setActiveBoth(0);
+    const trackPointer = (event: PointerEvent) => {
+      lastPointerRef.current = { x: event.clientX, y: event.clientY };
+    };
+    window.addEventListener("pointermove", trackPointer, { passive: true });
     return () => {
+      window.removeEventListener("pointermove", trackPointer);
       clearTimer(openTimer);
       clearTimer(closeTimer);
+      clearTimer(reconcileTimer);
     };
   }, []);
 
