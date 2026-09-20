@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowLeft,
@@ -91,19 +91,37 @@ function ProductLayer({
   onToggle: () => void;
 }) {
   const panelId = `product-panel-${index}`;
+  const hoverTimer = useRef<number | null>(null);
+
+  const clearHoverTimer = () => {
+    if (hoverTimer.current !== null) {
+      window.clearTimeout(hoverTimer.current);
+      hoverTimer.current = null;
+    }
+  };
+
+  useEffect(() => clearHoverTimer, []);
+
   return (
     <article
       className={`product-layer product-layer--${product.theme} ${isOpen ? "is-open" : ""}`}
       style={{ zIndex: PRODUCTS.length - index }}
       onPointerEnter={(event) => {
-        if (event.pointerType === "mouse") onOpen();
+        if (event.pointerType !== "mouse") return;
+        clearHoverTimer();
+        hoverTimer.current = window.setTimeout(onOpen, 180);
       }}
       onPointerLeave={(event) => {
-        if (event.pointerType === "mouse") onClose();
+        if (event.pointerType !== "mouse") return;
+        clearHoverTimer();
+        hoverTimer.current = window.setTimeout(onClose, 200);
       }}
       onFocus={onOpen}
       onBlur={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget)) onClose();
+        if (!event.currentTarget.contains(event.relatedTarget)) {
+          clearHoverTimer();
+          onClose();
+        }
       }}
     >
       <Button
