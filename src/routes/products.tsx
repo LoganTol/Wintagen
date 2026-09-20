@@ -112,7 +112,15 @@ function ProductLayer({
         className="product-layer__trigger h-auto w-full whitespace-normal rounded-none px-6 py-7 hover:bg-transparent sm:px-10 sm:py-9"
         aria-expanded={isOpen}
         aria-controls={panelId}
-        onClick={onToggle}
+        onPointerDown={(event) => {
+          if (event.pointerType !== "mouse") {
+            event.preventDefault();
+            onToggle();
+          }
+        }}
+        onClick={(event) => {
+          if (event.detail === 0) onToggle();
+        }}
       >
         <span className="text-center">
           <span className="block text-2xl font-semibold leading-tight sm:text-3xl">{product.name}</span>
