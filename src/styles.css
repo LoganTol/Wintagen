@@ -316,6 +316,18 @@
   overflow: hidden;
 }
 
+/*
+ * Give every panel the same height on hover-capable wider screens. When one
+ * band opens and another closes, the two animations then cancel out — the
+ * stack's total height stays constant, so the band the pointer rests on never
+ * shifts out from under the cursor mid-glide.
+ */
+@media (hover: hover) and (min-width: 48rem) {
+  .product-layer__panel-inner {
+    min-height: 15.5rem;
+  }
+}
+
 .product-layer.is-open {
   z-index: 10 !important;
   background: color-mix(in oklab, var(--product-soft) 42%, var(--card));
