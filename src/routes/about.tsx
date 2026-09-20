@@ -25,7 +25,6 @@ export const Route = createFileRoute("/about")({
   component: AboutPage,
 });
 
-const PRINCIPLES = ["Purpose first.", "Practical by default.", "Built to grow."];
 
 function AboutPage() {
   return (
