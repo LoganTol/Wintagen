@@ -306,15 +306,18 @@ function ProductsPage() {
     };
   }, []);
 
-  // Hover intent: a band opens after a short dwell.
+  // Hover intent: a band opens after a short dwell, then reconciles with the
+  // pointer's real position once the glide has settled.
   const requestOpen = (index: number) => {
     clearTimer(closeTimer);
     clearTimer(openTimer);
     pendingIndexRef.current = index;
+    reconcileDepth.current = 0;
     openTimer.current = window.setTimeout(() => {
       pendingIndexRef.current = null;
       openedByRef.current = "hover";
       setActiveBoth(index);
+      scheduleReconcile();
     }, 180);
   };
 
