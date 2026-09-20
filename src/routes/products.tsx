@@ -216,9 +216,18 @@ function ProductLayer({
 }
 
 function ProductsPage() {
-  const [openProduct, setOpenProduct] = useState<number | null>(null);
+  // `active` is the current band; `lingering` is the previous band, kept open
+  // while the new one expands so the band above collapses only after the
+  // hovered band is fully open. Collapsing both at once yanks the hovered
+  // trigger out from under the pointer, which the browser reads as "left the
+  // stack" and instantly closes the band again — the flicker this avoids.
+  const [active, setActive] = useState<number | null>(null);
+  const [lingering, setLingering] = useState<number | null>(null);
+  const activeRef = useRef<number | null>(null);
+  const openedByRef = useRef<"hover" | "manual">("manual");
   const openTimer = useRef<number | null>(null);
   const closeTimer = useRef<number | null>(null);
+  const lingerTimer = useRef<number | null>(null);
 
   const clearTimer = (ref: React.MutableRefObject<number | null>) => {
     if (ref.current !== null) {
@@ -227,31 +236,62 @@ function ProductsPage() {
     }
   };
 
+  const setActiveBoth = (value: number | null) => {
+    activeRef.current = value;
+    setActive(value);
+  };
+
   useEffect(() => {
-    if (window.matchMedia("(hover: none), (pointer: coarse)").matches) setOpenProduct(0);
+    if (window.matchMedia("(hover: none), (pointer: coarse)").matches) setActiveBoth(0);
     return () => {
       clearTimer(openTimer);
       clearTimer(closeTimer);
+      clearTimer(lingerTimer);
     };
   }, []);
 
-  // Hover intent: a band opens after a short dwell, and a band only closes
-  // when the pointer leaves the whole stack or settles on another band —
-  // so layout shifts while panels glide never drop the open state.
+  // Hover intent: a band opens after a short dwell. The previous band stays
+  // open for the duration of the expand animation, then collapses.
   const requestOpen = (index: number) => {
     clearTimer(closeTimer);
     clearTimer(openTimer);
-    openTimer.current = window.setTimeout(() => setOpenProduct(index), 180);
+    openTimer.current = window.setTimeout(() => {
+      openedByRef.current = "hover";
+      const previous = activeRef.current;
+      if (previous !== null && previous !== index) {
+        setLingering(previous);
+        clearTimer(lingerTimer);
+        lingerTimer.current = window.setTimeout(() => setLingering(null), 650);
+      }
+      setActiveBoth(index);
+    }, 180);
   };
+
+  // Deliberate opens (click, tap, keyboard focus) swap instantly — no linger.
   const openNow = (index: number) => {
-    clearTimer(closeTimer);
     clearTimer(openTimer);
-    setOpenProduct(index);
+    clearTimer(closeTimer);
+    clearTimer(lingerTimer);
+    openedByRef.current = "manual";
+    setLingering(null);
+    setActiveBoth(index);
   };
-  const scheduleStackClose = () => {
+
+  const toggleBand = (index: number) => {
     clearTimer(openTimer);
     clearTimer(closeTimer);
-    closeTimer.current = window.setTimeout(() => setOpenProduct(null), 250);
+    clearTimer(lingerTimer);
+    openedByRef.current = "manual";
+    setLingering(null);
+    setActiveBoth(activeRef.current === index ? null : index);
+  };
+
+  // Only hover-opened bands auto-close when the pointer leaves the stack;
+  // bands opened by click or keyboard stay until dismissed.
+  const scheduleStackClose = () => {
+    if (openedByRef.current !== "hover") return;
+    clearTimer(closeTimer);
+    closeTimer.current = window.setTimeout(() => setActiveBoth(null), 250);
   };
   const cancelStackClose = () => clearTimer(closeTimer);
 
