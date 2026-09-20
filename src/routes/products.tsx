@@ -235,9 +235,20 @@ function ProductsPage() {
   const [lingering, setLingering] = useState<number | null>(null);
   const activeRef = useRef<number | null>(null);
   const openedByRef = useRef<"hover" | "manual">("manual");
+  const pendingIndexRef = useRef<number | null>(null);
+  const lastPointerRef = useRef({ x: 0, y: 0 });
+  const stackRef = useRef<HTMLDivElement | null>(null);
   const openTimer = useRef<number | null>(null);
   const closeTimer = useRef<number | null>(null);
   const lingerTimer = useRef<number | null>(null);
+
+  // True when the pointer's last known position is still inside the element,
+  // regardless of what boundary events layout shifts have fired.
+  const isPointerOver = (element: HTMLElement) => {
+    const { x, y } = lastPointerRef.current;
+    const hit = document.elementFromPoint(x, y);
+    return hit !== null && element.contains(hit);
+  };
 
   const clearTimer = (ref: React.MutableRefObject<number | null>) => {
     if (ref.current !== null) {
