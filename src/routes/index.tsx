@@ -116,8 +116,8 @@ function Index() {
             </h2>
             <span aria-hidden="true" className="mt-4 block h-1 w-12 rounded-full bg-brand-accent" />
             <div className="mt-10 grid gap-6 md:grid-cols-2">
-              <article className="card-surface flex flex-col p-8 transition-shadow hover:shadow-md">
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand-soft">
+              <article className="card-surface flex flex-col border-brand/25 bg-brand-soft p-8 transition-shadow hover:shadow-md">
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-background">
                   <Boxes className="h-5 w-5 text-brand" />
                 </span>
                 <h3 className="mt-6 text-2xl font-semibold tracking-tight">Products</h3>
