@@ -73,19 +73,6 @@ function AboutPage() {
               </p>
             </div>
           </Reveal>
-          <Reveal delay={100}>
-            <ul className="mt-14 grid gap-4 sm:grid-cols-3">
-              {PRINCIPLES.map((line) => (
-                <li
-                  key={line}
-                  className="flex items-start gap-3 rounded-xl border border-border bg-surface px-5 py-4"
-                >
-                  <span aria-hidden="true" className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-sm bg-brand-accent" />
-                  <span className="font-medium">{line}</span>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
           <Reveal delay={160}>
             <div className="mt-16 flex flex-wrap gap-3">
               <Link to="/services" className="btn-primary">
