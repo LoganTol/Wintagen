@@ -42,23 +42,27 @@ const SERVICES = [
     icon: Code2,
     title: "Software development",
     body: "Purpose-built web applications and digital tools.",
+    slug: "software-development",
   },
   {
     icon: Globe,
     title: "Web experiences",
     body: "Modern, responsive websites designed for clarity and conversion.",
+    slug: "web-experiences",
   },
   {
     icon: Compass,
     title: "Product strategy",
     body: "Practical guidance to define, validate, and scope digital products.",
+    slug: "product-strategy",
   },
   {
     icon: Workflow,
     title: "Automation and integrations",
     body: "Connected workflows that reduce repetitive work.",
+    slug: "automation-integrations",
   },
-];
+] as const;
 
 const PRODUCTS = [
   {
