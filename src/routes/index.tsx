@@ -64,36 +64,6 @@ const SERVICES = [
   },
 ] as const;
 
-const PRODUCTS = [
-  {
-    label: "Wintagen Portfolio",
-    title: "Product announcements coming soon.",
-    description:
-      "We're preparing the first products in the Wintagen portfolio. More details will be shared here as they become available.",
-    status: "In development",
-  },
-];
-
-function ProductCard({ item }: { item: (typeof PRODUCTS)[number] }) {
-  return (
-    <Reveal>
-      <article className="card-surface flex h-full flex-col gap-4 p-7 sm:p-9">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <span className="text-xs font-semibold uppercase tracking-[0.14em] text-brand">
-          {item.label}
-        </span>
-        <span className="inline-flex items-center gap-2 rounded-full border border-border bg-brand-soft px-3 py-1 text-xs font-medium text-foreground">
-          <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
-          {item.status}
-        </span>
-      </div>
-      <h3 className="text-xl font-semibold tracking-tight sm:text-2xl">{item.title}</h3>
-        <p className="max-w-2xl text-muted-foreground">{item.description}</p>
-      </article>
-    </Reveal>
-  );
-}
-
 function Index() {
   return (
     <div id="top" className="min-h-screen bg-background">
