@@ -64,36 +64,6 @@ const SERVICES = [
   },
 ] as const;
 
-const PRODUCTS = [
-  {
-    label: "Wintagen Portfolio",
-    title: "Product announcements coming soon.",
-    description:
-      "We're preparing the first products in the Wintagen portfolio. More details will be shared here as they become available.",
-    status: "In development",
-  },
-];
-
-function ProductCard({ item }: { item: (typeof PRODUCTS)[number] }) {
-  return (
-    <Reveal>
-      <article className="card-surface flex h-full flex-col gap-4 p-7 sm:p-9">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <span className="text-xs font-semibold uppercase tracking-[0.14em] text-brand">
-          {item.label}
-        </span>
-        <span className="inline-flex items-center gap-2 rounded-full border border-border bg-brand-soft px-3 py-1 text-xs font-medium text-foreground">
-          <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
-          {item.status}
-        </span>
-      </div>
-      <h3 className="text-xl font-semibold tracking-tight sm:text-2xl">{item.title}</h3>
-        <p className="max-w-2xl text-muted-foreground">{item.description}</p>
-      </article>
-    </Reveal>
-  );
-}
-
 function Index() {
   return (
     <div id="top" className="min-h-screen bg-background">
@@ -186,28 +156,21 @@ function Index() {
 
         {/* Products */}
         <section id="products" className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
-            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-              Products built with purpose.
-            </h2>
-            <span aria-hidden="true" className="mt-4 block h-1 w-12 rounded-full bg-brand-accent" />
-          <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
-            Our portfolio is designed to grow. Each product starts with a specific problem and a
-            straightforward reason to exist.
-          </p>
-          <div className="mt-10 grid gap-6 lg:grid-cols-2">
-            {PRODUCTS.map((p) => (
-              <ProductCard key={p.title} item={p} />
-            ))}
-          </div>
-          <div className="mt-10">
-            <Link
-              to="/products"
-              className="group inline-flex items-center gap-2 rounded-md text-sm font-semibold text-brand focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
-            >
-              View the full portfolio
-              <ArrowRight className="h-4 w-4 transition-all group-hover:translate-x-0.5 group-hover:text-brand-accent" />
-            </Link>
-          </div>
+          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+            Products built with purpose.
+          </h2>
+          <span aria-hidden="true" className="mt-4 block h-1 w-12 rounded-full bg-brand-accent" />
+          <Reveal className="mt-6">
+            <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground">
+              The Wintagen portfolio is a growing collection of products — each one built around a
+              specific problem and a straightforward reason to exist.
+            </p>
+            <div className="mt-9">
+              <Link to="/products" className="btn-primary">
+                View the full portfolio
+              </Link>
+            </div>
+          </Reveal>
         </section>
 
         {/* Services */}
