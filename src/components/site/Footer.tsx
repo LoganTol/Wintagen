@@ -1,7 +1,5 @@
 import { Link } from "@tanstack/react-router";
 import wintagenLogo from "@/assets/Wintagen_Logo_Transparent.png.asset.json";
-import privacyPolicy from "@/assets/Wintagen_Privacy_Policy.pdf.asset.json";
-import termsOfService from "@/assets/Wintagen_Terms_of_Service.pdf.asset.json";
 
 const LINKS = [
   { label: "Products", href: "/products" },
