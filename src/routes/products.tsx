@@ -297,12 +297,46 @@ function ProductsPage() {
 
   useEffect(() => {
     if (window.matchMedia("(hover: none), (pointer: coarse)").matches) setActiveBoth(0);
+
+    // Hover-opened bands close from a window-level pointer check, not from
+    // boundary events alone: layout shifts during the glide fire phantom
+    // enter/leave events, so a leave that looks genuine can swallow the
+    // close. Here the pointer's real containment in the stack decides.
     const trackPointer = (event: PointerEvent) => {
       lastPointerRef.current = { x: event.clientX, y: event.clientY };
+      const stack = stackRef.current;
+      if (!stack || event.pointerType !== "mouse") return;
+      if (openedByRef.current !== "hover" || activeRef.current === null) return;
+      if (stack.contains(event.target as Node)) {
+        clearTimer(closeTimer);
+      } else if (closeTimer.current === null) {
+        closeTimer.current = window.setTimeout(() => setActiveBoth(null), 250);
+      }
     };
+
+    // A click or tap anywhere outside the stack dismisses any open band,
+    // including ones opened deliberately by click, tap, or keyboard.
+    const handleOutsideClick = (event: MouseEvent) => {
+      const stack = stackRef.current;
+      if (!stack || activeRef.current === null) return;
+      if (!stack.contains(event.target as Node)) setActiveBoth(null);
+    };
+
+    // The cursor left the window: no further pointermove will fire, and the
+    // stale recorded position could otherwise re-open a band via reconcile.
+    const handlePointerOut = (event: PointerEvent) => {
+      if (event.pointerType !== "mouse") return;
+      lastPointerRef.current = { x: -1, y: -1 };
+      if (openedByRef.current === "hover") scheduleStackClose();
+    };
+
     window.addEventListener("pointermove", trackPointer, { passive: true });
+    document.addEventListener("click", handleOutsideClick);
+    document.documentElement.addEventListener("pointerleave", handlePointerOut);
     return () => {
       window.removeEventListener("pointermove", trackPointer);
+      document.removeEventListener("click", handleOutsideClick);
+      document.documentElement.removeEventListener("pointerleave", handlePointerOut);
       clearTimer(openTimer);
       clearTimer(closeTimer);
       clearTimer(reconcileTimer);
