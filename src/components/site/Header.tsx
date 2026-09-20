@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import wintagenLogo from "@/assets/Wintagen_Logo_Transparent.png.asset.json";
 
 const NAV = [
-  { label: "Products", href: "#products" },
-  { label: "Services", href: "#services" },
-  { label: "About Us", href: "#about" },
+  { label: "Products", href: "/products" },
+  { label: "Services", href: "/#services" },
+  { label: "About Us", href: "/#about" },
 ];
 
 export function Header() {
@@ -29,8 +30,9 @@ export function Header() {
       }
     >
       <div className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-4 md:px-8">
-        <a
-          href="#top"
+        <Link
+          to="/"
+          hash="top"
           className="min-w-0 rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
           aria-label="Wintagen — back to top"
         >
@@ -39,7 +41,7 @@ export function Header() {
             alt="Wintagen"
             className="h-11 w-auto max-w-[230px] object-contain sm:h-12 sm:max-w-[260px]"
           />
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
           {NAV.map((item) => (
@@ -51,7 +53,7 @@ export function Header() {
               {item.label}
             </a>
           ))}
-          <a href="#contact" className="btn-primary text-sm">
+          <a href="/#contact" className="btn-primary text-sm">
             Contact
           </a>
         </nav>
@@ -75,7 +77,7 @@ export function Header() {
           className="border-t border-border bg-background px-5 pb-6 pt-2 md:hidden"
         >
           <ul className="flex flex-col">
-            {[...NAV, { label: "Contact", href: "#contact" }].map((item) => (
+            {[...NAV, { label: "Contact", href: "/#contact" }].map((item) => (
               <li key={item.href}>
                 <a
                   href={item.href}
