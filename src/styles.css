@@ -248,3 +248,164 @@
     transform: none;
   }
 }
+
+/* Portfolio cards use product-specific colors only inside their own brand area. */
+.product-fold {
+  --product-color: var(--brand);
+  --product-soft: var(--brand-soft);
+  position: relative;
+  isolation: isolate;
+  border-radius: calc(var(--radius) + 8px);
+  perspective: 1200px;
+}
+
+.product-fold--aether {
+  --product-color: oklch(0.58 0.17 145);
+  --product-soft: oklch(0.965 0.04 145);
+}
+
+.product-fold--quicksite {
+  --product-color: oklch(0.57 0.21 276);
+  --product-soft: oklch(0.965 0.025 286);
+}
+
+.product-fold__underlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--product-color);
+  transform: translate(0.45rem, 0.55rem);
+  opacity: 0.38;
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1), opacity 350ms ease;
+}
+
+.product-fold__sheet {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: inherit;
+  background: var(--card);
+  box-shadow: var(--shadow-soft);
+  transform-origin: top left;
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 350ms ease;
+}
+
+.product-fold__visual {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  background: var(--product-soft);
+}
+
+.product-fold__visual::before,
+.product-fold__visual::after {
+  content: "";
+  position: absolute;
+  border: 1px solid color-mix(in oklab, var(--product-color) 24%, transparent);
+  border-radius: 50%;
+}
+
+.product-fold__visual::before {
+  width: 17rem;
+  height: 17rem;
+  right: -7rem;
+  top: -8rem;
+}
+
+.product-fold__visual::after {
+  width: 10rem;
+  height: 10rem;
+  left: -5rem;
+  bottom: -5rem;
+}
+
+.product-fold__logo-stage {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 10rem;
+  width: min(100%, 21rem);
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in oklab, var(--product-color) 22%, var(--border));
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: 0 18px 45px -28px color-mix(in oklab, var(--product-color) 48%, transparent);
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.product-fold__category,
+.product-fold__link {
+  color: var(--product-color);
+}
+
+.product-fold__link:focus-visible {
+  outline-color: var(--product-color);
+}
+
+.product-fold__feature-icon {
+  display: inline-flex;
+  width: 2rem;
+  height: 2rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  background: var(--product-soft);
+  color: var(--product-color);
+}
+
+.product-fold__corner {
+  position: absolute;
+  right: -1px;
+  top: -1px;
+  width: 3.5rem;
+  height: 3.5rem;
+  background: linear-gradient(225deg, var(--surface) 49%, var(--border) 50%, var(--product-soft) 52%);
+  clip-path: polygon(0 0, 100% 100%, 100% 0);
+  filter: drop-shadow(-4px 5px 5px color-mix(in oklab, var(--foreground) 8%, transparent));
+  transition: width 500ms cubic-bezier(0.22, 1, 0.36, 1), height 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (min-width: 64rem) {
+  .product-fold__visual {
+    border-right: 1px solid var(--border);
+    border-bottom: 0;
+  }
+
+  .product-fold--quicksite .product-fold__visual {
+    border-right: 0;
+    border-left: 1px solid var(--border);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .product-fold:hover .product-fold__underlay {
+    transform: translate(0.8rem, 0.9rem);
+    opacity: 0.55;
+  }
+
+  .product-fold:hover .product-fold__sheet {
+    transform: translate(-0.18rem, -0.22rem) rotateX(0.35deg) rotateY(-0.35deg);
+    box-shadow: 0 24px 55px -30px color-mix(in oklab, var(--foreground) 28%, transparent);
+  }
+
+  .product-fold:hover .product-fold__logo-stage {
+    transform: translateY(-0.35rem);
+  }
+
+  .product-fold:hover .product-fold__corner {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-fold__underlay,
+  .product-fold__sheet,
+  .product-fold__logo-stage,
+  .product-fold__corner {
+    transform: none !important;
+  }
+}
