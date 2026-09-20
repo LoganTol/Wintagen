@@ -220,10 +220,9 @@ function ProductsPage() {
           </Reveal>
         </section>
 
-        <section className="border-y border-border bg-surface" aria-label="Wintagen product portfolio">
-          <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
-            <Reveal>
-              <div className="product-stack">
+        <section className="border-y border-border" aria-label="Wintagen product portfolio">
+          <Reveal>
+            <div className="product-stack">
               {PRODUCTS.map((product, index) => (
                 <ProductLayer
                   key={product.name}
@@ -235,9 +234,8 @@ function ProductsPage() {
                   onToggle={() => setOpenProduct((current) => (current === index ? null : index))}
                 />
               ))}
-              </div>
-            </Reveal>
-          </div>
+            </div>
+          </Reveal>
         </section>
 
         <section className="mx-auto max-w-3xl px-5 py-20 text-center md:px-8 md:py-28">
