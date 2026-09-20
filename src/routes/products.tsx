@@ -127,6 +127,7 @@ function ProductLayer({
 
   return (
     <article
+      data-index={index}
       className={`product-layer product-layer--${product.theme} ${isOpen ? "is-open" : ""}`}
       style={{ zIndex: PRODUCTS.length - index }}
       onPointerEnter={(event) => {
