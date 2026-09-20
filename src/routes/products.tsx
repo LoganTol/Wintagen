@@ -275,16 +275,29 @@ function ProductsPage() {
 
         <section className="border-y border-border" aria-label="Wintagen product portfolio">
           <Reveal>
-            <div className="product-stack">
+            <div
+              className="product-stack"
+              onPointerEnter={(event) => {
+                if (event.pointerType === "mouse") cancelStackClose();
+              }}
+              onPointerLeave={(event) => {
+                if (event.pointerType === "mouse") scheduleStackClose();
+              }}
+            >
               {PRODUCTS.map((product, index) => (
                 <ProductLayer
                   key={product.name}
                   product={product}
                   index={index}
                   isOpen={openProduct === index}
-                  onOpen={() => setOpenProduct(index)}
+                  onHoverOpen={() => requestOpen(index)}
+                  onFocusOpen={() => openNow(index)}
                   onClose={() => setOpenProduct((current) => (current === index ? null : current))}
-                  onToggle={() => setOpenProduct((current) => (current === index ? null : index))}
+                  onToggle={() => {
+                    clearTimer(openTimer);
+                    clearTimer(closeTimer);
+                    setOpenProduct((current) => (current === index ? null : index));
+                  }}
                 />
               ))}
             </div>
