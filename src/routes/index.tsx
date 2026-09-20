@@ -226,9 +226,9 @@ function Index() {
             </div>
             <ul className="grid gap-4 self-center">
               {[
-                "Find the real problem before writing a line of code.",
-                "Simple and dependable beats clever and complicated.",
-                "Built to hold up as your needs grow.",
+                "Purpose first.",
+                "Practical by default.",
+                "Built to grow.",
               ].map((line) => (
                 <li
                   key={line}
