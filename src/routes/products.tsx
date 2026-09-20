@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowLeft,
@@ -266,8 +267,7 @@ function ProductsPage() {
     };
   }, []);
 
-  // Hover intent: a band opens after a short dwell. The previous band stays
-  // open for the duration of the expand animation, then collapses.
+  // Hover intent: a band opens after a short dwell.
   const requestOpen = (index: number) => {
     clearTimer(closeTimer);
     clearTimer(openTimer);
@@ -275,12 +275,6 @@ function ProductsPage() {
     openTimer.current = window.setTimeout(() => {
       pendingIndexRef.current = null;
       openedByRef.current = "hover";
-      const previous = activeRef.current;
-      if (previous !== null && previous !== index) {
-        setLingering(previous);
-        clearTimer(lingerTimer);
-        lingerTimer.current = window.setTimeout(() => setLingering(null), 650);
-      }
       setActiveBoth(index);
     }, 180);
   };
@@ -294,22 +288,18 @@ function ProductsPage() {
     }
   };
 
-  // Deliberate opens (click, tap, keyboard focus) swap instantly — no linger.
+  // Deliberate opens (click, tap, keyboard focus) swap instantly.
   const openNow = (index: number) => {
     clearTimer(openTimer);
     clearTimer(closeTimer);
-    clearTimer(lingerTimer);
     openedByRef.current = "manual";
-    setLingering(null);
     setActiveBoth(index);
   };
 
   const toggleBand = (index: number) => {
     clearTimer(openTimer);
     clearTimer(closeTimer);
-    clearTimer(lingerTimer);
     openedByRef.current = "manual";
-    setLingering(null);
     setActiveBoth(activeRef.current === index ? null : index);
   };
 
