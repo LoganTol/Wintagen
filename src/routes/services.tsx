@@ -48,13 +48,6 @@ export const Route = createFileRoute("/services")({
   component: ServicesPage,
 });
 
-export const SERVICE_SLUGS = [
-  "software-development",
-  "web-experiences",
-  "product-strategy",
-  "automation-integrations",
-] as const;
-
 const SERVICES = [
   {
     slug: "software-development",
