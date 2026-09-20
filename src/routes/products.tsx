@@ -244,10 +244,12 @@ function ProductsPage() {
   const reconcileTimer = useRef<number | null>(null);
   const reconcileDepth = useRef(0);
 
-  // True when the pointer's last known position is still inside the element,
-  // regardless of what boundary events layout shifts have fired.
-  const isPointerOver = (element: HTMLElement) => {
-    const { x, y } = lastPointerRef.current;
+  // True when the pointer is still inside the element, regardless of what
+  // boundary events layout shifts have fired. Prefer the event's own
+  // coordinates (they are current even when the pointermove that updates
+  // lastPointerRef hasn't been dispatched yet); fall back to tracking.
+  const isPointerOver = (element: HTMLElement, point?: { x: number; y: number }) => {
+    const { x, y } = point ?? lastPointerRef.current;
     const hit = document.elementFromPoint(x, y);
     return hit !== null && element.contains(hit);
   };
@@ -397,7 +399,9 @@ function ProductsPage() {
               onPointerLeave={(event) => {
                 if (event.pointerType !== "mouse") return;
                 // Ignore phantom leaves caused by panels shifting the layout.
-                if (isPointerOver(event.currentTarget)) return;
+                if (isPointerOver(event.currentTarget, { x: event.clientX, y: event.clientY })) {
+                  return;
+                }
                 scheduleStackClose();
               }}
             >
