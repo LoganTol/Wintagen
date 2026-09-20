@@ -309,9 +309,9 @@
   opacity: 0;
   visibility: hidden;
   transition:
-    grid-template-rows 500ms cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 280ms ease,
-    visibility 0s linear 500ms;
+    grid-template-rows 620ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 320ms ease,
+    visibility 0s linear 620ms;
 }
 
 .product-layer__panel-inner {
@@ -330,8 +330,8 @@
   opacity: 1;
   visibility: visible;
   transition:
-    grid-template-rows 500ms cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 360ms ease 100ms,
+    grid-template-rows 620ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 420ms ease 120ms,
     visibility 0s;
 }
 
