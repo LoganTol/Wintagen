@@ -436,7 +436,7 @@ function ProductsPage() {
             </p>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
               <a href="mailto:hello@wintagen.com" className="btn-primary">Contact Wintagen</a>
-              <Link to="/" hash="services" className="btn-secondary group">
+              <Link to="/services" className="btn-secondary group">
                 View our services
                 <ArrowRight className="ml-1 inline h-4 w-4 transition-all group-hover:translate-x-0.5 group-hover:text-brand-accent" />
               </Link>
