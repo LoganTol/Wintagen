@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-// (pointer tracking helpers live in ProductsPage)
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowLeft,
@@ -359,12 +358,19 @@ function ProductsPage() {
         <section className="border-y border-border" aria-label="Wintagen product portfolio">
           <Reveal>
             <div
+              ref={stackRef}
               className="product-stack"
+              onPointerMove={(event) => {
+                lastPointerRef.current = { x: event.clientX, y: event.clientY };
+              }}
               onPointerEnter={(event) => {
                 if (event.pointerType === "mouse") cancelStackClose();
               }}
               onPointerLeave={(event) => {
-                if (event.pointerType === "mouse") scheduleStackClose();
+                if (event.pointerType !== "mouse") return;
+                // Ignore phantom leaves caused by panels shifting the layout.
+                if (isPointerOver(event.currentTarget)) return;
+                scheduleStackClose();
               }}
             >
               {PRODUCTS.map((product, index) => (
@@ -373,7 +379,9 @@ function ProductsPage() {
                   product={product}
                   index={index}
                   isOpen={active === index || lingering === index}
+                  isPointerOver={isPointerOver}
                   onHoverOpen={() => requestOpen(index)}
+                  onLeave={() => cancelPending(index)}
                   onFocusOpen={() => openNow(index)}
                   onClose={() => {
                     if (activeRef.current === index) setActiveBoth(null);
