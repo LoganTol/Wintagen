@@ -363,7 +363,7 @@ function ProductsPage() {
                   key={product.name}
                   product={product}
                   index={index}
-                  isOpen={active === index || lingering === index}
+                  isOpen={active === index}
                   isPointerOver={isPointerOver}
                   onHoverOpen={() => requestOpen(index)}
                   onLeave={() => cancelPending(index)}
