@@ -15,6 +15,7 @@ export const Route = createFileRoute("/")({
           "Wintagen creates focused software products and provides practical technology services for businesses building what comes next.",
       },
       { property: "og:title", content: "Wintagen | Software Products & Technology Services" },
+      { property: "og:url", content: "/" },
       {
         property: "og:description",
         content:
