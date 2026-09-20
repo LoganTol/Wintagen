@@ -1,15 +1,15 @@
 import { Link } from "@tanstack/react-router";
 import wintagenLogo from "@/assets/Wintagen_Logo_Transparent.png.asset.json";
-
-const LEGAL_PDF = "/wintagen-privacy-terms.pdf";
+import privacyPolicy from "@/assets/Wintagen_Privacy_Policy.pdf.asset.json";
+import termsOfService from "@/assets/Wintagen_Terms_of_Service.pdf.asset.json";
 
 const LINKS = [
   { label: "Products", href: "/products" },
   { label: "Services", href: "/services" },
   { label: "About Us", href: "/#about" },
   { label: "Contact", href: "/#contact" },
-  { label: "Privacy", href: LEGAL_PDF },
-  { label: "Terms", href: LEGAL_PDF },
+  { label: "Privacy", href: privacyPolicy.url },
+  { label: "Terms", href: termsOfService.url },
 ];
 
 export function Footer() {
