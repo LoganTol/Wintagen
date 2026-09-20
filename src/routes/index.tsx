@@ -96,14 +96,14 @@ function Index() {
       <Header />
       <main className="pt-20">
         {/* Hero */}
-        <section className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
-          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <section className="pt-16 md:pt-24">
+          <div className="mx-auto max-w-6xl px-5 md:px-8">
             <Reveal>
               <p className="flex items-center gap-3 text-sm font-semibold tracking-[0.12em] text-brand uppercase">
                 <span aria-hidden="true" className="h-2 w-2 rounded-full bg-brand-accent" />
                 Products. Services. One standard.
               </p>
-              <h1 className="mt-5 text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl">
+              <h1 className="mt-5 max-w-3xl text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl">
                 We build software—and the company behind it.
               </h1>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
@@ -119,19 +119,19 @@ function Index() {
                 </a>
               </div>
             </Reveal>
-
-            <Reveal delay={120} className="relative">
-              <figure className="card-surface overflow-hidden p-2 sm:p-3">
-                <img
-                  src={heroSkyline.url}
-                  alt="A city skyline at dawn, with the first light catching the tops of the buildings"
-                  className="aspect-[8/5] w-full rounded-lg object-cover"
-                  width={1400}
-                  height={861}
-                />
-              </figure>
-            </Reveal>
           </div>
+
+          <Reveal delay={120} className="mt-12 md:mt-16">
+            <figure className="w-full">
+              <img
+                src={heroSkyline.url}
+                alt="A city skyline at dawn, with the first light catching the tops of the buildings"
+                className="h-64 w-full object-cover sm:h-80 md:h-[26rem] lg:h-[30rem]"
+                width={1400}
+                height={861}
+              />
+            </figure>
+          </Reveal>
         </section>
 
         {/* Company model */}
