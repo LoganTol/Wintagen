@@ -338,13 +338,20 @@
 }
 
 /*
- * Give every panel the same height on hover-capable wider screens. When one
- * band opens and another closes, the two animations then cancel out — the
- * stack's total height stays constant, so the band the pointer rests on never
- * shifts out from under the cursor mid-glide.
+ * Give every open panel the same minimum height on hover-capable wider
+ * screens. When one band opens and another closes, the two animations then
+ * cancel out — the stack's total height stays constant, so the band the
+ * pointer rests on never shifts out from under the cursor mid-glide.
+ * The minimum only applies while open (and eases away with the same
+ * timing), otherwise a closed band would keep a 15.5rem empty gap.
  */
 @media (hover: hover) and (min-width: 48rem) {
   .product-layer__panel-inner {
+    min-height: 0;
+    transition: min-height 620ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .product-layer.is-open .product-layer__panel-inner {
     min-height: 15.5rem;
   }
 }
@@ -387,7 +394,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .product-layer,
-  .product-layer__panel {
+  .product-layer__panel,
+  .product-layer__panel-inner {
     transform: none !important;
     transition: none !important;
   }
