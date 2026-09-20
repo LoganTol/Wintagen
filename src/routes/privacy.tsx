@@ -29,12 +29,16 @@ export const Route = createFileRoute("/privacy")({
 
 function PrivacyPage() {
   return (
-    <LegalPage
-      eyebrow="Legal"
-      title="Privacy Policy"
-      effectiveDate="September 20, 2026"
-      intro={PRIVACY_INTRO}
-      sections={PRIVACY_SECTIONS}
-    />
+    <>
+      <Header />
+      <LegalPage
+        eyebrow="Legal"
+        title="Privacy Policy"
+        effectiveDate="September 20, 2026"
+        intro={PRIVACY_INTRO}
+        sections={PRIVACY_SECTIONS}
+      />
+      <Footer />
+    </>
   );
 }

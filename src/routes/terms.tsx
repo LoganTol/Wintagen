@@ -29,12 +29,16 @@ export const Route = createFileRoute("/terms")({
 
 function TermsPage() {
   return (
-    <LegalPage
-      eyebrow="Legal"
-      title="Terms of Service"
-      effectiveDate="September 20, 2026"
-      intro={TERMS_INTRO}
-      sections={TERMS_SECTIONS}
-    />
+    <>
+      <Header />
+      <LegalPage
+        eyebrow="Legal"
+        title="Terms of Service"
+        effectiveDate="September 20, 2026"
+        intro={TERMS_INTRO}
+        sections={TERMS_SECTIONS}
+      />
+      <Footer />
+    </>
   );
 }
