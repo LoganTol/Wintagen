@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LegalPage } from "@/components/site/LegalPage";
+import { Header } from "@/components/site/Header";
+import { Footer } from "@/components/site/Footer";
 import { TERMS_INTRO, TERMS_SECTIONS } from "@/content/terms";
 
 export const Route = createFileRoute("/terms")({
@@ -27,12 +29,16 @@ export const Route = createFileRoute("/terms")({
 
 function TermsPage() {
   return (
-    <LegalPage
-      eyebrow="Legal"
-      title="Terms of Service"
-      effectiveDate="September 20, 2026"
-      intro={TERMS_INTRO}
-      sections={TERMS_SECTIONS}
-    />
+    <>
+      <Header />
+      <LegalPage
+        eyebrow="Legal"
+        title="Terms of Service"
+        effectiveDate="September 20, 2026"
+        intro={TERMS_INTRO}
+        sections={TERMS_SECTIONS}
+      />
+      <Footer />
+    </>
   );
 }

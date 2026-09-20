@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LegalPage } from "@/components/site/LegalPage";
+import { Header } from "@/components/site/Header";
+import { Footer } from "@/components/site/Footer";
 import { PRIVACY_INTRO, PRIVACY_SECTIONS } from "@/content/privacy";
 
 export const Route = createFileRoute("/privacy")({
@@ -27,12 +29,16 @@ export const Route = createFileRoute("/privacy")({
 
 function PrivacyPage() {
   return (
-    <LegalPage
-      eyebrow="Legal"
-      title="Privacy Policy"
-      effectiveDate="September 20, 2026"
-      intro={PRIVACY_INTRO}
-      sections={PRIVACY_SECTIONS}
-    />
+    <>
+      <Header />
+      <LegalPage
+        eyebrow="Legal"
+        title="Privacy Policy"
+        effectiveDate="September 20, 2026"
+        intro={PRIVACY_INTRO}
+        sections={PRIVACY_SECTIONS}
+      />
+      <Footer />
+    </>
   );
 }
