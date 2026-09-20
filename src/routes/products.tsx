@@ -259,7 +259,7 @@ function ProductsPage() {
                   index={index}
                   isOpen={openProduct === index}
                   onOpen={() => setOpenProduct(index)}
-                  onClose={() => setOpenProduct(null)}
+                  onClose={() => setOpenProduct((current) => (current === index ? null : current))}
                   onToggle={() => setOpenProduct((current) => (current === index ? null : index))}
                 />
               ))}
