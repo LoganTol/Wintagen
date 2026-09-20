@@ -98,7 +98,9 @@ function ProductLayer({
   product,
   index,
   isOpen,
+  isPointerOver,
   onHoverOpen,
+  onLeave,
   onFocusOpen,
   onClose,
   onToggle,
@@ -106,7 +108,9 @@ function ProductLayer({
   product: Product;
   index: number;
   isOpen: boolean;
+  isPointerOver: (element: HTMLElement) => boolean;
   onHoverOpen: () => void;
+  onLeave: () => void;
   onFocusOpen: () => void;
   onClose: () => void;
   onToggle: () => void;
@@ -130,7 +134,13 @@ function ProductLayer({
       }}
       onPointerLeave={(event) => {
         if (event.pointerType !== "mouse") return;
+        // Panels gliding open or closed shift the layout; the browser reads
+        // that as the pointer leaving even though it never moved. Ignore
+        // those phantom leaves and only trust ones where the pointer truly
+        // sits outside the band.
+        if (isPointerOver(event.currentTarget)) return;
         hoverSuppressed.current = false;
+        onLeave();
       }}
       onFocus={() => {
         if (suppressFocusOpen.current) {
