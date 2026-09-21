@@ -82,7 +82,11 @@ export function Header() {
                 <a
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="block rounded-lg px-2 py-3.5 text-base font-medium text-foreground transition-colors hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                  className={
+                    item.label === "Get Started"
+                      ? "btn-primary mt-2 w-full text-base"
+                      : "block rounded-lg px-2 py-3.5 text-base font-medium text-foreground transition-colors hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                  }
                 >
                   {item.label}
                 </a>
