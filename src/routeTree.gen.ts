@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as GetStartedRouteImport } from './routes/get-started'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as ServicesRouteImport } from './routes/services'
@@ -24,6 +25,11 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GetStartedRoute = GetStartedRouteImport.update({
+  id: '/get-started',
+  path: '/get-started',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -50,6 +56,7 @@ const TermsRoute = TermsRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/get-started': typeof GetStartedRoute
   '/privacy': typeof PrivacyRoute
   '/products': typeof ProductsRoute
   '/services': typeof ServicesRoute
@@ -58,6 +65,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/get-started': typeof GetStartedRoute
   '/privacy': typeof PrivacyRoute
   '/products': typeof ProductsRoute
   '/services': typeof ServicesRoute
@@ -67,6 +75,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/get-started': typeof GetStartedRoute
   '/privacy': typeof PrivacyRoute
   '/products': typeof ProductsRoute
   '/services': typeof ServicesRoute
@@ -74,13 +83,28 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/privacy' | '/products' | '/services' | '/terms'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/get-started'
+    | '/privacy'
+    | '/products'
+    | '/services'
+    | '/terms'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/privacy' | '/products' | '/services' | '/terms'
+  to:
+    | '/'
+    | '/about'
+    | '/get-started'
+    | '/privacy'
+    | '/products'
+    | '/services'
+    | '/terms'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/get-started'
     | '/privacy'
     | '/products'
     | '/services'
@@ -90,6 +114,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  GetStartedRoute: typeof GetStartedRoute
   PrivacyRoute: typeof PrivacyRoute
   ProductsRoute: typeof ProductsRoute
   ServicesRoute: typeof ServicesRoute
@@ -110,6 +135,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/get-started': {
+      id: '/get-started'
+      path: '/get-started'
+      fullPath: '/get-started'
+      preLoaderRoute: typeof GetStartedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy': {
@@ -146,6 +178,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  GetStartedRoute: GetStartedRoute,
   PrivacyRoute: PrivacyRoute,
   ProductsRoute: ProductsRoute,
   ServicesRoute: ServicesRoute,
