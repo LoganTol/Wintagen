@@ -53,8 +53,8 @@ export function Header() {
               {item.label}
             </a>
           ))}
-          <a href="/#contact" className="btn-primary text-sm">
-            Contact
+          <a href="/get-started" className="btn-primary text-sm">
+            Get Started
           </a>
         </nav>
 
@@ -77,7 +77,7 @@ export function Header() {
           className="border-t border-border bg-background px-5 pb-6 pt-2 md:hidden"
         >
           <ul className="flex flex-col">
-            {[...NAV, { label: "Contact", href: "/#contact" }].map((item) => (
+            {[...NAV, { label: "Get Started", href: "/get-started" }].map((item) => (
               <li key={item.href}>
                 <a
                   href={item.href}

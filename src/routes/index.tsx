@@ -220,13 +220,12 @@ function Index() {
               See what we're building or start a conversation about what you need.
             </p>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <Link to="/products" className="btn-primary">
+              <Link to="/get-started" className="btn-primary">
+                Get started
+              </Link>
+              <Link to="/products" className="btn-secondary">
                 Explore products
               </Link>
-              {/* Configure the real destination here (e.g. mailto: or a contact URL). */}
-              <a href="mailto:hello@wintagen.com" className="btn-secondary">
-                Contact Wintagen
-              </a>
             </div>
           </div>
         </section>
