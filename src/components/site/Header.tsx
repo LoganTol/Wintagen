@@ -53,8 +53,8 @@ export function Header() {
               {item.label}
             </a>
           ))}
-          <a href="/#contact" className="btn-primary text-sm">
-            Contact
+          <a href="/get-started" className="btn-primary text-sm">
+            Get Started
           </a>
         </nav>
 
