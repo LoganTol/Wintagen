@@ -22,11 +22,7 @@ export function Footer() {
             aria-label="Wintagen — back to top"
             className="inline-block rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
           >
-            <img
-              src={wintagenLogo.url}
-              alt="Wintagen"
-              className="h-10 w-auto max-w-[200px] object-contain"
-            />
+            <img src={wintagenLogo.url} alt="Wintagen" className="h-10 w-auto max-w-[200px] object-contain" />
           </Link>
           <p className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
             <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
@@ -39,9 +35,7 @@ export function Footer() {
               <li key={l.label}>
                 <a
                   href={l.href}
-                  {...(l.href.endsWith(".pdf")
-                    ? { target: "_blank", rel: "noreferrer" }
-                    : {})}
+                  {...(l.href.endsWith(".pdf") ? { target: "_blank", rel: "noreferrer" } : {})}
                   className="rounded-md text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
                 >
                   {l.label}
@@ -53,7 +47,7 @@ export function Footer() {
       </div>
       <div className="border-t border-border">
         <p className="mx-auto max-w-6xl px-5 py-6 text-xs text-muted-foreground md:px-8">
-          © {new Date().getFullYear()} Wintagen. All rights reserved.
+          © {new Date().getFullYear()} Wintagen. All rights reserved. Atlanta, GA.
         </p>
       </div>
     </footer>
