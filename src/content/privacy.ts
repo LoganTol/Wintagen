@@ -10,7 +10,7 @@ export const PRIVACY_SECTIONS: LegalSection[] = [
     blocks: [
       {
         type: "paragraph",
-        text: 'Wintagen ("Wintagen," "we," "us") is responsible for the personal information described in this Policy. It applies to wintagen.com, inquiries, communications, and our administration of client services. Effective date: September 20, 2026. Contact: hello@wintagen.com.',
+        text: 'Wintagen ("Wintagen," "we," "us") is responsible for the personal information described in this Policy. It applies to wintagen.com, inquiries, communications, and our administration of client services. Effective date: September 20, 2026. Contact: contact@wintagen.com.',
       },
     ],
   },
@@ -85,7 +85,7 @@ export const PRIVACY_SECTIONS: LegalSection[] = [
     blocks: [
       {
         type: "paragraph",
-        text: "Where we send marketing emails, you may unsubscribe using the message link or by contacting hello@wintagen.com. We may keep limited suppression records to honor that choice. Necessary service, transaction, security, and legal messages may continue. Marketing consent, where needed, is separate from acceptance of service terms.",
+        text: "Where we send marketing emails, you may unsubscribe using the message link or by contacting contact@wintagen.com. We may keep limited suppression records to honor that choice. Necessary service, transaction, security, and legal messages may continue. Marketing consent, where needed, is separate from acceptance of service terms.",
       },
     ],
   },
@@ -155,7 +155,7 @@ export const PRIVACY_SECTIONS: LegalSection[] = [
     blocks: [
       {
         type: "paragraph",
-        text: "Contact hello@wintagen.com to ask about your information or exercise rights available under applicable law. Describe your request and the relationship involved. We verify identity and authority using proportionate information and avoid collecting unnecessary identification. Authorized agents may need evidence of permission and identity verification where permitted. We respond within the deadline applicable to the request and explain permitted extensions or refusals.",
+        text: "Contact contact@wintagen.com to ask about your information or exercise rights available under applicable law. Describe your request and the relationship involved. We verify identity and authority using proportionate information and avoid collecting unnecessary identification. Authorized agents may need evidence of permission and identity verification where permitted. We respond within the deadline applicable to the request and explain permitted extensions or refusals.",
       },
       { type: "subheading", text: "Available rights" },
       {
@@ -165,7 +165,7 @@ export const PRIVACY_SECTIONS: LegalSection[] = [
       { type: "subheading", text: "Appeals and complaints" },
       {
         type: "paragraph",
-        text: "If an applicable law provides an appeal, send it to hello@wintagen.com with the original request reference. We will explain our decision and available regulator complaint options within the applicable period. You may complain to the relevant supervisory or enforcement authority. This Policy does not reduce nonwaivable rights or condition their exercise on accepting arbitration or waiving claims.",
+        text: "If an applicable law provides an appeal, send it to contact@wintagen.com with the original request reference. We will explain our decision and available regulator complaint options within the applicable period. You may complain to the relevant supervisory or enforcement authority. This Policy does not reduce nonwaivable rights or condition their exercise on accepting arbitration or waiving claims.",
       },
     ],
   },
@@ -205,7 +205,7 @@ export const PRIVACY_SECTIONS: LegalSection[] = [
     blocks: [
       {
         type: "paragraph",
-        text: "The company website and client services are intended for adult business users and are not directed to children under 13. We do not knowingly collect personal information from children under 13 through these channels. If you believe a child supplied information, contact hello@wintagen.com so we can investigate and take required action.",
+        text: "The company website and client services are intended for adult business users and are not directed to children under 13. We do not knowingly collect personal information from children under 13 through these channels. If you believe a child supplied information, contact contact@wintagen.com so we can investigate and take required action.",
       },
     ],
   },
@@ -215,7 +215,7 @@ export const PRIVACY_SECTIONS: LegalSection[] = [
     blocks: [
       {
         type: "paragraph",
-        text: "We publish an updated Policy with a revised effective date when practices change. For material changes, we provide additional notice or request consent where required. Changes do not retroactively authorize incompatible uses. Questions and requests: Wintagen, hello@wintagen.com.",
+        text: "We publish an updated Policy with a revised effective date when practices change. For material changes, we provide additional notice or request consent where required. Changes do not retroactively authorize incompatible uses. Questions and requests: Wintagen, contact@wintagen.com.",
       },
     ],
   },
