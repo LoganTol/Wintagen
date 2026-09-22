@@ -265,7 +265,7 @@ export const TERMS_SECTIONS: LegalSection[] = [
     blocks: [
       {
         type: "paragraph",
-        text: "Before filing a claim, the parties will try in good faith to resolve the dispute through their designated contacts; reach us at hello@wintagen.com. This process does not prevent urgent relief, regulator complaints, or preserve a deadline that applicable law requires you to meet. The agreement is governed by the laws of the State of Delaware, subject to mandatory law that cannot be displaced by contract. Venue is the state and federal courts located in Delaware, except where mandatory law gives another forum.",
+        text: "Before filing a claim, the parties will try in good faith to resolve the dispute through their designated contacts; reach us at contact@wintagen.com. This process does not prevent urgent relief, regulator complaints, or preserve a deadline that applicable law requires you to meet. The agreement is governed by the laws of the State of Delaware, subject to mandatory law that cannot be displaced by contract. Venue is the state and federal courts located in Delaware, except where mandatory law gives another forum.",
       },
       { type: "subheading", text: "No arbitration or class waiver" },
       {
@@ -290,7 +290,7 @@ export const TERMS_SECTIONS: LegalSection[] = [
     blocks: [
       {
         type: "paragraph",
-        text: "Send contractual notices to Wintagen at hello@wintagen.com, and to the client contact in the SOW. Updates to website terms apply prospectively through an appropriate notice and acceptance process. Existing signed engagements remain governed by their accepted version unless the parties agree to an amendment or law requires a change.",
+        text: "Send contractual notices to Wintagen at contact@wintagen.com, and to the client contact in the SOW. Updates to website terms apply prospectively through an appropriate notice and acceptance process. Existing signed engagements remain governed by their accepted version unless the parties agree to an amendment or law requires a change.",
       },
     ],
   },
@@ -310,7 +310,7 @@ export const TERMS_SECTIONS: LegalSection[] = [
     blocks: [
       {
         type: "paragraph",
-        text: "The accepted Terms and incorporated documents constitute the agreement for their subject matter. If a provision is unenforceable, the remaining provisions continue to the extent lawful; any replacement must reflect lawful intent. A waiver of one breach is not a waiver of another. Ownership, accrued payment duties, confidentiality, data obligations, permitted limitations, and dispute provisions survive to the extent their purpose requires. Contact: Wintagen, hello@wintagen.com.",
+        text: "The accepted Terms and incorporated documents constitute the agreement for their subject matter. If a provision is unenforceable, the remaining provisions continue to the extent lawful; any replacement must reflect lawful intent. A waiver of one breach is not a waiver of another. Ownership, accrued payment duties, confidentiality, data obligations, permitted limitations, and dispute provisions survive to the extent their purpose requires. Contact: Wintagen, contact@wintagen.com.",
       },
     ],
   },

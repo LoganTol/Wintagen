@@ -469,7 +469,7 @@ function ProductsPage() {
               Start a conversation about our products or what you need.
             </p>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <a href="mailto:hello@wintagen.com" className="btn-primary">Contact Wintagen</a>
+              <a href="mailto:contact@wintagen.com" className="btn-primary">Contact Wintagen</a>
               <Link to="/services" className="btn-secondary group">
                 View our services
                 <ArrowRight className="ml-1 inline h-4 w-4 transition-all group-hover:translate-x-0.5 group-hover:text-brand-accent" />

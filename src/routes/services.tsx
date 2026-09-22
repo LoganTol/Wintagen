@@ -209,7 +209,7 @@ function ServiceLayer({
               </p>
               <p className="mt-4 leading-relaxed text-muted-foreground">{service.description}</p>
               <a
-                href="mailto:hello@wintagen.com"
+                href="mailto:contact@wintagen.com"
                 tabIndex={isOpen ? 0 : -1}
                 className="product-layer__link group mt-7 inline-flex items-center gap-2 rounded-md font-semibold focus-visible:outline-2 focus-visible:outline-offset-4"
                 aria-label={`Discuss a ${service.name.toLowerCase()} project with Wintagen`}
@@ -470,7 +470,7 @@ function ServicesPage() {
               Tell us what you are trying to build or improve, and we will take it from there.
             </p>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <a href="mailto:hello@wintagen.com" className="btn-primary">Contact Wintagen</a>
+              <a href="mailto:contact@wintagen.com" className="btn-primary">Contact Wintagen</a>
               <Link to="/products" className="btn-secondary group">
                 Explore our products
                 <ArrowRight className="ml-1 inline h-4 w-4 transition-all group-hover:translate-x-0.5 group-hover:text-brand-accent" />

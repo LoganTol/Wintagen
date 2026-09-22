@@ -167,7 +167,7 @@ function GetStartedPage() {
       notes.trim() ? `Notes: ${notes.trim()}` : "",
     ].filter(Boolean);
     // Configure the real destination here (e.g. a different inbox).
-    window.location.href = `mailto:hello@wintagen.com?subject=${encodeURIComponent(
+    window.location.href = `mailto:contact@wintagen.com?subject=${encodeURIComponent(
       `Project interest — ${firstName.trim()} ${lastName.trim()}`,
     )}&body=${encodeURIComponent(lines.join("\n"))}`;
   };
@@ -346,8 +346,8 @@ function GetStartedPage() {
               </button>
               <p className="text-sm text-muted-foreground">
                 Prefer plain email?{" "}
-                <a className="font-medium text-brand underline" href="mailto:hello@wintagen.com">
-                  hello@wintagen.com
+                <a className="font-medium text-brand underline" href="mailto:contact@wintagen.com">
+                  contact@wintagen.com
                 </a>
               </p>
             </div>
