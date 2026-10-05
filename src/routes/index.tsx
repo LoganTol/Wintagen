@@ -3,7 +3,7 @@ import { ArrowRight, Boxes, Compass, Layers, Workflow, Code2, Globe } from "luci
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/Reveal";
-import heroSkyline from "@/assets/wintagen-hero-skyline-dawn.jpg.asset.json";
+import heroSkyline from "@/assets/wintagen-hero-atlanta-skyline.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
