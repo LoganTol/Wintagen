@@ -99,10 +99,10 @@ function Index() {
             <figure className="w-full">
               <img
                 src={heroSkyline.url}
-                alt="A city skyline at dawn, with the first light catching the tops of the buildings"
+                alt="The Atlanta skyline at sunrise, its towers catching the first golden light"
                 className="h-64 w-full object-cover sm:h-80 md:h-[26rem] lg:h-[30rem]"
-                width={1400}
-                height={861}
+                width={1920}
+                height={1371}
               />
             </figure>
           </Reveal>
