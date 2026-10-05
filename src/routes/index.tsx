@@ -3,7 +3,7 @@ import { ArrowRight, Boxes, Compass, Layers, Workflow, Code2, Globe } from "luci
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/Reveal";
-import heroSkyline from "@/assets/wintagen-hero-skyline-dawn.jpg.asset.json";
+import heroSkyline from "@/assets/wintagen-hero-atlanta-skyline.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -99,10 +99,10 @@ function Index() {
             <figure className="w-full">
               <img
                 src={heroSkyline.url}
-                alt="A city skyline at dawn, with the first light catching the tops of the buildings"
+                alt="The Atlanta skyline at sunrise, its towers catching the first golden light"
                 className="h-64 w-full object-cover sm:h-80 md:h-[26rem] lg:h-[30rem]"
-                width={1400}
-                height={861}
+                width={1920}
+                height={1371}
               />
             </figure>
           </Reveal>
