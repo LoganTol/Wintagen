@@ -6,7 +6,7 @@ const LINKS = [
   { label: "Services", href: "/services" },
   { label: "About Us", href: "/about" },
   { label: "Get Started", href: "/get-started" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Contact", href: "mailto:contact@wintagen.com" },
   { label: "Privacy", href: "/privacy" },
   { label: "Terms", href: "/terms" },
 ];
