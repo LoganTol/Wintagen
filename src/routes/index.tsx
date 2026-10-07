@@ -219,16 +219,18 @@ function Index() {
             <p className="mx-auto mt-5 max-w-xl text-lg text-muted-foreground">
               See what we're building or start a conversation about what you need.
             </p>
-            <div className="mt-9 flex flex-wrap justify-center gap-3">
+            <div className="mt-9 flex flex-col items-center gap-3">
               <Link to="/get-started" className="btn-primary">
                 Get started
               </Link>
-              <a href="mailto:contact@wintagen.com" className="btn-secondary">
-                Contact Wintagen
-              </a>
-              <Link to="/products" className="btn-secondary">
-                Explore products
-              </Link>
+              <div className="flex flex-wrap justify-center gap-3">
+                <a href="mailto:contact@wintagen.com" className="btn-secondary">
+                  Contact Wintagen
+                </a>
+                <Link to="/products" className="btn-secondary">
+                  Explore products
+                </Link>
+              </div>
             </div>
           </div>
         </section>
