@@ -100,7 +100,7 @@ function Index() {
               <img
                 src={heroSkyline.url}
                 alt="The Atlanta skyline at sunset, its towers glowing beneath a soft orange and violet sky"
-                className="h-64 w-full object-cover sm:h-80 md:h-[26rem] lg:h-[30rem]"
+                className="h-64 w-full object-cover sm:h-80 md:h-[30rem] lg:h-[38rem] xl:h-[40rem] 2xl:h-[44rem] min-[1920px]:h-[52rem]"
                 width={1920}
                 height={1280}
               />
