@@ -33,6 +33,19 @@ export const Route = createFileRoute("/")({
       },
     ],
     links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          name: "Wintagen",
+          url: "https://wintagen.com",
+          applicationCategory: "BusinessApplication",
+          operatingSystem: "Windows, macOS, Web",
+        }),
+      },
+    ],
   }),
   component: Index,
 });
