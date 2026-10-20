@@ -44,7 +44,7 @@ export const Route = createFileRoute("/")({
           url: "https://wintagen.com",
           logo: "https://wintagen.com/favicon-96.png",
           description:
-            "Wintagen is an Atlanta-based software company that develops focused digital products and provides practical technology services including custom software development, web experiences, product strategy, and workflow automations.",
+            "Wintagen is an Atlanta-based software company that develops focused digital products and provides practical technology services including custom software development, websites, product strategy, and workflow automations.",
           email: "contact@wintagen.com",
           address: {
             "@type": "PostalAddress",
