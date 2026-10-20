@@ -138,7 +138,7 @@ Create a responsive grid of four editable service cards:
 Software development
 Purpose-built web applications and digital tools.
 
-Web experiences
+Websites
 Modern, responsive websites designed for clarity and conversion.
 
 Product strategy
