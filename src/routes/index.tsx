@@ -38,11 +38,40 @@ export const Route = createFileRoute("/")({
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "SoftwareApplication",
+          "@type": "Organization",
           name: "Wintagen",
+          legalName: "Wintagen",
           url: "https://wintagen.com",
-          applicationCategory: "BusinessApplication",
-          operatingSystem: "Windows, macOS, Web",
+          logo: "https://wintagen.com/favicon-96.png",
+          description:
+            "Wintagen is an Atlanta-based software company that develops focused digital products and provides practical technology services including custom software development, web experiences, product strategy, and workflow automations.",
+          email: "contact@wintagen.com",
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Atlanta",
+            addressRegion: "GA",
+            addressCountry: "US",
+          },
+          knowsAbout: [
+            "Software Development",
+            "Web Application Development",
+            "Digital Product Strategy",
+            "Workflow Automation & Integrations",
+            "SaaS Products",
+          ],
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: "Technology Services & Digital Products",
+            itemListElement: [
+              ["Software Development", "Purpose-built web applications and digital tools."],
+              ["Web Experiences", "Modern, responsive websites designed for clarity and conversion."],
+              ["Product Strategy", "Practical guidance to define, validate, and scope digital products."],
+              ["Automation & Integrations", "Connected workflows that reduce repetitive work."],
+            ].map(([name, description]) => ({
+              "@type": "Offer",
+              itemOffered: { "@type": "Service", name, description },
+            })),
+          },
         }),
       },
     ],
