@@ -64,7 +64,7 @@ export const Route = createFileRoute("/")({
             name: "Technology Services & Digital Products",
             itemListElement: [
               ["Software Development", "Purpose-built web applications and digital tools."],
-              ["Web Experiences", "Modern, responsive websites designed for clarity and conversion."],
+              ["Websites", "Modern, responsive websites designed for clarity and conversion."],
               ["Product Strategy", "Practical guidance to define, validate, and scope digital products."],
               ["Automation & Integrations", "Connected workflows that reduce repetitive work."],
             ].map(([name, description]) => ({
@@ -88,7 +88,7 @@ const SERVICES = [
   },
   {
     icon: Globe,
-    title: "Web experiences",
+    title: "Websites",
     body: "Modern, responsive websites designed for clarity and conversion.",
     slug: "web-experiences",
   },
@@ -123,8 +123,8 @@ function Index() {
                 We build software—and the company behind it.
               </h1>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-                Wintagen creates focused digital products and provides technology services for
-                businesses ready to build, improve, or move an idea forward.
+                Wintagen creates focused digital products and provides technology services for businesses ready to
+                build, improve, or move an idea forward.
               </p>
               <div className="mt-9 flex flex-wrap gap-3">
                 <Link to="/products" className="btn-primary">
@@ -153,9 +153,7 @@ function Index() {
         {/* Company model */}
         <section className="border-y border-border bg-surface">
           <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
-            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-              Two ways we create value.
-            </h2>
+            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">Two ways we create value.</h2>
             <span aria-hidden="true" className="mt-4 block h-1 w-12 rounded-full bg-brand-accent" />
             <div className="mt-10 grid gap-6 md:grid-cols-2">
               <article className="card-surface flex flex-col border-brand/25 bg-brand-soft p-8 transition-shadow hover:shadow-md">
@@ -163,9 +161,7 @@ function Index() {
                   <Boxes className="h-5 w-5 text-brand" />
                 </span>
                 <h3 className="mt-6 text-2xl font-semibold tracking-tight">Products</h3>
-                <p className="mt-3 text-muted-foreground">
-                  Focused software designed around clear, real-world needs.
-                </p>
+                <p className="mt-3 text-muted-foreground">Focused software designed around clear, real-world needs.</p>
                 <Link
                   to="/products"
                   className="group mt-8 inline-flex items-center gap-2 rounded-md text-sm font-semibold text-brand focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
@@ -181,8 +177,7 @@ function Index() {
                 </span>
                 <h3 className="mt-6 text-2xl font-semibold tracking-tight">Services</h3>
                 <p className="mt-3 text-muted-foreground">
-                  Practical technology support for organizations building or improving digital
-                  experiences.
+                  Practical technology support for organizations building or improving digital experiences.
                 </p>
                 <Link
                   to="/services"
@@ -198,14 +193,12 @@ function Index() {
 
         {/* Products */}
         <section id="products" className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
-          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-            Products built with purpose.
-          </h2>
+          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">Products built with purpose.</h2>
           <span aria-hidden="true" className="mt-4 block h-1 w-12 rounded-full bg-brand-accent" />
           <Reveal className="mt-6">
             <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground">
-              The Wintagen portfolio is a growing collection of products — each one built around a
-              specific problem and a straightforward reason to exist.
+              The Wintagen portfolio is a growing collection of products — each one built around a specific problem and
+              a straightforward reason to exist.
             </p>
             <div className="mt-9">
               <Link to="/products" className="btn-primary">
