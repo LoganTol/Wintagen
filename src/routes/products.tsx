@@ -45,50 +45,50 @@ export const Route = createFileRoute("/products")({
 const PRODUCTS = [
   {
     name: "Aether Tennis",
-    category: "Season management",
-    tagline: "Tennis seasons made simple.",
+    category: "Season Management",
+    tagline: "Tennis Seasons Made Simple.",
     description:
       "Aether Tennis turns a group of players into an organized round-robin season, coordinating fixtures, scheduling responsibilities, scores, and standings in one shared place.",
     url: "https://aethertennis.com/",
     domain: "aethertennis.com",
     theme: "aether" as const,
     capabilities: [
-      { label: "Generated fixtures", icon: CalendarDays },
-      { label: "Rotating captains", icon: Repeat2 },
-      { label: "Shared standings", icon: Trophy },
-      { label: "Group seasons", icon: UsersRound },
+      { label: "Generated Fixtures", icon: CalendarDays },
+      { label: "Rotating Captains", icon: Repeat2 },
+      { label: "Shared Standings", icon: Trophy },
+      { label: "Group Seasons", icon: UsersRound },
     ],
   },
   {
     name: "QuickSite",
-    category: "Website modernization",
-    tagline: "A modern website, in seconds.",
+    category: "Website Modernization",
+    tagline: "A Modern Website, In Seconds.",
     description:
       "QuickSite transforms an existing website into a modern, mobile-friendly experience. Enter a URL to generate a redesigned preview without writing code.",
     url: "https://www.get-quick-site.com/",
     domain: "get-quick-site.com",
     theme: "quicksite" as const,
     capabilities: [
-      { label: "URL-based redesign", icon: WandSparkles },
-      { label: "Mobile-first layouts", icon: Smartphone },
-      { label: "No-code workflow", icon: LayoutTemplate },
-      { label: "Rapid previews", icon: Sparkles },
+      { label: "URL-Based Redesign", icon: WandSparkles },
+      { label: "Mobile-First Layouts", icon: Smartphone },
+      { label: "No-Code Workflow", icon: LayoutTemplate },
+      { label: "Rapid Previews", icon: Sparkles },
     ],
   },
   {
     name: "ProPlans",
-    category: "Blueprint marketplace",
-    tagline: "Plans from the pros, for your next project.",
+    category: "Blueprint Marketplace",
+    tagline: "Plans From The Pros, For Your Next Project.",
     description:
       "ProPlans is a peer-to-peer marketplace for home improvement, woodworking, and construction project plans — connecting creators who sell detailed blueprints with builders ready to get to work.",
     url: "https://logantol.github.io/DIY-Market/",
     domain: "logantol.github.io/DIY-Market",
     theme: "proplans" as const,
     capabilities: [
-      { label: "Curated project plans", icon: ScrollText },
-      { label: "Sell your blueprints", icon: Store },
-      { label: "Custom plan requests", icon: DraftingCompass },
-      { label: "Maker community", icon: UsersRound },
+      { label: "Curated Project Plans", icon: ScrollText },
+      { label: "Sell Your Blueprints", icon: Store },
+      { label: "Custom Plan Requests", icon: DraftingCompass },
+      { label: "Maker Community", icon: UsersRound },
     ],
   },
 ] as const;
@@ -409,7 +409,7 @@ function ProductsPage() {
               Products
             </p>
             <h1 className="mt-5 text-4xl font-semibold leading-[1.1] tracking-normal sm:text-5xl">
-              Products built with purpose.
+              Products Built With Purpose.
             </h1>
             <span aria-hidden="true" className="mt-4 block h-1 w-12 rounded-full bg-brand-accent" />
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
@@ -462,7 +462,7 @@ function ProductsPage() {
         <section className="mx-auto max-w-3xl px-5 py-20 text-center md:px-8 md:py-28">
           <Reveal>
             <h2 className="text-3xl font-semibold tracking-normal sm:text-4xl">
-              Interested in what we're building?
+              Interested In What We're Building?
             </h2>
             <span aria-hidden="true" className="mx-auto mt-4 block h-1 w-12 rounded-full bg-brand-accent" />
             <p className="mx-auto mt-5 max-w-xl text-lg text-muted-foreground">

@@ -51,62 +51,62 @@ export const Route = createFileRoute("/services")({
 const SERVICES = [
   {
     slug: "software-development",
-    name: "Software development",
+    name: "Software Development",
     category: "Build",
-    tagline: "Purpose-built web applications and digital tools.",
+    tagline: "Purpose-Built Web Applications And Digital Tools.",
     description:
       "We design and build web applications around the way your work actually happens — starting from a clear problem, shipping something usable early, then refining it. Every build is written to be maintained: readable code, sensible structure, and room to grow as your needs change.",
     theme: "build" as const,
     capabilities: [
-      { label: "Custom web applications", icon: Code2 },
-      { label: "Internal tools and portals", icon: Wrench },
-      { label: "Ongoing iteration", icon: Gauge },
-      { label: "Maintainable foundations", icon: Boxes },
+      { label: "Custom Web Applications", icon: Code2 },
+      { label: "Internal Tools And Portals", icon: Wrench },
+      { label: "Ongoing Iteration", icon: Gauge },
+      { label: "Maintainable Foundations", icon: Boxes },
     ],
   },
   {
     slug: "web-experiences",
     name: "Websites",
-    category: "Design and build",
-    tagline: "Modern, responsive websites designed for clarity and conversion.",
+    category: "Design And Build",
+    tagline: "Modern, Responsive Websites Designed For Clarity And Conversion.",
     description:
       "Websites that say what you do in seconds and read well on every screen. We focus on clear structure, honest copy, quick load times, and accessible design — so visitors find what they came for and know what to do next.",
     theme: "web" as const,
     capabilities: [
-      { label: "Marketing and brand sites", icon: Globe },
-      { label: "Responsive layouts", icon: Smartphone },
-      { label: "Design systems", icon: LayoutTemplate },
-      { label: "Performance and accessibility", icon: Gauge },
+      { label: "Marketing And Brand Sites", icon: Globe },
+      { label: "Responsive Layouts", icon: Smartphone },
+      { label: "Design Systems", icon: LayoutTemplate },
+      { label: "Performance And Accessibility", icon: Gauge },
     ],
   },
   {
     slug: "product-strategy",
-    name: "Product strategy",
+    name: "Product Strategy",
     category: "Plan",
-    tagline: "Practical guidance to define, validate, and scope digital products.",
+    tagline: "Practical Guidance To Define, Validate, And Scope Digital Products.",
     description:
       "Before anything gets built, it helps to know what is worth building. We work through the problem, the people it affects, and the smallest version that proves the idea — then turn that into a scope you can budget, sequence, and act on.",
     theme: "strategy" as const,
     capabilities: [
-      { label: "Discovery and framing", icon: Search },
-      { label: "Scope and roadmapping", icon: Map },
-      { label: "Prototypes and concepts", icon: PenTool },
+      { label: "Discovery And Framing", icon: Search },
+      { label: "Scope And Roadmapping", icon: Map },
+      { label: "Prototypes And Concepts", icon: PenTool },
       { label: "Prioritization", icon: ListChecks },
     ],
   },
   {
     slug: "automation-integrations",
-    name: "Automation and integrations",
+    name: "Automation And Integrations",
     category: "Connect",
-    tagline: "Connected workflows that reduce repetitive work.",
+    tagline: "Connected Workflows That Reduce Repetitive Work.",
     description:
       "Most teams lose hours moving the same information between tools. We connect the systems you already use, automate the steps that never needed a person, and keep the handoffs visible so you can trust what is running in the background.",
     theme: "automate" as const,
     capabilities: [
-      { label: "Workflow automation", icon: Workflow },
-      { label: "Third-party integrations", icon: Plug },
-      { label: "Data syncing", icon: Link2 },
-      { label: "Scheduled processes", icon: Timer },
+      { label: "Workflow Automation", icon: Workflow },
+      { label: "Third-Party Integrations", icon: Plug },
+      { label: "Data Syncing", icon: Link2 },
+      { label: "Scheduled Processes", icon: Timer },
     ],
   },
 ] as const;
@@ -411,7 +411,7 @@ function ServicesPage() {
               Services
             </p>
             <h1 className="mt-5 text-4xl font-semibold leading-[1.1] tracking-normal sm:text-5xl">
-              Technology services, shaped around the work.
+              Technology Services, Shaped Around The Work.
             </h1>
             <span aria-hidden="true" className="mt-4 block h-1 w-12 rounded-full bg-brand-accent" />
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
@@ -463,7 +463,7 @@ function ServicesPage() {
         <section className="mx-auto max-w-3xl px-5 py-20 text-center md:px-8 md:py-28">
           <Reveal>
             <h2 className="text-3xl font-semibold tracking-normal sm:text-4xl">
-              Have a project in mind?
+              Have A Project In Mind?
             </h2>
             <span aria-hidden="true" className="mx-auto mt-4 block h-1 w-12 rounded-full bg-brand-accent" />
             <p className="mx-auto mt-5 max-w-xl text-lg text-muted-foreground">
