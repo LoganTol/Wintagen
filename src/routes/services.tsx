@@ -33,13 +33,13 @@ export const Route = createFileRoute("/services")({
       {
         name: "description",
         content:
-          "Software development, web experiences, product strategy, and automation and integrations — practical technology services from Wintagen.",
+          "Software development, websites, product strategy, and automation and integrations — practical technology services from Wintagen.",
       },
       { property: "og:title", content: "Services | Wintagen" },
       {
         property: "og:description",
         content:
-          "Software development, web experiences, product strategy, and automation and integrations — practical technology services from Wintagen.",
+          "Software development, websites, product strategy, and automation and integrations — practical technology services from Wintagen.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -66,7 +66,7 @@ const SERVICES = [
   },
   {
     slug: "web-experiences",
-    name: "Web experiences",
+    name: "Websites",
     category: "Design and build",
     tagline: "Modern, responsive websites designed for clarity and conversion.",
     description:
