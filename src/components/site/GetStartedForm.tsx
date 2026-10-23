@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Check, Phone, MessageSquare, Video, MessageCircle, Mail } from "lucide-react";
 
 /** Video-call booking calendar (Google appointment page). */
-export const BOOKING_URL = "https://calendar.app.google/Go6JD946vKGeDyid9";
+export const BOOKING_URL = "https://calendar.app.google/iVE2rQbt9DG79XQL6";
 
 /** Step 1 — edit these to change what visitors can pick from. */
 export const NEEDS = [
@@ -147,7 +147,7 @@ export function GetStartedForm({ idPrefix = "gs" }: { idPrefix?: string }) {
       `What they need: ${needs.join(", ")}`,
       `Features: ${[...features.filter((f) => f !== "Other"), otherFeature.trim() ? `Other — ${otherFeature.trim()}` : ""].filter(Boolean).join(", ") || "Not specified"}`,
       `Preferred contact: ${chosen.label} — ${
-        isBooking ? "Booking calendar link (https://calendar.app.google/Go6JD946vKGeDyid9)" : contactValue.trim()
+        isBooking ? `Booking calendar link (${BOOKING_URL})` : contactValue.trim()
       }`,
       notes.trim() ? `Notes: ${notes.trim()}` : "",
     ].filter(Boolean);
@@ -237,10 +237,6 @@ export function GetStartedForm({ idPrefix = "gs" }: { idPrefix?: string }) {
               onClick={() => {
                 setMethod(id);
                 setContactValue("");
-                // Video call hands the visitor straight to the booking calendar.
-                if (id === "zoom" && typeof window !== "undefined") {
-                  window.open(BOOKING_URL, "_blank", "noopener,noreferrer");
-                }
               }}
             >
               <span className="flex items-center gap-2 font-medium text-foreground">
