@@ -53,6 +53,13 @@ export function GetStartedModal() {
       setMinimized(true);
       return;
     }
+    // The automatic popup is a homepage moment; everywhere else starts with
+    // the corner tab so other pages stay uncluttered.
+    const isHomepage = window.location.pathname === "/";
+    if (!isHomepage) {
+      setMinimized(true);
+      return;
+    }
     const timer = window.setTimeout(() => setOpen(true), DELAY_MS);
     return () => window.clearTimeout(timer);
   }, []);

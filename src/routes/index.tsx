@@ -4,7 +4,6 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/Reveal";
 import heroSkyline from "@/assets/wintagen-hero-atlanta-skyline.jpg.asset.json";
-import { GetStartedModal } from "@/components/site/GetStartedModal";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -270,7 +269,6 @@ function Index() {
             </div>
           </div>
         </section>
-        <GetStartedModal />
       </main>
       <Footer />
     </div>
