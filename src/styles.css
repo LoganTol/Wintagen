@@ -249,6 +249,37 @@
   }
 }
 
+/* The Get Started panel lands in the corner: the tab pops and pulses once. */
+@keyframes pill-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.7);
+  }
+  55% {
+    opacity: 1;
+    transform: translateY(0) scale(1.07);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pill-ring {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--brand) 45%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 24px transparent;
+  }
+}
+
+@utility pill-land {
+  animation:
+    pill-pop 430ms cubic-bezier(0.22, 1, 0.36, 1) both,
+    pill-ring 900ms ease-out 120ms;
+}
+
 /* Full-width product bands */
 .product-stack {
   border-bottom: 1px solid var(--border);
