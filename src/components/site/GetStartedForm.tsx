@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Check, Phone, MessageSquare, Video, MessageCircle, Mail } from "lucide-react";
 
+/** Video-call booking calendar (Google appointment page). */
+export const BOOKING_URL = "https://calendar.app.google/Go6JD946vKGeDyid9";
+
 /** Step 1 — edit these to change what visitors can pick from. */
 export const NEEDS = [
   "A new website",
@@ -64,8 +67,8 @@ export const CONTACT_METHODS = [
   },
   {
     id: "zoom",
-    label: "Zoom call",
-    note: "Only if you actually want one.",
+    label: "Video call",
+    note: "Pick a time on our calendar that suits you.",
     icon: Video,
     field: "Email for the invite",
     type: "email",
@@ -127,8 +130,14 @@ export function GetStartedForm({ idPrefix = "gs" }: { idPrefix?: string }) {
     set(list.includes(value) ? list.filter((v) => v !== value) : [...list, value]);
 
   const chosen = CONTACT_METHODS.find((m) => m.id === method);
+  /** Video call books straight through the calendar link — no contact field needed. */
+  const isBooking = method === "zoom";
   const ready =
-    needs.length > 0 && !!method && firstName.trim() && lastName.trim() && contactValue.trim();
+    needs.length > 0 &&
+    !!method &&
+    firstName.trim() &&
+    lastName.trim() &&
+    (isBooking || contactValue.trim());
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -137,7 +146,9 @@ export function GetStartedForm({ idPrefix = "gs" }: { idPrefix?: string }) {
       `Name: ${firstName.trim()} ${lastName.trim()}`,
       `What they need: ${needs.join(", ")}`,
       `Features: ${[...features.filter((f) => f !== "Other"), otherFeature.trim() ? `Other — ${otherFeature.trim()}` : ""].filter(Boolean).join(", ") || "Not specified"}`,
-      `Preferred contact: ${chosen.label} — ${contactValue.trim()}`,
+      `Preferred contact: ${chosen.label} — ${
+        isBooking ? "Booking calendar link (https://calendar.app.google/Go6JD946vKGeDyid9)" : contactValue.trim()
+      }`,
       notes.trim() ? `Notes: ${notes.trim()}` : "",
     ].filter(Boolean);
     // Configure the real destination here (e.g. a different inbox).
@@ -226,6 +237,10 @@ export function GetStartedForm({ idPrefix = "gs" }: { idPrefix?: string }) {
               onClick={() => {
                 setMethod(id);
                 setContactValue("");
+                // Video call hands the visitor straight to the booking calendar.
+                if (id === "zoom" && typeof window !== "undefined") {
+                  window.open(BOOKING_URL, "_blank", "noopener,noreferrer");
+                }
               }}
             >
               <span className="flex items-center gap-2 font-medium text-foreground">
@@ -264,19 +279,37 @@ export function GetStartedForm({ idPrefix = "gs" }: { idPrefix?: string }) {
                   className={inputClass}
                 />
               </div>
-              <div className="sm:col-span-2">
-                <label className="text-sm font-medium" htmlFor={`${idPrefix}-contact-value`}>
-                  {chosen.field}
-                </label>
-                <input
-                  id={`${idPrefix}-contact-value`}
-                  type={chosen.type}
-                  value={contactValue}
-                  onChange={(e) => setContactValue(e.target.value)}
-                  placeholder={chosen.placeholder}
-                  className={inputClass}
-                />
-              </div>
+              {isBooking ? (
+                <div className="sm:col-span-2">
+                  <p className="text-sm text-muted-foreground">
+                    Pick any open time on our calendar — your booking confirms instantly. And if
+                    a video meeting ever feels like too much, a text or a quick call works just
+                    as well.
+                  </p>
+                  <a
+                    href={BOOKING_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary mt-3 inline-flex items-center gap-2"
+                  >
+                    Open the booking calendar
+                  </a>
+                </div>
+              ) : (
+                <div className="sm:col-span-2">
+                  <label className="text-sm font-medium" htmlFor={`${idPrefix}-contact-value`}>
+                    {chosen.field}
+                  </label>
+                  <input
+                    id={`${idPrefix}-contact-value`}
+                    type={chosen.type}
+                    value={contactValue}
+                    onChange={(e) => setContactValue(e.target.value)}
+                    placeholder={chosen.placeholder}
+                    className={inputClass}
+                  />
+                </div>
+              )}
               <div className="sm:col-span-2">
                 <label className="text-sm font-medium" htmlFor={`${idPrefix}-notes`}>
                   Anything else? <span className="text-muted-foreground">(optional)</span>
