@@ -6,18 +6,37 @@ import { GetStartedForm } from "@/components/site/GetStartedForm";
 const FREQUENCY: "session" | "always" = "session";
 const STORAGE_KEY = "wintagen-get-started-prompt";
 const DELAY_MS = 900;
+/** How long the panel takes to shrink into the corner tab. */
+const FLIGHT_MS = 430;
+/** Corner inset the panel flies to — matches the tab's own inset. */
+const CORNER_INSET = 20;
+
+type Flight = { dx: number; dy: number };
+
+function prefersReducedMotion() {
+  return (
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+}
 
 /**
  * Welcome prompt for the Get Started journey. Opens shortly after the homepage
  * loads, with an always-visible close button in the top right of the panel.
- * Closing it minimises the journey into a small tab in the bottom right corner,
- * so a visitor can reopen it at any point during their visit.
+ * Closing it glides the panel down into the bottom-right corner, where it
+ * lands as a small tab so a visitor can reopen the journey at any point.
  */
 export function GetStartedModal() {
   const [open, setOpen] = useState(false);
   const [minimized, setMinimized] = useState(false);
+  const [flight, setFlight] = useState<Flight | null>(null);
+  const [entered, setEntered] = useState(false);
+  const [landed, setLanded] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
   const restoreRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const flyingRef = useRef(false);
+  const flightTimer = useRef<number | null>(null);
 
   useEffect(() => {
     let alreadySeen = false;
@@ -45,30 +64,66 @@ export function GetStartedModal() {
     } catch {
       // Ignore storage failures.
     }
+    // Once the opening animation has finished, drop its classes so the panel's
+    // transform is free to drive the fly-to-corner motion.
+    const enteredTimer = window.setTimeout(() => setEntered(true), 340);
     const previouslyFocused = document.activeElement as HTMLElement | null;
     closeRef.current?.focus();
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        setOpen(false);
-        setMinimized(true);
+        dismiss();
       }
     };
     document.addEventListener("keydown", onKeyDown);
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
+      window.clearTimeout(enteredTimer);
       document.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = previousOverflow;
       previouslyFocused?.focus?.();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
-  const dismiss = () => {
+  useEffect(
+    () => () => {
+      if (flightTimer.current !== null) window.clearTimeout(flightTimer.current);
+    },
+    [],
+  );
+
+  const finish = () => {
+    flyingRef.current = false;
+    setFlight(null);
     setOpen(false);
     setMinimized(true);
+    setLanded(true);
+  };
+
+  /** Send the panel gliding into the corner tab instead of just vanishing. */
+  const dismiss = () => {
+    if (flyingRef.current) return;
+    const panel = panelRef.current;
+    if (!panel || prefersReducedMotion()) {
+      finish();
+      return;
+    }
+    const rect = panel.getBoundingClientRect();
+    flyingRef.current = true;
+    setFlight({
+      dx: window.innerWidth - CORNER_INSET - rect.right,
+      dy: window.innerHeight - CORNER_INSET - rect.bottom,
+    });
+    flightTimer.current = window.setTimeout(() => {
+      flightTimer.current = null;
+      finish();
+    }, FLIGHT_MS);
   };
 
   const restore = () => {
+    setLanded(false);
+    setEntered(false);
     setOpen(true);
     restoreRef.current?.blur();
   };
@@ -85,13 +140,36 @@ export function GetStartedModal() {
         >
           <div
             aria-hidden="true"
-            className="fixed inset-0 bg-foreground/45 backdrop-blur-sm motion-safe:animate-in motion-safe:fade-in-0 motion-safe:duration-300"
+            className={`fixed inset-0 bg-foreground/45 backdrop-blur-sm transition-opacity duration-300 ${
+              flight
+                ? "opacity-0"
+                : `opacity-100 ${
+                    entered
+                      ? ""
+                      : "motion-safe:animate-in motion-safe:fade-in-0 motion-safe:duration-300"
+                  }`
+            }`}
           />
           <div
+            ref={panelRef}
             role="dialog"
             aria-modal="true"
             aria-labelledby="get-started-modal-title"
-            className="relative z-10 w-full max-w-2xl overflow-hidden rounded-2xl border border-border bg-background shadow-soft motion-safe:animate-in motion-safe:fade-in-0 motion-safe:zoom-in-95 motion-safe:duration-300"
+            style={
+              flight
+                ? {
+                    transform: `translate(${flight.dx}px, ${flight.dy}px) scale(0.14)`,
+                    transformOrigin: "bottom right",
+                    opacity: 0,
+                    transition: `transform ${FLIGHT_MS}ms cubic-bezier(0.55, 0, 0.35, 1), opacity ${FLIGHT_MS}ms ease-in`,
+                  }
+                : undefined
+            }
+            className={`relative z-10 w-full max-w-2xl overflow-hidden rounded-2xl border border-border bg-background shadow-soft ${
+              entered || flight
+                ? ""
+                : "motion-safe:animate-in motion-safe:fade-in-0 motion-safe:zoom-in-95 motion-safe:duration-300"
+            }`}
           >
             {/* Sticky header: brand eyebrow, title, and the close button. */}
             <div className="sticky top-0 z-10 border-b border-border bg-background/95 px-5 py-4 backdrop-blur-sm sm:px-8">
@@ -139,7 +217,9 @@ export function GetStartedModal() {
           type="button"
           onClick={restore}
           aria-label="Open the Get started form"
-          className="fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-[max(1.25rem,env(safe-area-inset-right))] z-[90] inline-flex items-center gap-2.5 rounded-full border border-brand/30 bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-soft transition-colors hover:bg-brand/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-2 motion-safe:duration-300"
+          className={`fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-[max(1.25rem,env(safe-area-inset-right))] z-[90] inline-flex items-center gap-2.5 rounded-full border border-brand/30 bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-soft transition-colors hover:bg-brand/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand ${
+            landed ? "motion-safe:pill-land" : "motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-2 motion-safe:duration-300"
+          }`}
         >
           <span aria-hidden="true" className="h-2 w-2 rounded-full bg-brand-accent" />
           Get started
