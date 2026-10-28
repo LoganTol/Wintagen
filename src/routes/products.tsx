@@ -65,8 +65,8 @@ const PRODUCTS = [
     tagline: "A Modern Website, In Seconds.",
     description:
       "QuickSite transforms an existing website into a modern, mobile-friendly experience. Enter a URL to generate a redesigned preview without writing code.",
-    url: "https://www.get-quick-site.com/",
-    domain: "get-quick-site.com",
+    url: null,
+    domain: null,
     theme: "quicksite" as const,
     capabilities: [
       { label: "URL-Based Redesign", icon: WandSparkles },
