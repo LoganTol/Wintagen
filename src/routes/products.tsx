@@ -81,8 +81,8 @@ const PRODUCTS = [
     tagline: "Plans From The Pros, For Your Next Project.",
     description:
       "ProPlans is a peer-to-peer marketplace for home improvement, woodworking, and construction project plans — connecting creators who sell detailed blueprints with builders ready to get to work.",
-    url: "https://logantol.github.io/DIY-Market/",
-    domain: "logantol.github.io/DIY-Market",
+    url: null,
+    domain: null,
     theme: "proplans" as const,
     capabilities: [
       { label: "Curated Project Plans", icon: ScrollText },
