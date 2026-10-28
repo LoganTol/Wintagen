@@ -302,7 +302,7 @@ function ProductLayer({
           </div>
 
           {product.gallery.length > 0 && shot && (
-            <div className="mx-auto w-full max-w-6xl px-5 pb-12 pt-2 text-center sm:px-10">
+            <div className="mx-auto w-full max-w-6xl px-5 pb-28 pt-2 text-center sm:px-10 sm:pb-12">
               <p className="product-layer__category text-xs font-semibold uppercase tracking-[0.14em]">
                 A Look Inside
               </p>
