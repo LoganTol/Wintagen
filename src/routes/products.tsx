@@ -198,17 +198,19 @@ function ProductLayer({
                 {product.category}
               </p>
               <p className="mt-4 leading-relaxed text-muted-foreground">{product.description}</p>
-              <a
-                href={product.url}
-                target="_blank"
-                rel="noreferrer"
-                tabIndex={isOpen ? 0 : -1}
-                className="product-layer__link group mt-7 inline-flex items-center gap-2 rounded-md font-semibold focus-visible:outline-2 focus-visible:outline-offset-4"
-                aria-label={`Visit ${product.name} at ${product.domain} (opens in a new tab)`}
-              >
-                Visit {product.domain}
-                <ExternalLink className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-              </a>
+              {product.url && (
+                <a
+                  href={product.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  tabIndex={isOpen ? 0 : -1}
+                  className="product-layer__link group mt-7 inline-flex items-center gap-2 rounded-md font-semibold focus-visible:outline-2 focus-visible:outline-offset-4"
+                  aria-label={`Visit ${product.name} at ${product.domain} (opens in a new tab)`}
+                >
+                  Visit {product.domain}
+                  <ExternalLink className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </a>
+              )}
             </div>
             <ul className="grid content-start gap-3 sm:grid-cols-2 md:grid-cols-1" aria-label={`${product.name} features`}>
               {product.capabilities.map(({ label, icon: Icon }) => (
