@@ -536,11 +536,11 @@
   }
 
   .proplans-gallery__side--near {
-    opacity: 0.62;
+    opacity: 0.72;
   }
 
   .proplans-gallery__side--far {
-    opacity: 0.3;
+    opacity: 0.38;
     width: 17%;
   }
 
