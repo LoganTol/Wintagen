@@ -26,6 +26,9 @@ import { Button } from "@/components/ui/button";
 import proplansHero from "@/assets/proplans-hero.png.asset.json";
 import proplansToolbox from "@/assets/proplans-toolbox.png.asset.json";
 import proplansCatalogue from "@/assets/proplans-catalogue.png.asset.json";
+import quicksiteHero from "@/assets/quicksite-hero.png.asset.json";
+import quicksiteHowItWorks from "@/assets/quicksite-how-it-works.png.asset.json";
+import quicksitePreview from "@/assets/quicksite-preview.png.asset.json";
 
 export const Route = createFileRoute("/products")({
   head: () => ({
@@ -72,6 +75,28 @@ const PROPANS_GALLERY: GalleryItem[] = [
   },
 ];
 
+// Screenshots shown inside the QuickSite band, in the order they were supplied.
+const QUICKSITE_GALLERY: GalleryItem[] = [
+  {
+    src: quicksiteHero.url,
+    alt: "QuickSite homepage: the headline “Clean Up Your Website in Seconds” above a URL field and a Generate button.",
+    caption:
+      "The starting point: paste the address of a site you already own and ask QuickSite to reimagine it.",
+  },
+  {
+    src: quicksiteHowItWorks.url,
+    alt: "QuickSite section headed “How QuickSite Works” with three cards: paste your site URL, we instantly redesign it, preview and share.",
+    caption:
+      "Three steps, in order: paste a URL, let QuickSite rebuild the page, then preview and share the result.",
+  },
+  {
+    src: quicksitePreview.url,
+    alt: "QuickSite section headed “Live Preview” with an empty preview window awaiting a generated result.",
+    caption:
+      "The live preview: the rebuilt page appears here as soon as a URL has been generated.",
+  },
+];
+
 const PRODUCTS = [
   {
     name: "Aether Tennis",
@@ -105,7 +130,7 @@ const PRODUCTS = [
       { label: "No-Code Workflow", icon: LayoutTemplate },
       { label: "Rapid Previews", icon: Sparkles },
     ],
-    gallery: [] as GalleryItem[],
+    gallery: QUICKSITE_GALLERY,
   },
   {
     name: "ProPlans",
@@ -277,7 +302,7 @@ function ProductLayer({
           </div>
 
           {product.gallery.length > 0 && shot && (
-            <div className="mx-auto w-full max-w-6xl px-5 pb-12 pt-2 text-center sm:px-10">
+            <div className="mx-auto w-full max-w-6xl px-5 pb-28 pt-2 text-center sm:px-10 sm:pb-12">
               <p className="product-layer__category text-xs font-semibold uppercase tracking-[0.14em]">
                 A Look Inside
               </p>
