@@ -21,6 +21,9 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/Reveal";
 import { Button } from "@/components/ui/button";
+import propransHero from "@/assets/proplans-hero.png.asset.json";
+import propransToolbox from "@/assets/proplans-toolbox.png.asset.json";
+import propransCatalogue from "@/assets/proplans-catalogue.png.asset.json";
 
 export const Route = createFileRoute("/products")({
   head: () => ({
@@ -42,6 +45,31 @@ export const Route = createFileRoute("/products")({
   component: ProductsPage,
 });
 
+type GalleryItem = { src: string; alt: string; caption: string };
+
+// Screenshots shown inside the ProPlans band, in the order they were supplied.
+// Add or remove entries here — the gallery only appears on bands that list any.
+const PROPANS_GALLERY: GalleryItem[] = [
+  {
+    src: propransHero.url,
+    alt: "ProPlans homepage: the headline “Build it right. Plans from the pros.” with buttons to browse plans or request a build.",
+    caption:
+      "The front page: a curated shelf of professionally drafted plans, from decks and sheds to furniture and small structures.",
+  },
+  {
+    src: propransToolbox.url,
+    alt: "ProPlans section headed “Everything you need to build.” with three cards: ready-to-build plans, request custom builds, and monetise your expertise.",
+    caption:
+      "Three ways in: browse a ready-to-build plan, request a custom one, or sell designs you have already drawn.",
+  },
+  {
+    src: propransCatalogue.url,
+    alt: "ProPlans catalogue page listing plan cards for a multi-level deck, built-in library shelving, and a lean-to shed, with filters for category and difficulty.",
+    caption:
+      "The catalogue: filter by category and difficulty to find a plan that suits the weekend you have.",
+  },
+];
+
 const PRODUCTS = [
   {
     name: "Aether Tennis",
@@ -58,6 +86,7 @@ const PRODUCTS = [
       { label: "Shared Standings", icon: Trophy },
       { label: "Group Seasons", icon: UsersRound },
     ],
+    gallery: [] as GalleryItem[],
   },
   {
     name: "QuickSite",
@@ -74,6 +103,7 @@ const PRODUCTS = [
       { label: "No-Code Workflow", icon: LayoutTemplate },
       { label: "Rapid Previews", icon: Sparkles },
     ],
+    gallery: [] as GalleryItem[],
   },
   {
     name: "ProPlans",
@@ -90,6 +120,7 @@ const PRODUCTS = [
       { label: "Custom Plan Requests", icon: DraftingCompass },
       { label: "Maker Community", icon: UsersRound },
     ],
+    gallery: PROPANS_GALLERY,
   },
 ] as const;
 
@@ -124,6 +155,10 @@ function ProductLayer({
   // A mouse press focuses the trigger; that focus must not also open the
   // band, or it would fight the click toggle (focus opens, click closes).
   const suppressFocusOpen = useRef(false);
+  // Which screenshot is showing in this band's gallery (bands with no
+  // gallery simply ignore it).
+  const [shotIndex, setShotIndex] = useState(0);
+  const shot = product.gallery[shotIndex] ?? product.gallery[0];
 
   return (
     <article
@@ -223,6 +258,45 @@ function ProductLayer({
               ))}
             </ul>
           </div>
+
+          {product.gallery.length > 0 && shot && (
+            <div className="mx-auto w-full max-w-5xl px-7 pb-12 sm:px-12">
+              <p className="product-layer__category text-xs font-semibold uppercase tracking-[0.14em]">
+                A Look Inside
+              </p>
+              <div className="proplans-gallery__frame mt-4">
+                <img
+                  key={shot.src}
+                  src={shot.src}
+                  alt={shot.alt}
+                  className="h-full w-full object-contain"
+                  loading="lazy"
+                />
+              </div>
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-x-6 gap-y-4">
+                <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">{shot.caption}</p>
+                <div className="flex flex-wrap gap-2" role="group" aria-label={`${product.name} screenshots`}>
+                  {product.gallery.map((item, itemIndex) => (
+                    <button
+                      key={item.src}
+                      type="button"
+                      onClick={() => setShotIndex(itemIndex)}
+                      aria-pressed={itemIndex === shotIndex}
+                      aria-label={`Show ${item.caption}`}
+                      className={`proplans-gallery__thumb ${itemIndex === shotIndex ? "is-active" : ""}`}
+                    >
+                      <img
+                        src={item.src}
+                        alt=""
+                        className="h-full w-full object-cover"
+                        loading="lazy"
+                      />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </article>

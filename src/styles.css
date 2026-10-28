@@ -423,11 +423,80 @@
   color: var(--product-color);
 }
 
+/* Screenshot gallery inside a product band */
+.proplans-gallery__frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: color-mix(in oklab, var(--product-soft) 55%, var(--card));
+  box-shadow: var(--shadow-soft);
+}
+
+.proplans-gallery__frame img {
+  animation: proprans-gallery-fade 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes proprans-gallery-fade {
+  from {
+    opacity: 0;
+    transform: translateY(0.4rem) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.proplans-gallery__thumb {
+  width: 5.5rem;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--card);
+  cursor: pointer;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
+}
+
+@media (min-width: 40rem) {
+  .proplans-gallery__thumb {
+    width: 7rem;
+  }
+}
+
+.proplans-gallery__thumb:hover {
+  transform: translateY(-0.125rem);
+}
+
+.proplans-gallery__thumb:focus-visible {
+  outline: 2px solid var(--product-color);
+  outline-offset: 3px;
+}
+
+.proplans-gallery__thumb.is-active {
+  border-color: var(--product-color);
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--product-color) 30%, transparent);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .product-layer,
   .product-layer__panel,
   .product-layer__panel-inner {
     transform: none !important;
     transition: none !important;
+  }
+
+  .proplans-gallery__frame img,
+  .proplans-gallery__thumb {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
   }
 }
