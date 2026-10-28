@@ -171,8 +171,7 @@ function ProductLayer({
   };
   const sideCount = Math.min(2, Math.floor((total - 1) / 2));
   const leftShots = Array.from({ length: sideCount }, (_, i) => offsetFrom(-(sideCount - i)))
-    .filter((s): s is NonNullable<typeof s> => s !== null)
-    .reverse();
+    .filter((s): s is NonNullable<typeof s> => s !== null);
   const rightShots = Array.from({ length: sideCount }, (_, i) => offsetFrom(i + 1))
     .filter((s): s is NonNullable<typeof s> => s !== null);
   const showPrev = () => setShotIndex((shotIndex - 1 + total) % total);
@@ -314,7 +313,7 @@ function ProductLayer({
                         type="button"
                         onClick={showPrev}
                         aria-label="Show the previous screenshot"
-                        className="proplans-gallery__arrow proprans-gallery__arrow--prev"
+                        className="proplans-gallery__arrow proplans-gallery__arrow--prev"
                       >
                         <ChevronLeft className="h-5 w-5" strokeWidth={2} />
                       </button>
@@ -322,7 +321,7 @@ function ProductLayer({
                         type="button"
                         onClick={showNext}
                         aria-label="Show the next screenshot"
-                        className="proplans-gallery__arrow proprans-gallery__arrow--next"
+                        className="proplans-gallery__arrow proplans-gallery__arrow--next"
                       >
                         <ChevronRight className="h-5 w-5" strokeWidth={2} />
                       </button>

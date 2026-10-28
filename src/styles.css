@@ -423,7 +423,20 @@
   color: var(--product-color);
 }
 
-/* Screenshot gallery inside a product band */
+/* Screenshot carousel inside a product band */
+.proplans-gallery {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.proplans-gallery__center {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
 .proplans-gallery__frame {
   position: relative;
   width: 100%;
@@ -436,10 +449,10 @@
 }
 
 .proplans-gallery__frame img {
-  animation: proprans-gallery-fade 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: gallery-focus-in 420ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-@keyframes proprans-gallery-fade {
+@keyframes gallery-focus-in {
   from {
     opacity: 0;
     transform: translateY(0.4rem) scale(0.99);
@@ -450,39 +463,111 @@
   }
 }
 
-.proplans-gallery__thumb {
-  width: 5.5rem;
-  aspect-ratio: 16 / 10;
+.proplans-gallery__side {
+  display: none;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   padding: 0;
   border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  background: var(--card);
+  border-radius: var(--radius-md);
+  background: color-mix(in oklab, var(--product-soft) 55%, var(--card));
   cursor: pointer;
   transition:
-    border-color 200ms ease,
-    box-shadow 200ms ease,
-    transform 200ms ease;
+    opacity 320ms ease,
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-@media (min-width: 40rem) {
-  .proplans-gallery__thumb {
-    width: 7rem;
-  }
+.proplans-gallery__arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  display: inline-flex;
+  height: 2.5rem;
+  width: 2.5rem;
+  transform: translateY(-50%);
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  background: var(--card);
+  color: var(--product-color);
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  transition:
+    background 200ms ease,
+    color 200ms ease;
 }
 
-.proplans-gallery__thumb:hover {
-  transform: translateY(-0.125rem);
+.proplans-gallery__arrow--prev {
+  left: 0.75rem;
 }
 
-.proplans-gallery__thumb:focus-visible {
+.proplans-gallery__arrow--next {
+  right: 0.75rem;
+}
+
+.proplans-gallery__arrow:hover {
+  background: var(--product-color);
+  color: var(--card);
+}
+
+.proplans-gallery__arrow:focus-visible {
   outline: 2px solid var(--product-color);
   outline-offset: 3px;
 }
 
-.proplans-gallery__thumb.is-active {
-  border-color: var(--product-color);
-  box-shadow: 0 0 0 2px color-mix(in oklab, var(--product-color) 30%, transparent);
+.proplans-gallery__count {
+  color: var(--product-color);
+  opacity: 0.8;
+}
+
+@media (min-width: 48rem) {
+  .proplans-gallery {
+    gap: 0.75rem;
+  }
+
+  .proplans-gallery__center {
+    width: 62%;
+  }
+
+  .proplans-gallery__side {
+    display: block;
+    width: 17%;
+  }
+
+  .proplans-gallery__side--near {
+    opacity: 0.6;
+    transform: scale(0.9);
+  }
+
+  .proplans-gallery__side--far {
+    opacity: 0.28;
+    transform: scale(0.82);
+  }
+
+  .proplans-gallery__side--near:hover {
+    opacity: 0.9;
+    transform: scale(0.95);
+  }
+
+  .proplans-gallery__side--far:hover {
+    opacity: 0.5;
+    transform: scale(0.87);
+  }
+
+  /* tuck the flanking shots slightly under the prominent one */
+  .proplans-gallery__center + .proplans-gallery__side {
+    margin-inline-start: -1.25rem;
+  }
+
+  .proplans-gallery__side:has(+ .proplans-gallery__center) {
+    margin-inline-end: -1.25rem;
+  }
+
+  .proplans-gallery__arrow {
+    height: 2.75rem;
+    width: 2.75rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -494,9 +579,9 @@
   }
 
   .proplans-gallery__frame img,
-  .proplans-gallery__thumb {
+  .proplans-gallery__side,
+  .proplans-gallery__arrow {
     animation: none !important;
     transition: none !important;
-    transform: none !important;
   }
 }
