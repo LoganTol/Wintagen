@@ -23,9 +23,9 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/Reveal";
 import { Button } from "@/components/ui/button";
-import propransHero from "@/assets/proplans-hero.png.asset.json";
-import propransToolbox from "@/assets/proplans-toolbox.png.asset.json";
-import propransCatalogue from "@/assets/proplans-catalogue.png.asset.json";
+import proplansHero from "@/assets/proplans-hero.png.asset.json";
+import proplansToolbox from "@/assets/proplans-toolbox.png.asset.json";
+import proplansCatalogue from "@/assets/proplans-catalogue.png.asset.json";
 
 export const Route = createFileRoute("/products")({
   head: () => ({
@@ -53,19 +53,19 @@ type GalleryItem = { src: string; alt: string; caption: string };
 // Add or remove entries here — the gallery only appears on bands that list any.
 const PROPANS_GALLERY: GalleryItem[] = [
   {
-    src: propransHero.url,
+    src: proplansHero.url,
     alt: "ProPlans homepage: the headline “Build it right. Plans from the pros.” with buttons to browse plans or request a build.",
     caption:
       "The front page: a curated shelf of professionally drafted plans, from decks and sheds to furniture and small structures.",
   },
   {
-    src: propransToolbox.url,
+    src: proplansToolbox.url,
     alt: "ProPlans section headed “Everything you need to build.” with three cards: ready-to-build plans, request custom builds, and monetise your expertise.",
     caption:
       "Three ways in: browse a ready-to-build plan, request a custom one, or sell designs you have already drawn.",
   },
   {
-    src: propransCatalogue.url,
+    src: proplansCatalogue.url,
     alt: "ProPlans catalogue page listing plan cards for a multi-level deck, built-in library shelving, and a lean-to shed, with filters for category and difficulty.",
     caption:
       "The catalogue: filter by category and difficulty to find a plan that suits the weekend you have.",
