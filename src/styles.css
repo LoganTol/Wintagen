@@ -527,41 +527,40 @@
   }
 
   .proplans-gallery__center {
-    width: 62%;
+    width: 54%;
   }
 
   .proplans-gallery__side {
     display: block;
-    width: 17%;
+    width: 21%;
   }
 
   .proplans-gallery__side--near {
-    opacity: 0.6;
-    transform: scale(0.9);
+    opacity: 0.62;
   }
 
   .proplans-gallery__side--far {
-    opacity: 0.28;
-    transform: scale(0.82);
+    opacity: 0.3;
+    width: 17%;
   }
 
   .proplans-gallery__side--near:hover {
-    opacity: 0.9;
-    transform: scale(0.95);
+    opacity: 0.92;
+    transform: translateY(-0.2rem);
   }
 
   .proplans-gallery__side--far:hover {
-    opacity: 0.5;
-    transform: scale(0.87);
+    opacity: 0.55;
+    transform: translateY(-0.2rem);
   }
 
-  /* tuck the flanking shots slightly under the prominent one */
+  /* slide the flanking shots partly under the prominent one */
   .proplans-gallery__center + .proplans-gallery__side {
-    margin-inline-start: -1.25rem;
+    margin-inline-start: -2rem;
   }
 
   .proplans-gallery__side:has(+ .proplans-gallery__center) {
-    margin-inline-end: -1.25rem;
+    margin-inline-end: -2rem;
   }
 
   .proplans-gallery__arrow {
