@@ -5,6 +5,8 @@ import {
   ArrowLeft,
   ArrowRight,
   CalendarDays,
+  ChevronLeft,
+  ChevronRight,
   DraftingCompass,
   ExternalLink,
   LayoutTemplate,
@@ -155,10 +157,26 @@ function ProductLayer({
   // A mouse press focuses the trigger; that focus must not also open the
   // band, or it would fight the click toggle (focus opens, click closes).
   const suppressFocusOpen = useRef(false);
-  // Which screenshot is showing in this band's gallery (bands with no
+  // Which screenshot is showing in this band's carousel (bands with no
   // gallery simply ignore it).
   const [shotIndex, setShotIndex] = useState(0);
+  const total = product.gallery.length;
   const shot = product.gallery[shotIndex] ?? product.gallery[0];
+  // The shots flanking the prominent one, wrapping around either end. Up to
+  // two sit on each side; with fewer shots the sides thin out to match.
+  const offsetFrom = (offset: number) => {
+    const index = (shotIndex + offset + total) % total;
+    const item = product.gallery[index];
+    return item ? { item, index, depth: Math.abs(offset) } : null;
+  };
+  const sideCount = Math.min(2, Math.floor((total - 1) / 2));
+  const leftShots = Array.from({ length: sideCount }, (_, i) => offsetFrom(-(sideCount - i)))
+    .filter((s): s is NonNullable<typeof s> => s !== null)
+    .reverse();
+  const rightShots = Array.from({ length: sideCount }, (_, i) => offsetFrom(i + 1))
+    .filter((s): s is NonNullable<typeof s> => s !== null);
+  const showPrev = () => setShotIndex((shotIndex - 1 + total) % total);
+  const showNext = () => setShotIndex((shotIndex + 1) % total);
 
   return (
     <article
@@ -260,41 +278,79 @@ function ProductLayer({
           </div>
 
           {product.gallery.length > 0 && shot && (
-            <div className="mx-auto w-full max-w-5xl px-7 pb-12 sm:px-12">
+            <div className="mx-auto w-full max-w-6xl px-5 pb-12 pt-2 text-center sm:px-10">
               <p className="product-layer__category text-xs font-semibold uppercase tracking-[0.14em]">
                 A Look Inside
               </p>
-              <div className="proplans-gallery__frame mt-4">
-                <img
-                  key={shot.src}
-                  src={shot.src}
-                  alt={shot.alt}
-                  className="h-full w-full object-contain"
-                  loading="lazy"
-                />
-              </div>
-              <div className="mt-4 flex flex-wrap items-center justify-between gap-x-6 gap-y-4">
-                <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">{shot.caption}</p>
-                <div className="flex flex-wrap gap-2" role="group" aria-label={`${product.name} screenshots`}>
-                  {product.gallery.map((item, itemIndex) => (
-                    <button
-                      key={item.src}
-                      type="button"
-                      onClick={() => setShotIndex(itemIndex)}
-                      aria-pressed={itemIndex === shotIndex}
-                      aria-label={`Show ${item.caption}`}
-                      className={`proplans-gallery__thumb ${itemIndex === shotIndex ? "is-active" : ""}`}
-                    >
-                      <img
-                        src={item.src}
-                        alt=""
-                        className="h-full w-full object-cover"
-                        loading="lazy"
-                      />
-                    </button>
-                  ))}
+
+              <div className="proplans-gallery mt-7">
+                {leftShots.map(({ item, index, depth }) => (
+                  <button
+                    key={item.src}
+                    type="button"
+                    onClick={() => setShotIndex(index)}
+                    aria-label={`Show ${item.caption}`}
+                    className={`proplans-gallery__side ${
+                      depth === 1 ? "proplans-gallery__side--near" : "proplans-gallery__side--far"
+                    }`}
+                  >
+                    <img src={item.src} alt="" className="h-full w-full object-cover" loading="lazy" />
+                  </button>
+                ))}
+
+                <div className="proplans-gallery__center">
+                  <div className="proplans-gallery__frame">
+                    <img
+                      key={shot.src}
+                      src={shot.src}
+                      alt={shot.alt}
+                      className="h-full w-full object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+                  {total > 1 && (
+                    <>
+                      <button
+                        type="button"
+                        onClick={showPrev}
+                        aria-label="Show the previous screenshot"
+                        className="proplans-gallery__arrow proprans-gallery__arrow--prev"
+                      >
+                        <ChevronLeft className="h-5 w-5" strokeWidth={2} />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={showNext}
+                        aria-label="Show the next screenshot"
+                        className="proplans-gallery__arrow proprans-gallery__arrow--next"
+                      >
+                        <ChevronRight className="h-5 w-5" strokeWidth={2} />
+                      </button>
+                    </>
+                  )}
                 </div>
+
+                {rightShots.map(({ item, index, depth }) => (
+                  <button
+                    key={item.src}
+                    type="button"
+                    onClick={() => setShotIndex(index)}
+                    aria-label={`Show ${item.caption}`}
+                    className={`proplans-gallery__side ${
+                      depth === 1 ? "proplans-gallery__side--near" : "proplans-gallery__side--far"
+                    }`}
+                  >
+                    <img src={item.src} alt="" className="h-full w-full object-cover" loading="lazy" />
+                  </button>
+                ))}
               </div>
+
+              <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-muted-foreground">
+                {shot.caption}
+              </p>
+              <p className="proplans-gallery__count mt-3 text-xs font-semibold uppercase tracking-[0.14em]">
+                {String(shotIndex + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+              </p>
             </div>
           )}
         </div>
