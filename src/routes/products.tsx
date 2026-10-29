@@ -318,7 +318,7 @@ function ProductLayer({
                       depth === 1 ? "proplans-gallery__side--near" : "proplans-gallery__side--far"
                     }`}
                   >
-                    <img src={item.src} alt="" className="h-full w-full object-cover" loading="lazy" />
+                    <img src={item.src} alt="" className="h-full w-full object-contain" loading="lazy" />
                   </button>
                 ))}
 
@@ -364,7 +364,7 @@ function ProductLayer({
                       depth === 1 ? "proplans-gallery__side--near" : "proplans-gallery__side--far"
                     }`}
                   >
-                    <img src={item.src} alt="" className="h-full w-full object-cover" loading="lazy" />
+                    <img src={item.src} alt="" className="h-full w-full object-contain" loading="lazy" />
                   </button>
                 ))}
               </div>
