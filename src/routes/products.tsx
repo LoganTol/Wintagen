@@ -328,7 +328,7 @@ function ProductLayer({
                       key={shot.src}
                       src={shot.src}
                       alt={shot.alt}
-                      className="h-full w-full object-contain"
+                      className="w-full"
                       loading="lazy"
                     />
                   </div>
