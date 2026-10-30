@@ -1,13 +1,19 @@
 import { cn } from "@/lib/utils";
 import type { CSSProperties } from "react";
 
-const TRAIL_LENGTH = 24;
+const TRAIL_LENGTH = 28;
+
+function beamSegmentClass(index: number) {
+  if (index < 6) return "border-beam__light--head";
+  if (index < 18) return "border-beam__light--body";
+  return "border-beam__light--tail";
+}
 
 function BeamTrail() {
   return Array.from({ length: TRAIL_LENGTH }, (_, index) => (
     <span
       key={index}
-      className="border-beam__light"
+      className={cn("border-beam__light", beamSegmentClass(index))}
       style={{
         "--trail-index": index,
         opacity: 1 - index / TRAIL_LENGTH,
