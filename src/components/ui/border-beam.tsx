@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import type { CSSProperties } from "react";
 
 const TRAIL_LENGTH = 28;
