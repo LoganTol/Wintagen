@@ -84,7 +84,6 @@ function AboutPage() {
                 View our products
               </Link>
             </div>
-            </div>
           </Reveal>
         </section>
       </main>
