@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import wintagenLogo from "@/assets/Wintagen_Logo_Transparent.png.asset.json";
+import wintagenLogo from "@/assets/wintagen-logo-light.png.asset.json";
 
 const NAV = [
   { label: "Products", href: "/products" },
@@ -36,7 +36,7 @@ export function Header() {
         "site-header fixed inset-x-0 top-0 z-50 transition-colors duration-300 " +
         (scrolled
           ? "border-b border-border/80 bg-background/85 shadow-soft backdrop-blur-md"
-          : "border-b border-transparent bg-background/95")
+          : "border-b border-border/50 bg-background/80")
       }
     >
       <div className="site-container grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 py-4">
