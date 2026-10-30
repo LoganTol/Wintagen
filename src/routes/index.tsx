@@ -4,8 +4,6 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/Reveal";
 import { Button } from "@/components/ui/button";
-import quicksiteHero from "@/assets/quicksite-hero.png.asset.json";
-import proplansToolbox from "@/assets/proplans-toolbox.png.asset.json";
 import heroSkyline from "@/assets/wintagen-hero-atlanta-skyline.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
@@ -189,88 +187,6 @@ function Index() {
               </div>
             </Reveal>
           </div>
-        </section>
-
-        <section id="products" className="site-container section-space">
-          <Reveal>
-            <p className="section-label">Our portfolio</p>
-            <h2 className="section-heading mt-5">Products built with purpose.</h2>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-              The Wintagen portfolio is a growing collection of products — each one built around a
-              specific problem and a straightforward reason to exist.
-            </p>
-            <div className="portfolio-grid mt-10">
-              <article className="portfolio-preview">
-                <div className="portfolio-preview__image">
-                  <img
-                    src={quicksiteHero.url}
-                    alt="QuickSite's homepage with a website URL field and redesign preview"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="portfolio-preview__text">
-                  <p className="text-xs font-semibold text-brand">Website Modernization</p>
-                  <h3 className="mt-3 text-2xl font-semibold">QuickSite</h3>
-                  <p className="mt-3 leading-relaxed text-muted-foreground">
-                    QuickSite transforms an existing website into a modern, mobile-friendly
-                    experience. Enter a URL to generate a redesigned preview without writing code.
-                  </p>
-                  <Button asChild variant="link" className="mt-4 px-0">
-                    <Link to="/products">
-                      Explore QuickSite <ArrowRight aria-hidden="true" />
-                    </Link>
-                  </Button>
-                </div>
-              </article>
-              <article className="portfolio-preview">
-                <div className="portfolio-preview__image">
-                  <img
-                    src={proplansToolbox.url}
-                    alt="ProPlans: ready-to-build plans, custom build requests, and selling your designs"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="portfolio-preview__text">
-                  <p className="text-xs font-semibold text-brand">Blueprint Marketplace</p>
-                  <h3 className="mt-3 text-2xl font-semibold">ProPlans</h3>
-                  <p className="mt-3 leading-relaxed text-muted-foreground">
-                    A peer-to-peer marketplace for home improvement, woodworking, and construction
-                    project plans.
-                  </p>
-                  <Button asChild variant="link" className="mt-4 px-0">
-                    <Link to="/products">
-                      Explore ProPlans <ArrowRight aria-hidden="true" />
-                    </Link>
-                  </Button>
-                </div>
-              </article>
-              <article className="portfolio-preview portfolio-aether">
-                <p className="text-xs font-semibold text-brand">Season Management</p>
-                <h3 className="mt-3 text-2xl font-semibold">Aether Tennis</h3>
-                <p className="mt-3 leading-relaxed text-muted-foreground">
-                  Tennis Seasons Made Simple.
-                </p>
-                <p className="mt-3 leading-relaxed text-muted-foreground">
-                  Fixtures, scheduling responsibilities, scores, and standings in one shared place.
-                </p>
-                <Button asChild variant="link" className="mt-4 px-0">
-                  <a
-                    href="https://aethertennis.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Visit Aether Tennis (opens in a new tab)"
-                  >
-                    Visit Aether Tennis <ArrowRight aria-hidden="true" />
-                  </a>
-                </Button>
-              </article>
-            </div>
-            <Button asChild className="mt-8">
-              <Link to="/products">
-                View the full portfolio <ArrowRight aria-hidden="true" />
-              </Link>
-            </Button>
-          </Reveal>
         </section>
 
         <section id="services" className="border-y border-border bg-surface">
