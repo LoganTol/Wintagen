@@ -186,6 +186,16 @@ function ProductLayer({
   // Which screenshot is showing in this band's carousel (bands with no
   // gallery simply ignore it).
   const [shotIndex, setShotIndex] = useState(0);
+  const galleryChangingRef = useRef(false);
+  const selectShot = (index: number) => {
+    galleryChangingRef.current = true;
+    setShotIndex(index);
+  };
+  useEffect(() => {
+    if (!galleryChangingRef.current) return;
+    const timer = window.setTimeout(() => { galleryChangingRef.current = false; }, 100);
+    return () => window.clearTimeout(timer);
+  }, [shotIndex]);
   const total = product.gallery.length;
   const shot = product.gallery[shotIndex] ?? product.gallery[0];
   // The shots flanking the prominent one, wrapping around either end. Up to
@@ -232,6 +242,7 @@ function ProductLayer({
         onFocusOpen();
       }}
       onBlur={(event) => {
+        if (galleryChangingRef.current) return;
         // Changing slides can remove the focused thumbnail as it moves sides.
         // That is not the visitor leaving this product.
         if (
@@ -332,7 +343,7 @@ function ProductLayer({
                     key={item.src}
                     type="button"
                     onPointerDown={(event) => event.preventDefault()}
-                    onClick={() => setShotIndex(index)}
+                    onClick={() => selectShot(index)}
                     aria-label={`Show ${item.caption}`}
                     className={`proplans-gallery__side ${
                       depth === 1 ? "proplans-gallery__side--near" : "proplans-gallery__side--far"
@@ -387,7 +398,7 @@ function ProductLayer({
                     key={item.src}
                     type="button"
                     onPointerDown={(event) => event.preventDefault()}
-                    onClick={() => setShotIndex(index)}
+                    onClick={() => selectShot(index)}
                     aria-label={`Show ${item.caption}`}
                     className={`proplans-gallery__side ${
                       depth === 1 ? "proplans-gallery__side--near" : "proplans-gallery__side--far"
