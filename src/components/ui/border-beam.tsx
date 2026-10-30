@@ -13,7 +13,7 @@ function BeamTrail() {
   return Array.from({ length: TRAIL_LENGTH }, (_, index) => (
     <span
       key={index}
-      className={cn("border-beam__light", beamSegmentClass(index))}
+      className={`border-beam__light ${beamSegmentClass(index)}`}
       style={{
         "--trail-index": index,
         opacity: 1 - index / TRAIL_LENGTH,
