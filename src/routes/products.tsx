@@ -324,6 +324,7 @@ function ProductLayer({
                     variant="ghost"
                     key={item.src}
                     type="button"
+                    onPointerDown={(event) => event.preventDefault()}
                     onClick={() => setShotIndex(index)}
                     aria-label={`Show ${item.caption}`}
                     className={`proplans-gallery__side ${
@@ -378,6 +379,7 @@ function ProductLayer({
                     variant="ghost"
                     key={item.src}
                     type="button"
+                    onPointerDown={(event) => event.preventDefault()}
                     onClick={() => setShotIndex(index)}
                     aria-label={`Show ${item.caption}`}
                     className={`proplans-gallery__side ${
