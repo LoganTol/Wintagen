@@ -147,7 +147,7 @@ export function GetStartedModal() {
         >
           <div
             aria-hidden="true"
-            className={`fixed inset-0 bg-foreground/45 backdrop-blur-sm transition-opacity duration-300 ${
+            className={`fixed inset-0 bg-overlay backdrop-blur-sm transition-opacity duration-300 ${
               flight
                 ? "opacity-0"
                 : `opacity-100 ${

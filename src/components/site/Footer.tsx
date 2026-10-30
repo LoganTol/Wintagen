@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import wintagenLogo from "@/assets/Wintagen_Logo_Transparent.png.asset.json";
+import wintagenLogo from "@/assets/wintagen-logo-light.png.asset.json";
 
 const LINKS = [
   { label: "Products", href: "/products" },
@@ -13,7 +13,7 @@ const LINKS = [
 
 export function Footer() {
   return (
-    <footer className="site-footer border-t border-border bg-background">
+    <footer className="site-footer border-t border-border bg-surface">
       <div className="site-container flex flex-col gap-10 py-16 md:flex-row md:items-start md:justify-between md:py-20">
         <div className="max-w-sm">
           <Link

@@ -105,7 +105,7 @@ export function OptionButton({
         aria-hidden="true"
         className={
           "mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border " +
-          (selected ? "border-brand bg-brand text-brand-foreground" : "border-border")
+          (selected ? "border-brand bg-brand text-brand-foreground" : "border-input")
         }
       >
         {selected && <Check className="h-3.5 w-3.5" />}
@@ -116,7 +116,7 @@ export function OptionButton({
 }
 
 export const inputClass =
-  "mt-2 w-full rounded-lg border border-border bg-card px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand";
+  "mt-2 w-full rounded-lg border border-input bg-card px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand";
 
 export function GetStartedForm({ idPrefix = "gs" }: { idPrefix?: string }) {
   const [needs, setNeeds] = useState<string[]>([]);
