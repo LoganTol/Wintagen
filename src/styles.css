@@ -692,8 +692,8 @@
   mask-composite: exclude;
 }
 .border-beam__glow {
-  filter: blur(7px);
-  opacity: 0.8;
+  filter: blur(8px);
+  opacity: 0.95;
 }
 .border-beam__light {
   position: absolute;
@@ -703,10 +703,11 @@
   background: linear-gradient(
     to left,
     var(--brand-highlight) 0%,
-    var(--brand) 20%,
-    var(--brand-hover) 44%,
-    color-mix(in oklab, var(--brand-accent) 45%, transparent) 70%,
-    transparent 96%
+    var(--brand) 26%,
+    var(--brand-hover) 52%,
+    color-mix(in oklab, var(--brand-accent) 70%, transparent) 74%,
+    color-mix(in oklab, var(--brand-accent) 35%, transparent) 84%,
+    transparent 98%
   );
   offset-anchor: 50% 50%;
   offset-rotate: auto;
