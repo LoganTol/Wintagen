@@ -1,0 +1,12 @@
+{
+  "scope": "Visual reference adaptation only; not a migration of the Linkify application.",
+  "capabilities": [
+    { "capability": "Reference design", "source": "linkify-main_1.zip", "outcome": "adapt", "status": "inspected", "next_action": "Apply typography, spacing, framed previews and asymmetric grids using Wintagen tokens." },
+    { "capability": "Reference code license", "source": "MIT, Shreyas Sihasane 2024", "outcome": "preserve notice", "status": "pending", "next_action": "Include license notice with adaptation." },
+    { "capability": "Reference database, records and auth identities", "source": "Linkify Prisma and Clerk", "outcome": "excluded by user scope", "status": "not applicable", "next_action": null },
+    { "capability": "Reference authorization, file bytes and providers", "source": "Linkify application", "outcome": "excluded by user scope", "status": "not applicable", "next_action": null },
+    { "capability": "Reference endpoints, callbacks, webhooks, schedules and secrets", "source": "Linkify application", "outcome": "excluded by user scope", "status": "not applicable", "next_action": null },
+    { "capability": "Wintagen routes, galleries, forms and booking", "source": "Existing project", "outcome": "preserve", "status": "pending verification", "next_action": "Exercise navigation, galleries, mailto submission, calendar and popup." },
+    { "capability": "Cutover", "source": "Existing Wintagen deployment", "outcome": "preview only", "status": "not applicable", "next_action": "Publishing remains user-controlled." }
+  ]
+}
