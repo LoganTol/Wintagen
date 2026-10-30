@@ -692,8 +692,8 @@
   mask-composite: exclude;
 }
 .border-beam__glow {
-  filter: blur(5px);
-  opacity: 0.75;
+  filter: blur(7px);
+  opacity: 0.8;
 }
 .border-beam__light {
   position: absolute;
@@ -719,7 +719,9 @@
 }
 @media (max-width: 47.99rem) {
   .border-beam__light {
-    animation-delay: calc(var(--trail-index) * 0.03s - 12s);
+    width: 64px;
+    height: 4px;
+    animation-delay: calc(var(--trail-index) * 0.055s - 12s);
   }
 }
 @media (prefers-reduced-motion: reduce) {
