@@ -719,7 +719,7 @@
   .border-beam__light {
     width: 64px;
     height: 4px;
-    animation-delay: calc(var(--trail-index) * 0.055s - 12s);
+    animation-delay: calc(var(--trail-index) * 0.045s - 12s);
   }
 }
 @media (prefers-reduced-motion: reduce) {
