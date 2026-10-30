@@ -5,7 +5,7 @@ function BeamTrail() {
   return Array.from({ length: 48 }, (_, index) => (
     <span
       key={index}
-      className={cn("border-beam__light", index < 5 ? "border-beam__light--head" : index > 35 ? "border-beam__light--tail" : "border-beam__light--body")}
+      className={`border-beam__light ${index < 5 ? "border-beam__light--head" : index > 35 ? "border-beam__light--tail" : "border-beam__light--body"}`}
       style={{ "--trail-index": index, opacity: 1 - index / 48 } as CSSProperties}
     />
   ));
