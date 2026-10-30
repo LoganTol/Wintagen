@@ -482,6 +482,7 @@
 
 .proplans-gallery__side {
   display: none;
+  height: auto;
   aspect-ratio: 16 / 9;
   overflow: hidden;
   padding: 0;
@@ -507,7 +508,7 @@
   border: 1px solid var(--border);
   border-radius: 9999px;
   background: var(--card);
-  color: var(--product-color);
+  color: var(--brand);
   box-shadow: var(--shadow-soft);
   cursor: pointer;
   transition:
@@ -524,7 +525,7 @@
 }
 
 .proplans-gallery__arrow:hover {
-  background: var(--product-color);
+  background: var(--brand);
   color: var(--card);
 }
 
