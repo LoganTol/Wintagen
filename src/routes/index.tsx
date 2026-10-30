@@ -4,6 +4,7 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/Reveal";
 import { Button } from "@/components/ui/button";
+import { BorderBeam } from "@/components/ui/border-beam";
 import heroSkyline from "@/assets/wintagen-hero-atlanta-skyline.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
@@ -141,7 +142,7 @@ function Index() {
             </Reveal>
           </div>
           <Reveal delay={120} className="home-hero__photo">
-            <figure>
+            <figure className="home-hero__image-clip">
               <img
                 src={heroSkyline.url}
                 alt="The Atlanta skyline at sunset, including the full spire of Bank of America Plaza"
@@ -149,6 +150,7 @@ function Index() {
                 height={1280}
               />
             </figure>
+            <BorderBeam />
           </Reveal>
         </section>
 

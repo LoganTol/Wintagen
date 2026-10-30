@@ -121,8 +121,9 @@
   --border-highlight: color-mix(in oklab, var(--brand-highlight) 40%, var(--brand));
   --hero-glow: radial-gradient(ellipse at 50% 56%, color-mix(in oklab, var(--brand) 28%, transparent) 0%, color-mix(in oklab, var(--brand-hover) 18%, transparent) 38%, transparent 72%);
   --hero-accent-glow: radial-gradient(ellipse at 72% 72%, color-mix(in oklab, var(--brand-accent) 7%, transparent), transparent 40%);
-  --hero-image-fade: linear-gradient(to bottom, transparent, var(--foreground) 14%, var(--foreground) 76%, transparent);
-  --hero-image-side-fade: linear-gradient(to right, transparent, var(--foreground) 10%, var(--foreground) 90%, transparent);
+  --beam-gradient: linear-gradient(to left, var(--brand-highlight) 0%, var(--brand) 24%, color-mix(in oklab, var(--brand) 80%, transparent) 58%, color-mix(in oklab, var(--brand-accent) 70%, transparent) 72%, transparent 95%);
+  --beam-mask: linear-gradient(var(--foreground), var(--foreground));
+  --beam-static: linear-gradient(115deg, var(--brand-hover), var(--brand-highlight) 35%, var(--brand) 60%, var(--brand-accent) 72%, var(--brand-hover));
 }
 
 @layer base {
@@ -662,11 +663,68 @@
 }
 .home-hero__photo {
   position: relative;
-  width: 100%;
-  margin-top: 1.5rem;
-  border: 0;
-  mask-image: var(--hero-image-fade), var(--hero-image-side-fade);
-  mask-composite: intersect;
+  width: calc(100% - 2.5rem);
+  max-width: 76rem;
+  margin: 1.5rem auto 2rem;
+  border: 1px solid var(--brand-hover);
+  border-radius: var(--radius);
+  padding: 3px;
+  background: var(--background);
+}
+.home-hero__image-clip {
+  overflow: hidden;
+  border-radius: calc(var(--radius) - 3px);
+}
+.border-beam {
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  --beam-size: 220px;
+}
+.border-beam__track,
+.border-beam__glow {
+  position: absolute;
+  inset: 0;
+  border: 2px solid transparent;
+  border-radius: inherit;
+  mask-image: var(--beam-mask), var(--beam-mask);
+  mask-clip: padding-box, border-box;
+  mask-composite: exclude;
+}
+.border-beam__glow {
+  inset: -2px;
+  border-width: 6px;
+  filter: blur(5px);
+  opacity: 0.75;
+}
+.border-beam__track::after,
+.border-beam__glow::after {
+  content: "";
+  position: absolute;
+  width: var(--beam-size);
+  aspect-ratio: 1;
+  background: var(--beam-gradient);
+  offset-anchor: 90% 50%;
+  offset-path: inset(0 round var(--radius));
+  animation: border-beam-travel 12s linear infinite;
+}
+@keyframes border-beam-travel {
+  to { offset-distance: 100%; }
+}
+@media (max-width: 47.99rem) {
+  .border-beam { --beam-size: 130px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .border-beam__track,
+  .border-beam__glow {
+    background: var(--beam-static);
+  }
+  .border-beam__track::after,
+  .border-beam__glow::after {
+    display: none;
+    animation: none;
+  }
 }
 .home-hero__photo img {
   display: block;
