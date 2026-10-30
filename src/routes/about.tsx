@@ -25,7 +25,6 @@ export const Route = createFileRoute("/about")({
   component: AboutPage,
 });
 
-
 function AboutPage() {
   return (
     <div className="min-h-screen bg-background">
@@ -38,41 +37,40 @@ function AboutPage() {
               About us
             </p>
             <div className="about-story mt-6">
-            <div><h1 className="page-title">
-              Built to create useful things.
-            </h1>
-            <span aria-hidden="true" className="section-rule" />
-            </div>
-            <div className="max-w-2xl space-y-6">
-              <p className="text-lg leading-relaxed text-muted-foreground">
-                Wintagen is a software company based in Atlanta, Georgia, where we develop digital
-                products and work with businesses to create custom software, applications, and
-                websites. We bring creative ideas and practical development together to build
-                technology around the people who use it.
-              </p>
-              <p className="leading-relaxed text-muted-foreground">
-                Every project starts with a conversation. We take time to understand your business,
-                the challenges you face, and what you want to accomplish. Whether you have a
-                detailed plan or an idea you're still exploring, we work with you to turn that
-                vision into a clear direction.
-              </p>
-              <p className="leading-relaxed text-muted-foreground">
-                Customer involvement remains important throughout development. Through open
-                communication, regular feedback, and shared decisions, we keep the work connected
-                to your goals. Your knowledge of your business helps shape what we build, from the
-                features that matter most to the experience your customers will have.
-              </p>
-              <p className="leading-relaxed text-muted-foreground">
-                Building our own products also informs how we approach client projects. We consider
-                how software will be used, maintained, and improved after launch, alongside the
-                work needed to get it there.
-              </p>
-              <p className="font-medium leading-relaxed text-foreground">
-                At Wintagen, we're creating a home for useful products, creative thinking, and
-                lasting customer relationships. Our goal is to make thoughtful software that helps
-                businesses move forward and makes everyday tasks easier.
-              </p>
-            </div>
+              <div>
+                <h1 className="page-title">Built to create useful things.</h1>
+                <span aria-hidden="true" className="section-rule" />
+              </div>
+              <div className="max-w-2xl space-y-6">
+                <p className="text-lg leading-relaxed text-muted-foreground">
+                  Wintagen is a software company based in Atlanta, Georgia, where we develop digital
+                  products and work with businesses to create custom software, applications, and
+                  websites. We bring creative ideas and practical development together to build
+                  technology around the people who use it.
+                </p>
+                <p className="leading-relaxed text-muted-foreground">
+                  Every project starts with a conversation. We take time to understand your
+                  business, the challenges you face, and what you want to accomplish. Whether you
+                  have a detailed plan or an idea you're still exploring, we work with you to turn
+                  that vision into a clear direction.
+                </p>
+                <p className="leading-relaxed text-muted-foreground">
+                  Customer involvement remains important throughout development. Through open
+                  communication, regular feedback, and shared decisions, we keep the work connected
+                  to your goals. Your knowledge of your business helps shape what we build, from the
+                  features that matter most to the experience your customers will have.
+                </p>
+                <p className="leading-relaxed text-muted-foreground">
+                  Building our own products also informs how we approach client projects. We
+                  consider how software will be used, maintained, and improved after launch,
+                  alongside the work needed to get it there.
+                </p>
+                <p className="font-medium leading-relaxed text-foreground">
+                  At Wintagen, we're creating a home for useful products, creative thinking, and
+                  lasting customer relationships. Our goal is to make thoughtful software that helps
+                  businesses move forward and makes everyday tasks easier.
+                </p>
+              </div>
             </div>
           </Reveal>
           <Reveal delay={160}>
