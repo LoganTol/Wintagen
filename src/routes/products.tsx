@@ -516,7 +516,9 @@ function ProductsPage() {
     const handleOutsideClick = (event: MouseEvent) => {
       const stack = stackRef.current;
       if (!stack || activeRef.current === null) return;
-      if (!stack.contains(event.target as Node)) setActiveBoth(null);
+      // A thumbnail may be removed by its own click before this listener runs.
+      // The original event path still identifies the click as inside the stack.
+      if (!event.composedPath().includes(stack)) setActiveBoth(null);
     };
 
     // The cursor left the window: no further pointermove will fire, and the
