@@ -119,6 +119,10 @@
   --shadow-card: 0 12px 36px -20px oklch(0 0 0 / 0.55);
   --shadow-teal-glow: 0 0 48px -18px oklch(0.555756 0.093967 194.7884 / 0.30);
   --border-highlight: color-mix(in oklab, var(--brand-highlight) 40%, var(--brand));
+  --hero-glow: radial-gradient(ellipse at 50% 56%, color-mix(in oklab, var(--brand) 28%, transparent) 0%, color-mix(in oklab, var(--brand-hover) 18%, transparent) 38%, transparent 72%);
+  --hero-accent-glow: radial-gradient(ellipse at 72% 72%, color-mix(in oklab, var(--brand-accent) 7%, transparent), transparent 40%);
+  --hero-image-fade: linear-gradient(to bottom, transparent, var(--foreground) 14%, var(--foreground) 76%, transparent);
+  --hero-image-side-fade: linear-gradient(to right, transparent, var(--foreground) 10%, var(--foreground) 90%, transparent);
 }
 
 @layer base {
@@ -629,7 +633,20 @@
   background: var(--brand-accent);
 }
 .home-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
   padding-top: 3rem;
+  background: var(--background);
+}
+.home-hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: var(--hero-glow), var(--hero-accent-glow);
+  filter: blur(40px);
+  pointer-events: none;
 }
 .home-hero__content {
   max-width: 66rem;
@@ -644,10 +661,12 @@
   font-weight: 600;
 }
 .home-hero__photo {
+  position: relative;
   width: 100%;
-  margin-top: 3rem;
-  overflow: hidden;
-  border-block: 1px solid var(--border);
+  margin-top: 1.5rem;
+  border: 0;
+  mask-image: var(--hero-image-fade), var(--hero-image-side-fade);
+  mask-composite: intersect;
 }
 .home-hero__photo img {
   display: block;
@@ -820,7 +839,7 @@
     font-size: 4rem;
   }
   .home-hero__photo {
-    margin-top: 4rem;
+    margin-top: 2rem;
   }
   .home-hero__photo img {
     height: 34rem;
