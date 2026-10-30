@@ -10,11 +10,11 @@
  * The @theme inline block maps CSS custom properties to Tailwind utility
  * classes (e.g. --color-primary -> bg-primary, text-primary).
  *
- * The :root and .dark blocks define the actual color values using oklch.
+ * The shared :root/.dark block defines the dark-default color values using oklch.
  * All colors MUST use oklch format.
  *
  * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
+ * 1. Add the variable to the shared :root/.dark block
  * 2. Register it in @theme inline as --color-<name>: var(--<name>)
  */
 
@@ -92,7 +92,7 @@
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
   --border: oklch(0.336841 0.023174 196.1054);
-  --input: var(--border);
+  --input: oklch(0.56 0.02 196);
   --ring: var(--brand-highlight);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -764,6 +764,7 @@
 .journey-option {
   min-height: 4rem;
 }
+/* Brand fills stay exact; text and focus use the accessible highlight role. */
 .text-brand {
   color: var(--brand-highlight);
 }
