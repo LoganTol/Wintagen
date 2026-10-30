@@ -3,6 +3,9 @@ import { ArrowRight, Boxes, Compass, Layers, Workflow, Code2, Globe } from "luci
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/Reveal";
+import { Button } from "@/components/ui/button";
+import quicksiteHero from "@/assets/quicksite-hero.png.asset.json";
+import proplansToolbox from "@/assets/proplans-toolbox.png.asset.json";
 import heroSkyline from "@/assets/wintagen-hero-atlanta-skyline.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
@@ -15,7 +18,7 @@ export const Route = createFileRoute("/")({
           "Wintagen creates focused software products and provides practical technology services for businesses building what comes next.",
       },
       { property: "og:title", content: "Wintagen | Software Products & Technology Services" },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: "https://wintagen.com/" },
       {
         property: "og:description",
         content:
@@ -24,15 +27,15 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       {
         property: "og:image",
-        content: `https://wintagen-builder-spark.lovable.app${heroSkyline.url}`,
+        content: `https://wintagen.com${heroSkyline.url}`,
       },
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:image",
-        content: `https://wintagen-builder-spark.lovable.app${heroSkyline.url}`,
+        content: `https://wintagen.com${heroSkyline.url}`,
       },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: "https://wintagen.com/" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -111,163 +114,124 @@ function Index() {
     <div id="top" className="min-h-screen bg-background">
       <Header />
       <main className="pt-20">
-        {/* Hero */}
-        <section className="pt-16 md:pt-24">
-          <div className="mx-auto max-w-6xl px-5 md:px-8">
-            <Reveal>
-              <p className="flex items-center gap-3 text-sm font-semibold tracking-[0.12em] text-brand uppercase">
-                <span aria-hidden="true" className="h-2 w-2 rounded-full bg-brand-accent" />
-                Products. Services. One standard.
-              </p>
-              <h1 className="mt-5 max-w-3xl text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl">
-                We build software—and the company behind it.
-              </h1>
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
+        <section className="home-hero">
+          <div className="site-container">
+            <Reveal className="home-hero__content">
+              <p className="section-label rounded-full border border-border bg-brand-soft px-4 py-2">Products. Services. One standard.</p>
+              <h1 className="home-hero__title">We build <span className="text-brand">software</span>—and the company behind it.</h1>
+              <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
                 Wintagen creates focused digital products and provides technology services for businesses ready to
                 build, improve, or move an idea forward.
               </p>
-              <div className="mt-9 flex flex-wrap gap-3">
-                <Link to="/products" className="btn-primary">
-                  Explore our products
-                </Link>
-                <Link to="/services" className="btn-secondary">
-                  View our services
-                </Link>
+              <div className="mt-8 flex flex-wrap justify-center gap-3">
+                <Button asChild size="lg"><Link to="/products">Explore our products <ArrowRight aria-hidden="true" /></Link></Button>
+                <Button asChild size="lg" variant="outline"><Link to="/services">View our services</Link></Button>
               </div>
             </Reveal>
           </div>
-
-          <Reveal delay={120} className="mt-12 md:mt-16">
-            <figure className="w-full">
-              <img
-                src={heroSkyline.url}
-                alt="The Atlanta skyline at sunset, its towers glowing beneath a soft orange and violet sky"
-                className="h-64 w-full object-cover sm:h-80 md:h-[30rem] lg:h-[38rem] xl:h-[40rem] 2xl:h-[44rem] min-[1920px]:h-[52rem]"
-                width={1920}
-                height={1280}
-              />
+          <Reveal delay={120} className="home-hero__photo">
+            <figure>
+              <img src={heroSkyline.url} alt="The Atlanta skyline at sunset, including the full spire of Bank of America Plaza" width={1920} height={1280} />
             </figure>
           </Reveal>
         </section>
 
-        {/* Company model */}
-        <section className="border-y border-border bg-surface">
-          <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
-            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">Two ways we create value.</h2>
-            <span aria-hidden="true" className="mt-4 block h-1 w-12 rounded-full bg-brand-accent" />
-            <div className="mt-10 grid gap-6 md:grid-cols-2">
-              <article className="card-surface flex flex-col border-brand/25 bg-brand-soft p-8 transition-shadow hover:shadow-md">
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-background">
-                  <Boxes className="h-5 w-5 text-brand" />
-                </span>
-                <h3 className="mt-6 text-2xl font-semibold tracking-tight">Products</h3>
-                <p className="mt-3 text-muted-foreground">Focused software designed around clear, real-world needs.</p>
-                <Link
-                  to="/products"
-                  className="group mt-8 inline-flex items-center gap-2 rounded-md text-sm font-semibold text-brand focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
-                >
-                  Explore products
-                  <ArrowRight className="h-4 w-4 transition-all group-hover:translate-x-0.5 group-hover:text-brand-accent" />
-                </Link>
-              </article>
-
-              <article className="card-surface flex flex-col border-brand/25 bg-brand-soft p-8 transition-shadow hover:shadow-md">
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-background">
-                  <Layers className="h-5 w-5 text-brand" />
-                </span>
-                <h3 className="mt-6 text-2xl font-semibold tracking-tight">Services</h3>
-                <p className="mt-3 text-muted-foreground">
-                  Practical technology support for organizations building or improving digital experiences.
-                </p>
-                <Link
-                  to="/services"
-                  className="group mt-8 inline-flex items-center gap-2 rounded-md text-sm font-semibold text-brand focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
-                >
-                  Explore services
-                  <ArrowRight className="h-4 w-4 transition-all group-hover:translate-x-0.5 group-hover:text-brand-accent" />
-                </Link>
-              </article>
-            </div>
+        <section className="border-b border-border bg-surface">
+          <div className="site-container section-space">
+            <Reveal>
+              <p className="section-label">Wintagen</p>
+              <h2 className="section-heading mt-5">Two ways we create value.</h2>
+              <span aria-hidden="true" className="section-rule" />
+              <div className="mt-10 grid gap-6 md:grid-cols-2">
+                <article className="value-card flex flex-col">
+                  <Boxes className="h-8 w-8 text-brand" strokeWidth={1.5} aria-hidden="true" />
+                  <h3 className="mt-8 text-2xl font-semibold">Products</h3>
+                  <p className="mt-3 max-w-md leading-relaxed text-muted-foreground">Focused software designed around clear, real-world needs.</p>
+                  <Button asChild variant="link" className="mt-6 self-start px-0"><Link to="/products">Explore products <ArrowRight aria-hidden="true" /></Link></Button>
+                </article>
+                <article className="value-card flex flex-col">
+                  <Layers className="h-8 w-8 text-brand" strokeWidth={1.5} aria-hidden="true" />
+                  <h3 className="mt-8 text-2xl font-semibold">Services</h3>
+                  <p className="mt-3 max-w-md leading-relaxed text-muted-foreground">Practical technology support for organizations building or improving digital experiences.</p>
+                  <Button asChild variant="link" className="mt-6 self-start px-0"><Link to="/services">Explore services <ArrowRight aria-hidden="true" /></Link></Button>
+                </article>
+              </div>
+            </Reveal>
           </div>
         </section>
 
-        {/* Products */}
-        <section id="products" className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
-          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">Products built with purpose.</h2>
-          <span aria-hidden="true" className="mt-4 block h-1 w-12 rounded-full bg-brand-accent" />
-          <Reveal className="mt-6">
-            <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground">
-              The Wintagen portfolio is a growing collection of products — each one built around a specific problem and
-              a straightforward reason to exist.
+        <section id="products" className="site-container section-space">
+          <Reveal>
+            <p className="section-label">Our portfolio</p>
+            <h2 className="section-heading mt-5">Products built with purpose.</h2>
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+              The Wintagen portfolio is a growing collection of products — each one built around a specific problem and a straightforward reason to exist.
             </p>
-            <div className="mt-9">
-              <Link to="/products" className="btn-primary">
-                View the full portfolio
-              </Link>
+            <div className="portfolio-grid mt-10">
+              <article className="portfolio-preview">
+                <div className="portfolio-preview__image"><img src={quicksiteHero.url} alt="QuickSite's homepage with a website URL field and redesign preview" loading="lazy" /></div>
+                <div className="portfolio-preview__text">
+                  <p className="text-xs font-semibold text-brand">Website Modernization</p>
+                  <h3 className="mt-3 text-2xl font-semibold">QuickSite</h3>
+                  <p className="mt-3 leading-relaxed text-muted-foreground">QuickSite transforms an existing website into a modern, mobile-friendly experience. Enter a URL to generate a redesigned preview without writing code.</p>
+                  <Button asChild variant="link" className="mt-4 px-0"><Link to="/products">Explore QuickSite <ArrowRight aria-hidden="true" /></Link></Button>
+                </div>
+              </article>
+              <article className="portfolio-preview">
+                <div className="portfolio-preview__image"><img src={proplansToolbox.url} alt="ProPlans: ready-to-build plans, custom build requests, and selling your designs" loading="lazy" /></div>
+                <div className="portfolio-preview__text">
+                  <p className="text-xs font-semibold text-brand">Blueprint Marketplace</p>
+                  <h3 className="mt-3 text-2xl font-semibold">ProPlans</h3>
+                  <p className="mt-3 leading-relaxed text-muted-foreground">A peer-to-peer marketplace for home improvement, woodworking, and construction project plans.</p>
+                  <Button asChild variant="link" className="mt-4 px-0"><Link to="/products">Explore ProPlans <ArrowRight aria-hidden="true" /></Link></Button>
+                </div>
+              </article>
+              <article className="portfolio-preview portfolio-aether">
+                <p className="text-xs font-semibold text-brand">Season Management</p>
+                <h3 className="mt-3 text-2xl font-semibold">Aether Tennis</h3>
+                <p className="mt-3 leading-relaxed text-muted-foreground">Tennis Seasons Made Simple.</p>
+                <p className="mt-3 leading-relaxed text-muted-foreground">Fixtures, scheduling responsibilities, scores, and standings in one shared place.</p>
+                <Button asChild variant="link" className="mt-4 px-0"><a href="https://aethertennis.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit Aether Tennis (opens in a new tab)">Visit Aether Tennis <ArrowRight aria-hidden="true" /></a></Button>
+              </article>
             </div>
+            <Button asChild className="mt-8"><Link to="/products">View the full portfolio <ArrowRight aria-hidden="true" /></Link></Button>
           </Reveal>
         </section>
 
-        {/* Services */}
         <section id="services" className="border-y border-border bg-surface">
-          <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
-            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-              Technology services, shaped around the work.
-            </h2>
-            <span aria-hidden="true" className="mt-4 block h-1 w-12 rounded-full bg-brand-accent" />
-            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {SERVICES.map(({ icon: Icon, title, body, slug }) => (
-                <Link
-                  key={title}
-                  to="/services"
-                  hash={slug}
-                  className="card-surface group flex flex-col p-6 transition-shadow hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
-                  aria-label={`${title} — see details on our services page`}
-                >
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-brand-soft">
-                    <Icon className="h-5 w-5 text-brand" />
-                  </span>
-                  <h3 className="mt-5 text-lg font-semibold tracking-tight">{title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{body}</p>
-                  <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand">
-                    Learn more
-                    <ArrowRight className="h-4 w-4 transition-all group-hover:translate-x-0.5 group-hover:text-brand-accent" />
-                  </span>
-                </Link>
-              ))}
-            </div>
-            <div className="mt-10">
-              <Link to="/services" className="btn-primary">
-                Explore all services
-              </Link>
-            </div>
+          <div className="site-container section-space">
+            <Reveal>
+              <p className="section-label">Our services</p>
+              <h2 className="section-heading mt-5 max-w-3xl">Technology services, shaped around the work.</h2>
+              <span aria-hidden="true" className="section-rule" />
+              <div className="mt-10 grid gap-5 sm:grid-cols-2">
+                {SERVICES.map(({ icon: Icon, title, body, slug }, index) => (
+                  <Link key={title} to="/services" hash={slug} className="service-card group flex flex-col focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand" aria-label={`${title} — see details on our services page`}>
+                    <div className="flex items-center justify-between"><Icon className="h-8 w-8 text-brand" strokeWidth={1.5} aria-hidden="true" /><span className="text-xs font-medium text-muted-foreground">0{index + 1}</span></div>
+                    <h3 className="mt-8 text-xl font-semibold">{title}</h3>
+                    <p className="mt-3 max-w-md leading-relaxed text-muted-foreground">{body}</p>
+                    <span className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-brand">Learn more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" /></span>
+                  </Link>
+                ))}
+              </div>
+              <Button asChild className="mt-8"><Link to="/services">Explore all services <ArrowRight aria-hidden="true" /></Link></Button>
+            </Reveal>
           </div>
         </section>
 
-        {/* Contact CTA */}
-        <section id="contact" className="border-t border-border bg-surface">
-          <div className="mx-auto max-w-3xl px-5 py-20 text-center md:px-8 md:py-28">
-            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-              Have a product to explore or a project to discuss?
-            </h2>
-            <span aria-hidden="true" className="mx-auto mt-4 block h-1 w-12 rounded-full bg-brand-accent" />
-            <p className="mx-auto mt-5 max-w-xl text-lg text-muted-foreground">
-              See what we're building or start a conversation about what you need.
-            </p>
+        <section id="contact" className="bg-brand-soft">
+          <Reveal className="site-container section-space text-center">
+            <p className="section-label">Let's talk</p>
+            <h2 className="section-heading mx-auto mt-5 max-w-3xl">Have a product to explore or a project to discuss?</h2>
+            <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground">See what we're building or start a conversation about what you need.</p>
             <div className="mt-9 flex flex-col items-center gap-3">
-              <Link to="/get-started" className="btn-primary">
-                Get started
-              </Link>
+              <Button asChild size="lg"><Link to="/get-started">Get started <ArrowRight aria-hidden="true" /></Link></Button>
               <div className="flex flex-wrap justify-center gap-3">
-                <a href="mailto:contact@wintagen.com" className="btn-secondary">
-                  Contact Wintagen
-                </a>
-                <Link to="/products" className="btn-secondary">
-                  Explore products
-                </Link>
+                <Button asChild variant="outline"><a href="mailto:contact@wintagen.com">Contact Wintagen</a></Button>
+                <Button asChild variant="outline"><Link to="/products">Explore products</Link></Button>
               </div>
             </div>
-          </div>
+          </Reveal>
         </section>
       </main>
       <Footer />
