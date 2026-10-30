@@ -31,17 +31,19 @@ function AboutPage() {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="pt-20">
-        <section className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
+        <section className="site-container page-intro">
           <Reveal>
             <p className="flex items-center gap-3 text-sm font-semibold tracking-[0.12em] text-brand uppercase">
               <span aria-hidden="true" className="h-2 w-2 rounded-full bg-brand-accent" />
               About us
             </p>
-            <h1 className="mt-5 text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl">
+            <div className="about-story mt-6">
+            <div><h1 className="page-title">
               Built to create useful things.
             </h1>
-            <span aria-hidden="true" className="mt-6 block h-1 w-12 rounded-full bg-brand-accent" />
-            <div className="mt-8 max-w-2xl space-y-5">
+            <span aria-hidden="true" className="section-rule" />
+            </div>
+            <div className="max-w-2xl space-y-6">
               <p className="text-lg leading-relaxed text-muted-foreground">
                 Wintagen is a software company based in Atlanta, Georgia, where we develop digital
                 products and work with businesses to create custom software, applications, and
@@ -71,6 +73,7 @@ function AboutPage() {
                 businesses move forward and makes everyday tasks easier.
               </p>
             </div>
+            </div>
           </Reveal>
           <Reveal delay={160}>
             <div className="mt-16 flex flex-wrap gap-3">
@@ -80,6 +83,7 @@ function AboutPage() {
               <Link to="/products" className="btn-secondary">
                 View our products
               </Link>
+            </div>
             </div>
           </Reveal>
         </section>

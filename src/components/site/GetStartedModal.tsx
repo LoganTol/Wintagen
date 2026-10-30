@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { X, ArrowUpRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { GetStartedForm } from "@/components/site/GetStartedForm";
 
 /** Set to "" to show the prompt on every visit; "session" shows it once per browser session. */
@@ -172,7 +173,7 @@ export function GetStartedModal() {
                   }
                 : undefined
             }
-            className={`relative z-10 w-full max-w-2xl overflow-hidden rounded-2xl border border-border bg-background shadow-soft ${
+            className={`relative z-10 w-full max-w-2xl overflow-hidden rounded-lg border border-border bg-background shadow-soft ${
               entered || flight
                 ? ""
                 : "motion-safe:animate-in motion-safe:fade-in-0 motion-safe:zoom-in-95 motion-safe:duration-300"
@@ -193,7 +194,9 @@ export function GetStartedModal() {
                     Tell us what you're working on.
                   </h2>
                 </div>
-                <button
+                <Button
+                  variant="outline"
+                  size="icon"
                   ref={closeRef}
                   type="button"
                   onClick={dismiss}
@@ -201,7 +204,7 @@ export function GetStartedModal() {
                   className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:border-brand/40 hover:bg-brand-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
                 >
                   <X className="h-5 w-5" aria-hidden="true" />
-                </button>
+                </Button>
               </div>
               <p className="mt-2 max-w-lg text-sm text-muted-foreground">
                 Three short steps. No pressure, no commitment — and a video meeting is never
@@ -219,19 +222,20 @@ export function GetStartedModal() {
 
       {/* Minimised journey: a corner tab that reopens the prompt. */}
       {!open && minimized && (
-        <button
+        <Button
           ref={restoreRef}
+          size="lg"
           type="button"
           onClick={restore}
           aria-label="Open the Get started form"
-          className={`fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-[max(1.25rem,env(safe-area-inset-right))] z-[90] inline-flex items-center gap-2.5 rounded-full border border-brand/30 bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-soft transition-colors hover:bg-brand/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand ${
+          className={`fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-[max(1.25rem,env(safe-area-inset-right))] z-[90] h-auto inline-flex items-center gap-2.5 rounded-full border border-brand/30 bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-soft transition-colors hover:bg-brand/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand ${
             landed ? "motion-safe:pill-land" : "motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-2 motion-safe:duration-300"
           }`}
         >
           <span aria-hidden="true" className="h-2 w-2 rounded-full bg-brand-accent" />
           Get started
           <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-        </button>
+        </Button>
       )}
     </>
   );

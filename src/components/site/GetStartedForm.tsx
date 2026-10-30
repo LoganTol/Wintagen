@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Check, Phone, MessageSquare, Video, MessageCircle, Mail } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 /** Video-call booking calendar (Google appointment page). */
 export const BOOKING_URL = "https://calendar.app.google/iVE2rQbt9DG79XQL6";
@@ -88,12 +89,12 @@ export function OptionButton({
   children: React.ReactNode;
 }) {
   return (
-    <button
+    <Button variant="ghost"
       type="button"
       onClick={onClick}
       aria-pressed={selected}
       className={
-        "flex w-full items-start gap-3 rounded-xl border p-4 text-left text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand " +
+        "journey-option flex h-auto w-full items-start justify-start gap-3 whitespace-normal rounded-lg border p-4 text-left text-sm font-normal transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand " +
         (selected
           ? "border-brand/50 bg-brand-soft text-foreground"
           : "border-border bg-card text-muted-foreground hover:border-brand/30 hover:text-foreground")
@@ -109,7 +110,7 @@ export function OptionButton({
         {selected && <Check className="h-3.5 w-3.5" />}
       </span>
       <span className="min-w-0 flex-1">{children}</span>
-    </button>
+    </Button>
   );
 }
 
@@ -158,7 +159,7 @@ export function GetStartedForm({ idPrefix = "gs" }: { idPrefix?: string }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-14">
+    <form onSubmit={handleSubmit} className="journey-form space-y-14">
       {/* Step 1 */}
       <fieldset>
         <legend className="text-sm font-semibold tracking-[0.12em] text-brand uppercase">
@@ -249,7 +250,7 @@ export function GetStartedForm({ idPrefix = "gs" }: { idPrefix?: string }) {
         </div>
 
         {chosen && (
-          <div className="mt-6 rounded-xl border border-brand/25 bg-brand-soft p-5">
+          <div className="mt-6 border-t border-brand/25 bg-brand-soft p-5">
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <label className="text-sm font-medium" htmlFor={`${idPrefix}-first-name`}>
@@ -325,9 +326,9 @@ export function GetStartedForm({ idPrefix = "gs" }: { idPrefix?: string }) {
       </fieldset>
 
       <div className="flex flex-wrap items-center gap-4">
-        <button type="submit" disabled={!ready} className="btn-primary disabled:opacity-50">
+        <Button type="submit" disabled={!ready}>
           Send my details
-        </button>
+        </Button>
         <p className="text-sm text-muted-foreground">
           Prefer plain email?{" "}
           <a className="font-medium text-brand underline" href="mailto:contact@wintagen.com">

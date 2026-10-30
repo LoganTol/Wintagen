@@ -269,7 +269,7 @@ function ProductLayer({
 
       <div id={panelId} className="product-layer__panel" aria-hidden={!isOpen}>
         <div className="product-layer__panel-inner">
-          <div className="mx-auto grid max-w-4xl gap-8 px-7 pb-10 pt-2 sm:px-12 sm:pb-12 md:grid-cols-[1.2fr_1fr] md:gap-12">
+          <div className="mx-auto grid max-w-5xl gap-8 px-7 pb-12 pt-2 sm:px-12 sm:pb-14 md:grid-cols-[1.2fr_1fr] md:gap-16">
             <div>
               <p className="product-layer__category text-xs font-semibold uppercase tracking-[0.14em]">
                 {product.category}
@@ -309,7 +309,7 @@ function ProductLayer({
 
               <div className="proplans-gallery mt-7">
                 {leftShots.map(({ item, index, depth }) => (
-                  <button
+                  <Button variant="ghost"
                     key={item.src}
                     type="button"
                     onClick={() => setShotIndex(index)}
@@ -319,7 +319,7 @@ function ProductLayer({
                     }`}
                   >
                     <img src={item.src} alt="" className="h-full w-full object-contain" loading="lazy" />
-                  </button>
+                  </Button>
                 ))}
 
                 <div className="proplans-gallery__center">
@@ -334,28 +334,28 @@ function ProductLayer({
                   </div>
                   {total > 1 && (
                     <>
-                      <button
+                      <Button variant="ghost"
                         type="button"
                         onClick={showPrev}
                         aria-label="Show the previous screenshot"
                         className="proplans-gallery__arrow proplans-gallery__arrow--prev"
                       >
                         <ChevronLeft className="h-5 w-5" strokeWidth={2} />
-                      </button>
-                      <button
+                      </Button>
+                      <Button variant="ghost"
                         type="button"
                         onClick={showNext}
                         aria-label="Show the next screenshot"
                         className="proplans-gallery__arrow proplans-gallery__arrow--next"
                       >
                         <ChevronRight className="h-5 w-5" strokeWidth={2} />
-                      </button>
+                      </Button>
                     </>
                   )}
                 </div>
 
                 {rightShots.map(({ item, index, depth }) => (
-                  <button
+                  <Button variant="ghost"
                     key={item.src}
                     type="button"
                     onClick={() => setShotIndex(index)}
@@ -365,7 +365,7 @@ function ProductLayer({
                     }`}
                   >
                     <img src={item.src} alt="" className="h-full w-full object-contain" loading="lazy" />
-                  </button>
+                  </Button>
                 ))}
               </div>
 
@@ -551,7 +551,7 @@ function ProductsPage() {
     <div id="top" className="min-h-screen bg-background">
       <Header />
       <main className="pt-20">
-        <section className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
+        <section className="site-container page-intro">
           <Reveal>
             <Link
               to="/"
@@ -564,10 +564,10 @@ function ProductsPage() {
               <span aria-hidden="true" className="h-2 w-2 rounded-full bg-brand-accent" />
               Products
             </p>
-            <h1 className="mt-5 text-4xl font-semibold leading-[1.1] tracking-normal sm:text-5xl">
+            <h1 className="page-title mt-5">
               Products Built With Purpose.
             </h1>
-            <span aria-hidden="true" className="mt-4 block h-1 w-12 rounded-full bg-brand-accent" />
+            <span aria-hidden="true" className="section-rule" />
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
               Each Wintagen product starts with a specific problem and a straightforward reason to
               exist. Meet the first three brands in our growing portfolio.
@@ -615,9 +615,9 @@ function ProductsPage() {
           </Reveal>
         </section>
 
-        <section className="mx-auto max-w-3xl px-5 py-20 text-center md:px-8 md:py-28">
+        <section className="site-container section-space text-center">
           <Reveal>
-            <h2 className="text-3xl font-semibold tracking-normal sm:text-4xl">
+            <h2 className="section-heading">
               Interested In What We're Building?
             </h2>
             <span aria-hidden="true" className="mx-auto mt-4 block h-1 w-12 rounded-full bg-brand-accent" />

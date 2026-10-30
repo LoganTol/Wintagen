@@ -202,7 +202,7 @@ function ServiceLayer({
 
       <div id={panelId} className="product-layer__panel" aria-hidden={!isOpen}>
         <div className="product-layer__panel-inner">
-          <div className="mx-auto grid max-w-4xl gap-8 px-7 pb-10 pt-2 sm:px-12 sm:pb-12 md:grid-cols-[1.2fr_1fr] md:gap-12">
+          <div className="mx-auto grid max-w-5xl gap-8 px-7 pb-12 pt-2 sm:px-12 sm:pb-14 md:grid-cols-[1.2fr_1fr] md:gap-16">
             <div>
               <p className="product-layer__category text-xs font-semibold uppercase tracking-[0.14em]">
                 {service.category}
@@ -297,11 +297,12 @@ function ServicesPage() {
   useEffect(() => {
     const hash = window.location.hash.replace("#", "");
     const hashIndex = SERVICES.findIndex((s) => s.slug === hash);
-    if (hashIndex >= 0) {
+    const matchedService = SERVICES[hashIndex];
+    if (matchedService) {
       openedByRef.current = "manual";
       setActiveBoth(hashIndex);
       window.setTimeout(() => {
-        document.getElementById(SERVICES[hashIndex]!.slug)?.scrollIntoView({ block: "start" });
+        document.getElementById(matchedService.slug)?.scrollIntoView({ block: "start" });
       }, 60);
     } else if (window.matchMedia("(hover: none), (pointer: coarse)").matches) {
       setActiveBoth(0);
@@ -397,7 +398,7 @@ function ServicesPage() {
     <div id="top" className="min-h-screen bg-background">
       <Header />
       <main className="pt-20">
-        <section className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
+        <section className="site-container page-intro">
           <Reveal>
             <Link
               to="/"
@@ -410,10 +411,10 @@ function ServicesPage() {
               <span aria-hidden="true" className="h-2 w-2 rounded-full bg-brand-accent" />
               Services
             </p>
-            <h1 className="mt-5 text-4xl font-semibold leading-[1.1] tracking-normal sm:text-5xl">
+            <h1 className="page-title mt-5">
               Technology Services, Shaped Around The Work.
             </h1>
-            <span aria-hidden="true" className="mt-4 block h-1 w-12 rounded-full bg-brand-accent" />
+            <span aria-hidden="true" className="section-rule" />
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
               Four ways we help organizations build, improve, and connect their digital work. Open
               any service below for the detail.
@@ -460,9 +461,9 @@ function ServicesPage() {
           </Reveal>
         </section>
 
-        <section className="mx-auto max-w-3xl px-5 py-20 text-center md:px-8 md:py-28">
+        <section className="site-container section-space text-center">
           <Reveal>
-            <h2 className="text-3xl font-semibold tracking-normal sm:text-4xl">
+            <h2 className="section-heading">
               Have A Project In Mind?
             </h2>
             <span aria-hidden="true" className="mx-auto mt-4 block h-1 w-12 rounded-full bg-brand-accent" />

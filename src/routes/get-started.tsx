@@ -37,7 +37,7 @@ function GetStartedPage() {
               <span aria-hidden="true" className="h-2 w-2 rounded-full bg-brand-accent" />
               Get started
             </p>
-            <h1 className="mt-5 text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl">
+            <h1 className="page-title mt-5">
               Tell us what you're working on.
             </h1>
             <span aria-hidden="true" className="mt-6 block h-1 w-12 rounded-full bg-brand-accent" />
