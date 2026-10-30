@@ -64,7 +64,11 @@ export function Header() {
               {item.label}
             </Link>
           ))}
-          <Button asChild><Link to="/get-started">Get Started <ArrowUpRight aria-hidden="true" /></Link></Button>
+          <Button asChild>
+            <Link to="/get-started">
+              Get Started <ArrowUpRight aria-hidden="true" />
+            </Link>
+          </Button>
         </nav>
 
         <Button

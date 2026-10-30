@@ -1,8 +1,6 @@
 import { Reveal } from "@/components/site/Reveal";
 
-export type LegalBlock =
-  | { type: "subheading"; text: string }
-  | { type: "paragraph"; text: string };
+export type LegalBlock = { type: "subheading"; text: string } | { type: "paragraph"; text: string };
 
 export interface LegalSection {
   number: string;

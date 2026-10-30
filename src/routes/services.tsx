@@ -193,7 +193,9 @@ function ServiceLayer({
         }}
       >
         <span className="text-center">
-          <span className="block text-2xl font-semibold leading-tight sm:text-3xl">{service.name}</span>
+          <span className="block text-2xl font-semibold leading-tight sm:text-3xl">
+            {service.name}
+          </span>
           <span className="mt-2 block text-sm font-medium text-muted-foreground sm:text-base">
             {service.tagline}
           </span>
@@ -223,7 +225,10 @@ function ServiceLayer({
               aria-label={`${service.name} highlights`}
             >
               {service.capabilities.map(({ label, icon: Icon }) => (
-                <li key={label} className="flex items-center gap-3 text-sm font-medium text-foreground">
+                <li
+                  key={label}
+                  className="flex items-center gap-3 text-sm font-medium text-foreground"
+                >
                   <span className="product-layer__feature-icon" aria-hidden="true">
                     <Icon className="h-4 w-4" strokeWidth={1.8} />
                   </span>
@@ -411,9 +416,7 @@ function ServicesPage() {
               <span aria-hidden="true" className="h-2 w-2 rounded-full bg-brand-accent" />
               Services
             </p>
-            <h1 className="page-title mt-5">
-              Technology Services, Shaped Around The Work.
-            </h1>
+            <h1 className="page-title mt-5">Technology Services, Shaped Around The Work.</h1>
             <span aria-hidden="true" className="section-rule" />
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
               Four ways we help organizations build, improve, and connect their digital work. Open
@@ -463,15 +466,18 @@ function ServicesPage() {
 
         <section className="site-container section-space text-center">
           <Reveal>
-            <h2 className="section-heading">
-              Have A Project In Mind?
-            </h2>
-            <span aria-hidden="true" className="mx-auto mt-4 block h-1 w-12 rounded-full bg-brand-accent" />
+            <h2 className="section-heading">Have A Project In Mind?</h2>
+            <span
+              aria-hidden="true"
+              className="mx-auto mt-4 block h-1 w-12 rounded-full bg-brand-accent"
+            />
             <p className="mx-auto mt-5 max-w-xl text-lg text-muted-foreground">
               Tell us what you are trying to build or improve, and we will take it from there.
             </p>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <a href="mailto:contact@wintagen.com" className="btn-primary">Contact Wintagen</a>
+              <a href="mailto:contact@wintagen.com" className="btn-primary">
+                Contact Wintagen
+              </a>
               <Link to="/products" className="btn-secondary group">
                 Explore our products
                 <ArrowRight className="ml-1 inline h-4 w-4 transition-all group-hover:translate-x-0.5 group-hover:text-brand-accent" />

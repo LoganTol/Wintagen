@@ -16,8 +16,7 @@ type Flight = { dx: number; dy: number };
 
 function prefersReducedMotion() {
   return (
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
   );
 }
 
@@ -229,7 +228,9 @@ export function GetStartedModal() {
           onClick={restore}
           aria-label="Open the Get started form"
           className={`fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-[max(1.25rem,env(safe-area-inset-right))] z-[90] h-auto inline-flex items-center gap-2.5 rounded-full border border-brand/30 bg-brand px-5 py-3.5 text-sm font-semibold text-brand-foreground shadow-soft transition-colors hover:bg-brand/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand ${
-            landed ? "motion-safe:pill-land" : "motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-2 motion-safe:duration-300"
+            landed
+              ? "motion-safe:pill-land"
+              : "motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-2 motion-safe:duration-300"
           }`}
         >
           <span aria-hidden="true" className="h-2 w-2 rounded-full bg-brand-accent" />

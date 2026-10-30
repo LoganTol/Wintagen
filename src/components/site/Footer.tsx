@@ -22,11 +22,15 @@ export function Footer() {
             aria-label="Wintagen — back to top"
             className="inline-block rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
           >
-            <img src={wintagenLogo.url} alt="Wintagen" className="h-12 w-auto max-w-[230px] object-contain" />
+            <img
+              src={wintagenLogo.url}
+              alt="Wintagen"
+              className="h-12 w-auto max-w-[230px] object-contain"
+            />
           </Link>
           <p className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
             <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
-              Software products and technology services.
+            Software products and technology services.
           </p>
         </div>
         <nav aria-label="Footer">
