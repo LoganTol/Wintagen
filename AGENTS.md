@@ -8,3 +8,7 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Presentation architecture
+- Keep TanStack Start routes and existing client-only contact/booking flows; reference repositories supply visual patterns only, so their auth, schema and runtime are not imported.
+- Define shared presentation roles and page-layout selectors in src/styles.css and use the existing Button component for controls; this keeps navigation, forms and secondary pages consistent without duplicating a theme.

@@ -1,8 +1,6 @@
 import { Reveal } from "@/components/site/Reveal";
 
-export type LegalBlock =
-  | { type: "subheading"; text: string }
-  | { type: "paragraph"; text: string };
+export type LegalBlock = { type: "subheading"; text: string } | { type: "paragraph"; text: string };
 
 export interface LegalSection {
   number: string;
@@ -24,7 +22,7 @@ export function LegalPage({
   sections: LegalSection[];
 }) {
   return (
-    <main id="main" className="pb-20 pt-28 md:pt-36">
+    <main id="main" className="legal-content pb-28 pt-32 md:pt-40">
       <div className="mx-auto max-w-3xl px-5 md:px-8">
         <Reveal>
           <p className="flex items-center gap-2 text-sm font-medium uppercase tracking-wide text-muted-foreground">

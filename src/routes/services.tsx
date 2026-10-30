@@ -193,7 +193,9 @@ function ServiceLayer({
         }}
       >
         <span className="text-center">
-          <span className="block text-2xl font-semibold leading-tight sm:text-3xl">{service.name}</span>
+          <span className="block text-2xl font-semibold leading-tight sm:text-3xl">
+            {service.name}
+          </span>
           <span className="mt-2 block text-sm font-medium text-muted-foreground sm:text-base">
             {service.tagline}
           </span>
@@ -202,7 +204,7 @@ function ServiceLayer({
 
       <div id={panelId} className="product-layer__panel" aria-hidden={!isOpen}>
         <div className="product-layer__panel-inner">
-          <div className="mx-auto grid max-w-4xl gap-8 px-7 pb-10 pt-2 sm:px-12 sm:pb-12 md:grid-cols-[1.2fr_1fr] md:gap-12">
+          <div className="mx-auto grid max-w-5xl gap-8 px-7 pb-12 pt-2 sm:px-12 sm:pb-14 md:grid-cols-[1.2fr_1fr] md:gap-16">
             <div>
               <p className="product-layer__category text-xs font-semibold uppercase tracking-[0.14em]">
                 {service.category}
@@ -223,7 +225,10 @@ function ServiceLayer({
               aria-label={`${service.name} highlights`}
             >
               {service.capabilities.map(({ label, icon: Icon }) => (
-                <li key={label} className="flex items-center gap-3 text-sm font-medium text-foreground">
+                <li
+                  key={label}
+                  className="flex items-center gap-3 text-sm font-medium text-foreground"
+                >
                   <span className="product-layer__feature-icon" aria-hidden="true">
                     <Icon className="h-4 w-4" strokeWidth={1.8} />
                   </span>
@@ -297,11 +302,12 @@ function ServicesPage() {
   useEffect(() => {
     const hash = window.location.hash.replace("#", "");
     const hashIndex = SERVICES.findIndex((s) => s.slug === hash);
-    if (hashIndex >= 0) {
+    const matchedService = SERVICES[hashIndex];
+    if (matchedService) {
       openedByRef.current = "manual";
       setActiveBoth(hashIndex);
       window.setTimeout(() => {
-        document.getElementById(SERVICES[hashIndex]!.slug)?.scrollIntoView({ block: "start" });
+        document.getElementById(matchedService.slug)?.scrollIntoView({ block: "start" });
       }, 60);
     } else if (window.matchMedia("(hover: none), (pointer: coarse)").matches) {
       setActiveBoth(0);
@@ -397,7 +403,7 @@ function ServicesPage() {
     <div id="top" className="min-h-screen bg-background">
       <Header />
       <main className="pt-20">
-        <section className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
+        <section className="site-container page-intro">
           <Reveal>
             <Link
               to="/"
@@ -410,10 +416,8 @@ function ServicesPage() {
               <span aria-hidden="true" className="h-2 w-2 rounded-full bg-brand-accent" />
               Services
             </p>
-            <h1 className="mt-5 text-4xl font-semibold leading-[1.1] tracking-normal sm:text-5xl">
-              Technology Services, Shaped Around The Work.
-            </h1>
-            <span aria-hidden="true" className="mt-4 block h-1 w-12 rounded-full bg-brand-accent" />
+            <h1 className="page-title mt-5">Technology Services, Shaped Around The Work.</h1>
+            <span aria-hidden="true" className="section-rule" />
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
               Four ways we help organizations build, improve, and connect their digital work. Open
               any service below for the detail.
@@ -460,17 +464,20 @@ function ServicesPage() {
           </Reveal>
         </section>
 
-        <section className="mx-auto max-w-3xl px-5 py-20 text-center md:px-8 md:py-28">
+        <section className="site-container section-space text-center">
           <Reveal>
-            <h2 className="text-3xl font-semibold tracking-normal sm:text-4xl">
-              Have A Project In Mind?
-            </h2>
-            <span aria-hidden="true" className="mx-auto mt-4 block h-1 w-12 rounded-full bg-brand-accent" />
+            <h2 className="section-heading">Have A Project In Mind?</h2>
+            <span
+              aria-hidden="true"
+              className="mx-auto mt-4 block h-1 w-12 rounded-full bg-brand-accent"
+            />
             <p className="mx-auto mt-5 max-w-xl text-lg text-muted-foreground">
               Tell us what you are trying to build or improve, and we will take it from there.
             </p>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <a href="mailto:contact@wintagen.com" className="btn-primary">Contact Wintagen</a>
+              <a href="mailto:contact@wintagen.com" className="btn-primary">
+                Contact Wintagen
+              </a>
               <Link to="/products" className="btn-secondary group">
                 Explore our products
                 <ArrowRight className="ml-1 inline h-4 w-4 transition-all group-hover:translate-x-0.5 group-hover:text-brand-accent" />

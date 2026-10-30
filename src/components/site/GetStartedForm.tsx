@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Check, Phone, MessageSquare, Video, MessageCircle, Mail } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 /** Video-call booking calendar (Google appointment page). */
 export const BOOKING_URL = "https://calendar.app.google/iVE2rQbt9DG79XQL6";
@@ -88,12 +89,13 @@ export function OptionButton({
   children: React.ReactNode;
 }) {
   return (
-    <button
+    <Button
+      variant="ghost"
       type="button"
       onClick={onClick}
       aria-pressed={selected}
       className={
-        "flex w-full items-start gap-3 rounded-xl border p-4 text-left text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand " +
+        "journey-option flex h-auto w-full items-start justify-start gap-3 whitespace-normal rounded-lg border p-4 text-left text-sm font-normal transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand " +
         (selected
           ? "border-brand/50 bg-brand-soft text-foreground"
           : "border-border bg-card text-muted-foreground hover:border-brand/30 hover:text-foreground")
@@ -109,7 +111,7 @@ export function OptionButton({
         {selected && <Check className="h-3.5 w-3.5" />}
       </span>
       <span className="min-w-0 flex-1">{children}</span>
-    </button>
+    </Button>
   );
 }
 
@@ -158,7 +160,7 @@ export function GetStartedForm({ idPrefix = "gs" }: { idPrefix?: string }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-14">
+    <form onSubmit={handleSubmit} className="journey-form space-y-14">
       {/* Step 1 */}
       <fieldset>
         <legend className="text-sm font-semibold tracking-[0.12em] text-brand uppercase">
@@ -187,9 +189,7 @@ export function GetStartedForm({ idPrefix = "gs" }: { idPrefix?: string }) {
         <h2 className="mt-3 text-2xl font-semibold tracking-tight">
           Any features already in mind?
         </h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Optional — a rough sketch is plenty.
-        </p>
+        <p className="mt-2 text-sm text-muted-foreground">Optional — a rough sketch is plenty.</p>
         <div className="mt-6 grid gap-3 sm:grid-cols-2">
           {FEATURES.map((f) => (
             <OptionButton
@@ -226,8 +226,8 @@ export function GetStartedForm({ idPrefix = "gs" }: { idPrefix?: string }) {
           How would you like to hear from us?
         </h2>
         <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
-          Your call, literally. A video meeting is never required here — if a text or a quick
-          phone call gets you further, that works just as well for us.
+          Your call, literally. A video meeting is never required here — if a text or a quick phone
+          call gets you further, that works just as well for us.
         </p>
         <div className="mt-6 grid gap-3 sm:grid-cols-2">
           {CONTACT_METHODS.map(({ id, label, note, icon: Icon }) => (
@@ -249,7 +249,7 @@ export function GetStartedForm({ idPrefix = "gs" }: { idPrefix?: string }) {
         </div>
 
         {chosen && (
-          <div className="mt-6 rounded-xl border border-brand/25 bg-brand-soft p-5">
+          <div className="mt-6 border-t border-brand/25 bg-brand-soft p-5">
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <label className="text-sm font-medium" htmlFor={`${idPrefix}-first-name`}>
@@ -278,9 +278,9 @@ export function GetStartedForm({ idPrefix = "gs" }: { idPrefix?: string }) {
               {isBooking ? (
                 <div className="sm:col-span-2">
                   <p className="text-sm text-muted-foreground">
-                    Pick any open time on our calendar — your booking confirms instantly. And if
-                    a video meeting ever feels like too much, a text or a quick call works just
-                    as well.
+                    Pick any open time on our calendar — your booking confirms instantly. And if a
+                    video meeting ever feels like too much, a text or a quick call works just as
+                    well.
                   </p>
                   <a
                     href={BOOKING_URL}
@@ -325,9 +325,9 @@ export function GetStartedForm({ idPrefix = "gs" }: { idPrefix?: string }) {
       </fieldset>
 
       <div className="flex flex-wrap items-center gap-4">
-        <button type="submit" disabled={!ready} className="btn-primary disabled:opacity-50">
+        <Button type="submit" disabled={!ready}>
           Send my details
-        </button>
+        </Button>
         <p className="text-sm text-muted-foreground">
           Prefer plain email?{" "}
           <a className="font-medium text-brand underline" href="mailto:contact@wintagen.com">

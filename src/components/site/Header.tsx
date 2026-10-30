@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import wintagenLogo from "@/assets/Wintagen_Logo_Transparent.png.asset.json";
 
 const NAV = [
@@ -20,16 +21,25 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (!open) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
+  }, [open]);
+
   return (
     <header
       className={
-        "fixed inset-x-0 top-0 z-50 transition-colors duration-300 " +
+        "site-header fixed inset-x-0 top-0 z-50 transition-colors duration-300 " +
         (scrolled
           ? "border-b border-border/80 bg-background/85 shadow-soft backdrop-blur-md"
-          : "border-b border-transparent")
+          : "border-b border-transparent bg-background/95")
       }
     >
-      <div className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-4 md:px-8">
+      <div className="site-container grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 py-4">
         <Link
           to="/"
           hash="top"
@@ -45,21 +55,26 @@ export function Header() {
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
           {NAV.map((item) => (
-            <a
+            <Link
               key={item.href}
-              href={item.href}
+              to={item.href}
+              activeProps={{ className: "text-brand" }}
               className="rounded-md text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
             >
               {item.label}
-            </a>
+            </Link>
           ))}
-          <a href="/get-started" className="btn-primary text-sm">
-            Get Started
-          </a>
+          <Button asChild>
+            <Link to="/get-started">
+              Get Started <ArrowUpRight aria-hidden="true" />
+            </Link>
+          </Button>
         </nav>
 
-        <button
+        <Button
           type="button"
+          variant="outline"
+          size="icon"
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-controls="mobile-nav"
@@ -67,7 +82,7 @@ export function Header() {
           className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-border text-foreground transition-colors hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand md:hidden"
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        </Button>
       </div>
 
       {open && (
@@ -79,8 +94,8 @@ export function Header() {
           <ul className="flex flex-col">
             {[...NAV, { label: "Get Started", href: "/get-started" }].map((item) => (
               <li key={item.href}>
-                <a
-                  href={item.href}
+                <Link
+                  to={item.href}
                   onClick={() => setOpen(false)}
                   className={
                     item.label === "Get Started"
@@ -89,7 +104,7 @@ export function Header() {
                   }
                 >
                   {item.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
