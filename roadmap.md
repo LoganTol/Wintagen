@@ -5,3 +5,7 @@
 - [x] Carry the visual system through portfolio, services, About, legal pages and forms.
 - [x] Preserve and verify galleries, service deep links, contact submission, booking and corner form.
 - [x] Check desktop/mobile layouts, image rendering and diagnostics; retain reference license notice.
+
+## Dark-theme revision
+- [ ] Apply the requested dark palette, readable logo, translucent navigation and restrained visual effects throughout the site.
+- [ ] Verify page contrast, desktop/mobile layouts, galleries, and the contact/booking journey without changing functionality.
