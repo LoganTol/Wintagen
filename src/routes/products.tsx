@@ -245,11 +245,7 @@ function ProductLayer({
         if (galleryChangingRef.current) return;
         // Changing slides can remove the focused thumbnail as it moves sides.
         // That is not the visitor leaving this product.
-        if (
-          event.relatedTarget === null &&
-          event.target instanceof HTMLElement &&
-          event.target.closest(".proplans-gallery")
-        ) return;
+        if (event.relatedTarget === null) return;
         if (!event.currentTarget.contains(event.relatedTarget)) {
           onClose();
         }
