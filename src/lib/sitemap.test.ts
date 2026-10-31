@@ -1,4 +1,5 @@
-import { describe, expect, test } from "bun:test";
+import { describe, test } from "node:test";
+import assert from "node:assert/strict";
 import { createRootRoute, createRoute, createRouter, createMemoryHistory } from "@tanstack/react-router";
 import { sitemapStaticPaths, sitemapXML } from "./sitemap";
 
@@ -17,17 +18,17 @@ describe("router-derived sitemap", () => {
         privateLayout.addChildren([privateChild]),
       ]),
     });
-    expect(sitemapStaticPaths(router)).toEqual(["/", "/about", "/get-started", "/products", "/services"]);
+    assert.deepEqual(sitemapStaticPaths(router), ["/", "/about", "/get-started", "/products", "/services"]);
   });
 
   test("uses the public origin without manufacturing content timestamps", () => {
     const xml = sitemapXML("https://wintagen.com", [{ path: "/" }, { path: "/products" }, { path: "/products" }]);
-    expect(xml).toContain("<loc>https://wintagen.com/products</loc>");
-    expect(xml.match(/<url>/g)?.length).toBe(2);
-    expect(xml).not.toContain("<lastmod>");
+    assert.ok(xml.includes("<loc>https://wintagen.com/products</loc>"));
+    assert.equal(xml.match(/<url>/g)?.length, 2);
+    assert.ok(!xml.includes("<lastmod>"));
   });
 
   test("rejects external destinations", () => {
-    expect(() => sitemapXML("https://wintagen.com", [{ path: "//other.example/products" }])).toThrow("Invalid sitemap path");
+    assert.throws(() => sitemapXML("https://wintagen.com", [{ path: "//other.example/products" }]), /Invalid sitemap path/);
   });
 });
