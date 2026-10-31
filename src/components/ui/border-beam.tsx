@@ -15,8 +15,8 @@ function BeamTrail() {
       key={index}
       className={`border-beam__light ${beamSegmentClass(index)}`}
       style={{
-        "--trail-index": index,
-        opacity: 1 - Math.pow(index / TRAIL_LENGTH, 1.8),
+        "--trail-index": String(index),
+        opacity: (1 - Math.pow(index / TRAIL_LENGTH, 1.8)).toFixed(4),
       } as CSSProperties}
     />
   ));
