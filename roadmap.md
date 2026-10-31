@@ -1,5 +1,8 @@
 # Wintagen visual redesign
 
+## Google sitemap
+- [ ] Add a router-derived sitemap for public, indexable pages and verify the XML response.
+
 - [x] Inspect Linkify reference and existing Wintagen content and interactions.
 - [x] Apply brand tokens, larger typography, navigation, footer and homepage layouts.
 - [x] Carry the visual system through portfolio, services, About, legal pages and forms.

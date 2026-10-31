@@ -31,6 +31,7 @@ import quicksiteHowItWorks from "@/assets/quicksite-how-it-works.png.asset.json"
 import quicksitePreview from "@/assets/quicksite-preview.png.asset.json";
 
 export const Route = createFileRoute("/products")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Products | Wintagen" },

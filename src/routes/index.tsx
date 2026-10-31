@@ -8,6 +8,7 @@ import { BorderBeam } from "@/components/ui/border-beam";
 import heroSkyline from "@/assets/wintagen-hero-atlanta-skyline.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Wintagen | Software Products & Technology Services" },

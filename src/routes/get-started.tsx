@@ -5,6 +5,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { GetStartedForm } from "@/components/site/GetStartedForm";
 
 export const Route = createFileRoute("/get-started")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Get Started | Wintagen" },

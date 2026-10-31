@@ -5,6 +5,7 @@ import { Footer } from "@/components/site/Footer";
 import { TERMS_INTRO, TERMS_SECTIONS } from "@/content/terms";
 
 export const Route = createFileRoute("/terms")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Terms of Service | Wintagen" },

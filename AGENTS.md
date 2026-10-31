@@ -10,6 +10,7 @@
 <!-- LOVABLE:END -->
 
 ## Presentation architecture
+- Derive sitemap URLs from required route-level staticData.sitemap decisions via src/lib/sitemap.ts; this automatically tracks public routes while excluding noindex pages and avoids invented lastmod timestamps.
 - Keep TanStack Start routes and existing client-only contact/booking flows; reference repositories supply visual patterns only, so their auth, schema and runtime are not imported.
 - Define shared presentation roles and page-layout selectors in src/styles.css and use the existing Button component for controls; this keeps navigation, forms and secondary pages consistent without duplicating a theme.
 - Define the default appearance explicitly in shared root/dark tokens and separate brand fills from readable highlight/focus roles; reference theme naming must not determine appearance or contrast.
