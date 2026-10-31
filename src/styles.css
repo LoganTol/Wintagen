@@ -663,17 +663,17 @@
 }
 .home-hero__photo {
   position: relative;
-  width: calc(100% - 2.5rem);
-  max-width: 76rem;
-  margin: 1.5rem auto 2rem;
-  border: 1px solid var(--brand-hover);
-  border-radius: var(--radius);
-  padding: 3px;
+  width: 100%;
+  margin: 1.5rem 0 0;
+  border-top: 1px solid var(--brand-hover);
+  border-bottom: 1px solid var(--brand-hover);
+  border-radius: 0;
+  padding: 3px 0;
   background: var(--background);
 }
 .home-hero__image-clip {
   overflow: hidden;
-  border-radius: calc(var(--radius) - 3px);
+  border-radius: 0;
 }
 .border-beam {
   position: absolute;
@@ -703,7 +703,7 @@
   background: var(--brand);
   offset-anchor: 50% 50%;
   offset-rotate: auto;
-  offset-path: inset(0 round calc(var(--radius) - 2px));
+  offset-path: inset(0 round 0);
   animation: border-beam-travel 12s linear infinite;
   animation-delay: calc(var(--trail-index) * 0.045s - 12s);
 }
