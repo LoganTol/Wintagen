@@ -27,6 +27,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/services")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Services | Wintagen" },

@@ -5,6 +5,7 @@ import { Footer } from "@/components/site/Footer";
 import { PRIVACY_INTRO, PRIVACY_SECTIONS } from "@/content/privacy";
 
 export const Route = createFileRoute("/privacy")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Privacy Policy | Wintagen" },
