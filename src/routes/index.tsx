@@ -119,9 +119,6 @@ function Index() {
         <section className="home-hero">
           <div className="site-container">
             <Reveal className="home-hero__content">
-              <p className="section-label rounded-full border border-border bg-brand-soft px-4 py-2">
-                Products. Services. One standard.
-              </p>
               <h1 className="home-hero__title">
                 We build <span className="text-brand">software</span>—and the company behind it.
               </h1>
