@@ -121,9 +121,9 @@
   --border-highlight: color-mix(in oklab, var(--brand-highlight) 40%, var(--brand));
   --hero-glow: radial-gradient(ellipse at 50% 56%, color-mix(in oklab, var(--brand) 28%, transparent) 0%, color-mix(in oklab, var(--brand-hover) 18%, transparent) 38%, transparent 72%);
   --hero-accent-glow: radial-gradient(ellipse at 72% 72%, color-mix(in oklab, var(--brand-accent) 7%, transparent), transparent 40%);
-  --beam-gradient: linear-gradient(to left, var(--brand-highlight) 0%, var(--brand) 24%, color-mix(in oklab, var(--brand) 80%, transparent) 58%, color-mix(in oklab, var(--brand-accent) 70%, transparent) 72%, transparent 95%);
+  --beam-gradient: linear-gradient(to left, var(--brand) 0%, var(--brand) 24%, color-mix(in oklab, var(--brand) 80%, transparent) 58%, color-mix(in oklab, var(--brand-accent) 70%, transparent) 72%, transparent 95%);
   --beam-mask: linear-gradient(var(--foreground), var(--foreground));
-  --beam-static: linear-gradient(115deg, var(--brand-hover), var(--brand-highlight) 35%, var(--brand) 60%, var(--brand-accent) 72%, var(--brand-hover));
+  --beam-static: linear-gradient(115deg, var(--brand-hover), var(--brand) 35%, var(--brand) 60%, var(--brand-accent) 72%, var(--brand-hover));
 }
 
 @layer base {
@@ -708,7 +708,7 @@
   animation: border-beam-travel 12s linear infinite;
   animation-delay: calc(var(--trail-index) * 0.045s - 12s);
 }
-.border-beam__light--head { background: var(--brand-highlight); }
+.border-beam__light--head { background: var(--brand); }
 .border-beam__light--body { background: var(--brand); }
 .border-beam__light--tail {
   background: color-mix(in oklab, var(--brand-accent) 55%, var(--brand-hover));
