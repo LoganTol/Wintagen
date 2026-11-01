@@ -677,7 +677,8 @@
 }
 .border-beam {
   position: absolute;
-  inset: -1px;
+  /* Turn around beyond the viewport so only the horizontal runs are visible. */
+  inset: -1px -12rem;
   border-radius: inherit;
   pointer-events: none;
 }
