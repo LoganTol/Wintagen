@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Boxes, Compass, Layers, Workflow, Code2, Globe } from "lucide-react";
+import { ArrowRight, Compass, Workflow, Code2, Globe } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/Reveal";
@@ -158,32 +158,34 @@ function Index() {
               <p className="section-label">Wintagen</p>
               <h2 className="section-heading mt-5">Two ways we create value.</h2>
               <span aria-hidden="true" className="section-rule" />
-              <div className="mt-10 grid gap-6 md:grid-cols-2">
-                <article className="value-card flex flex-col">
-                  <Boxes className="h-8 w-8 text-brand" strokeWidth={1.5} aria-hidden="true" />
-                  <h3 className="mt-8 text-2xl font-semibold">Products</h3>
-                  <p className="mt-3 max-w-md leading-relaxed text-muted-foreground">
-                    Focused software designed around clear, real-world needs.
-                  </p>
-                  <Button asChild variant="link" className="mt-6 self-start px-0">
-                    <Link to="/products">
-                      Explore products <ArrowRight aria-hidden="true" />
-                    </Link>
-                  </Button>
-                </article>
-                <article className="value-card flex flex-col">
-                  <Layers className="h-8 w-8 text-brand" strokeWidth={1.5} aria-hidden="true" />
-                  <h3 className="mt-8 text-2xl font-semibold">Services</h3>
-                  <p className="mt-3 max-w-md leading-relaxed text-muted-foreground">
-                    Practical technology support for organizations building or improving digital
-                    experiences.
-                  </p>
-                  <Button asChild variant="link" className="mt-6 self-start px-0">
-                    <Link to="/services">
-                      Explore services <ArrowRight aria-hidden="true" />
-                    </Link>
-                  </Button>
-                </article>
+              <div className="value-list mt-10">
+                <Link to="/products" className="value-row group">
+                  <span className="value-row__index" aria-hidden="true">01</span>
+                  <span className="value-row__body">
+                    <span className="value-row__title">Products</span>
+                    <span className="value-row__text">
+                      Focused software designed around clear, real-world needs.
+                    </span>
+                  </span>
+                  <span className="value-row__action">
+                    Explore products
+                    <ArrowRight className="value-row__arrow" aria-hidden="true" />
+                  </span>
+                </Link>
+                <Link to="/services" className="value-row group">
+                  <span className="value-row__index" aria-hidden="true">02</span>
+                  <span className="value-row__body">
+                    <span className="value-row__title">Services</span>
+                    <span className="value-row__text">
+                      Practical technology support for organizations building or improving digital
+                      experiences.
+                    </span>
+                  </span>
+                  <span className="value-row__action">
+                    Explore services
+                    <ArrowRight className="value-row__arrow" aria-hidden="true" />
+                  </span>
+                </Link>
               </div>
             </Reveal>
           </div>
