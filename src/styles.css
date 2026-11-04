@@ -119,7 +119,7 @@
   --shadow-card: 0 12px 36px -20px oklch(0 0 0 / 0.22);
   --shadow-teal-glow: 0 0 48px -18px oklch(0.555756 0.093967 194.7884 / 0.30);
   --border-highlight: color-mix(in oklab, var(--brand-highlight) 40%, var(--border));
-  --hero-glow: radial-gradient(ellipse at 50% 56%, color-mix(in oklab, var(--brand) 16%, transparent) 0%, color-mix(in oklab, var(--brand-hover) 10%, transparent) 38%, transparent 72%);
+  --hero-glow: radial-gradient(ellipse at 50% 56%, color-mix(in oklab, var(--brand) 34%, transparent) 0%, color-mix(in oklab, var(--brand-hover) 22%, transparent) 42%, transparent 78%);
   --hero-accent-glow: radial-gradient(ellipse at 72% 72%, color-mix(in oklab, var(--brand-accent) 7%, transparent), transparent 40%);
   --beam-gradient: linear-gradient(to left, var(--brand) 0%, var(--brand) 24%, color-mix(in oklab, var(--brand) 80%, transparent) 58%, color-mix(in oklab, var(--brand-accent) 70%, transparent) 72%, transparent 95%);
   --beam-mask: linear-gradient(var(--foreground), var(--foreground));
