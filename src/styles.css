@@ -74,10 +74,10 @@
 :root,
 .dark {
   --radius: 0.5rem;
-  color-scheme: dark;
-  --background: oklch(0.166706 0.009373 196.2877);
-  --foreground: oklch(0.981339 0.005300 197.0702);
-  --card: oklch(0.240763 0.016780 196.0926);
+  color-scheme: light;
+  --background: oklch(0.982 0.0035 100);
+  --foreground: oklch(0.22 0.012 196.2877);
+  --card: oklch(1 0 0);
   --card-foreground: var(--foreground);
   --popover: var(--card);
   --popover-foreground: var(--foreground);
@@ -86,13 +86,13 @@
   --secondary: var(--brand-soft);
   --secondary-foreground: var(--foreground);
   --muted: var(--surface);
-  --muted-foreground: oklch(0.777531 0.020918 196.7299);
+  --muted-foreground: oklch(0.50 0.022 196.7299);
   --accent: var(--brand-soft);
   --accent-foreground: var(--foreground);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.336841 0.023174 196.1054);
-  --input: oklch(0.56 0.02 196);
+  --border: oklch(0.91 0.008 196.1054);
+  --input: oklch(0.85 0.01 196);
   --ring: var(--brand-highlight);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -109,17 +109,17 @@
   --sidebar-ring: var(--ring);
   --brand: oklch(0.555756 0.093967 194.7884);
   --brand-foreground: oklch(1 0 0);
-  --brand-soft: oklch(0.258 0.029 194.7884);
-  --brand-highlight: oklch(0.960190 0.013798 191.3928);
+  --brand-soft: oklch(0.957 0.016 194.7884);
+  --brand-highlight: oklch(0.555756 0.093967 194.7884);
   --brand-accent: oklch(0.734923 0.184585 53.8303);
-  --surface: oklch(0.204563 0.013209 196.1662);
+  --surface: oklch(0.958 0.008 196.1662);
   --brand-hover: oklch(0.478331 0.080679 194.7934);
-  --overlay: oklch(0.10 0.008 196 / 0.8);
-  --shadow-elevated: 0 2px 4px oklch(0 0 0 / 0.15), 0 16px 40px -16px oklch(0 0 0 / 0.45);
-  --shadow-card: 0 12px 36px -20px oklch(0 0 0 / 0.55);
+  --overlay: oklch(0.10 0.008 196 / 0.5);
+  --shadow-elevated: 0 2px 4px oklch(0 0 0 / 0.06), 0 16px 40px -16px oklch(0 0 0 / 0.16);
+  --shadow-card: 0 12px 36px -20px oklch(0 0 0 / 0.22);
   --shadow-teal-glow: 0 0 48px -18px oklch(0.555756 0.093967 194.7884 / 0.30);
-  --border-highlight: color-mix(in oklab, var(--brand-highlight) 40%, var(--brand));
-  --hero-glow: radial-gradient(ellipse at 50% 56%, color-mix(in oklab, var(--brand) 28%, transparent) 0%, color-mix(in oklab, var(--brand-hover) 18%, transparent) 38%, transparent 72%);
+  --border-highlight: color-mix(in oklab, var(--brand-highlight) 40%, var(--border));
+  --hero-glow: radial-gradient(ellipse at 50% 56%, color-mix(in oklab, var(--brand) 16%, transparent) 0%, color-mix(in oklab, var(--brand-hover) 10%, transparent) 38%, transparent 72%);
   --hero-accent-glow: radial-gradient(ellipse at 72% 72%, color-mix(in oklab, var(--brand-accent) 7%, transparent), transparent 40%);
   --beam-gradient: linear-gradient(to left, var(--brand) 0%, var(--brand) 24%, color-mix(in oklab, var(--brand) 80%, transparent) 58%, color-mix(in oklab, var(--brand-accent) 70%, transparent) 72%, transparent 95%);
   --beam-mask: linear-gradient(var(--foreground), var(--foreground));
@@ -665,8 +665,8 @@
   position: relative;
   width: 100%;
   margin: 1.5rem 0 0;
-  border-top: 1px solid var(--brand-hover);
-  border-bottom: 1px solid var(--brand-hover);
+  border-top: 1px solid color-mix(in oklab, var(--brand) 30%, transparent);
+  border-bottom: 1px solid color-mix(in oklab, var(--brand) 30%, transparent);
   border-radius: 0;
   padding: 3px 0;
   background: var(--background);

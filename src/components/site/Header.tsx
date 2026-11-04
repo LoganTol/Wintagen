@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import wintagenLogo from "@/assets/wintagen-logo-light.png.asset.json";
+import wintagenLogo from "@/assets/Wintagen_Logo_Transparent.png.asset.json";
 
 const NAV = [
   { label: "Products", href: "/products" },
