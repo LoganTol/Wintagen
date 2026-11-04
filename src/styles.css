@@ -665,8 +665,8 @@
   position: relative;
   width: 100%;
   margin: 1.5rem 0 0;
-  border-top: 1px solid var(--brand-hover);
-  border-bottom: 1px solid var(--brand-hover);
+  border-top: 1px solid color-mix(in oklab, var(--brand) 30%, transparent);
+  border-bottom: 1px solid color-mix(in oklab, var(--brand) 30%, transparent);
   border-radius: 0;
   padding: 3px 0;
   background: var(--background);
