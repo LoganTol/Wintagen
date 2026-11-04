@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import wintagenLogo from "@/assets/wintagen-logo-light.png.asset.json";
+import wintagenLogo from "@/assets/Wintagen_Logo_Transparent.png.asset.json";
 
 const LINKS = [
   { label: "Products", href: "/products" },
