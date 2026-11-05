@@ -746,34 +746,33 @@
   box-shadow: var(--shadow-card);
 }
 .value-list {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+/* On phones the two halves stack, so the divider runs horizontally. */
+.value-half + .value-half {
   border-top: 1px solid var(--border);
 }
-.value-row {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
+.value-half {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 1.25rem 2.5rem;
-  padding-block: 2.5rem;
-  border-bottom: 1px solid var(--border);
+  gap: 0.65rem;
+  padding: 2.75rem 1.5rem;
+  text-align: center;
   text-decoration: none;
   transition: background 250ms ease;
 }
-.value-row:hover {
+.value-half:hover {
   background: var(--brand-soft);
 }
-.value-row__index {
+.value-half__index {
   font-size: 0.875rem;
   font-weight: 500;
   letter-spacing: 0.12em;
   color: var(--brand-highlight);
 }
-.value-row__body {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  min-width: 0;
-}
-.value-row__title {
+.value-half__title {
   font-size: 1.75rem;
   line-height: 1.2;
   font-weight: 600;
@@ -781,44 +780,60 @@
   color: var(--foreground);
   transition: color 200ms ease;
 }
-.value-row:hover .value-row__title {
+.value-half:hover .value-half__title {
   color: var(--brand-highlight);
 }
-.value-row__text {
-  max-width: 34rem;
+.value-half__text {
+  max-width: 26rem;
   line-height: 1.6;
   color: var(--muted-foreground);
 }
-.value-row__action {
-  grid-column: 2;
+.value-half__action {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  margin-top: 0.75rem;
   font-size: 0.9375rem;
   font-weight: 500;
   color: var(--brand-highlight);
 }
-.value-row__arrow {
+.value-half__arrow {
   height: 1rem;
   width: 1rem;
   transition: transform 250ms ease;
 }
-.value-row:hover .value-row__arrow {
+.value-half:hover .value-half__arrow {
   transform: translateX(4px);
 }
 @media (min-width: 768px) {
-  .value-row {
-    grid-template-columns: 4rem minmax(0, 1fr) auto;
-    padding-block: 3rem;
+  .value-list {
+    grid-template-columns: 1fr 1fr;
   }
-  .value-row__action {
-    grid-column: auto;
+  /* The clean vertical line dividing the two equal halves. */
+  .value-list::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background: var(--border);
+  }
+  .value-list {
+    position: relative;
+  }
+  .value-half + .value-half {
+    border-top: 0;
+  }
+  .value-half {
+    padding: 3.5rem 3rem;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .value-row,
-  .value-row__title,
-  .value-row__arrow {
+  .value-half,
+  .value-half__title,
+  .value-half__arrow {
     transition: none;
   }
 }
