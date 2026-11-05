@@ -121,7 +121,7 @@ function Index() {
           <div className="site-container">
             <Reveal className="home-hero__content">
               <h1 className="home-hero__title">
-                We build <span className="text-brand">software</span>—and the company behind it.
+                Thoughtfully built <span className="text-brand">websites and software</span>.
               </h1>
               <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
                 Wintagen develops its own portfolio of digital products alongside custom website
