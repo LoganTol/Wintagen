@@ -121,7 +121,7 @@ function Index() {
           <div className="site-container">
             <Reveal className="home-hero__content">
               <h1 className="home-hero__title">
-                Thoughtfully built <span className="text-brand">websites and software</span>.
+                Thoughtfully Built <span className="text-brand">Websites and Software</span>.
               </h1>
               <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
                 Wintagen develops its own portfolio of digital products alongside custom website
@@ -134,7 +134,9 @@ function Index() {
                   </Link>
                 </Button>
                 <Button asChild size="lg" variant="outline">
-                  <Link to="/services">View our services</Link>
+                  <Link to="/services" className="border border-brand">
+                    View our services
+                  </Link>
                 </Button>
               </div>
             </Reveal>
