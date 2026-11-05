@@ -785,6 +785,20 @@
   transform: translateY(6px);
   box-shadow: inset 0 -4px 14px rgb(5 132 132 / 0.16);
 }
+.value-half__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--brand-soft) 70%, var(--brand) 8%);
+  color: var(--brand);
+}
+.value-half__icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
 .value-half__title {
   font-size: 1.75rem;
   line-height: 1.2;
