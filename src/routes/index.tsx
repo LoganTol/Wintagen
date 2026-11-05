@@ -5,6 +5,7 @@ import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/Reveal";
 import { Button } from "@/components/ui/button";
 import { BorderBeam } from "@/components/ui/border-beam";
+import { useScrollHighlight } from "@/hooks/use-scroll-highlight";
 import heroSkyline from "@/assets/wintagen-hero-atlanta-skyline.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
@@ -113,6 +114,7 @@ const SERVICES = [
 ] as const;
 
 function Index() {
+  useScrollHighlight(".value-half, .service-card");
   return (
     <div id="top" className="min-h-screen bg-background">
       <Header />
