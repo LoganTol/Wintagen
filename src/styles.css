@@ -749,6 +749,11 @@
   display: grid;
   grid-template-columns: 1fr;
 }
+/* The hover wash should reach the section's bottom border, so the
+   panels' own bottom padding provides the section's bottom spacing. */
+.value-section .site-container {
+  padding-bottom: 0;
+}
 /* On phones the two halves stack, so the divider runs horizontally. */
 .value-half + .value-half {
   border-top: 1px solid var(--brand);
@@ -758,7 +763,7 @@
   flex-direction: column;
   align-items: center;
   gap: 0.65rem;
-  padding: 2.75rem 1.5rem 7.75rem;
+  padding: 2.75rem 1.5rem 12.75rem;
   text-align: center;
   text-decoration: none;
   transition:
@@ -831,7 +836,7 @@
     border-top: 0;
   }
   .value-half {
-    padding: 3.5rem 3rem 10rem;
+    padding: 3.5rem 3rem 15.75rem;
   }
 }
 @media (prefers-reduced-motion: reduce) {

@@ -152,7 +152,7 @@ function Index() {
           </Reveal>
         </section>
 
-        <section className="border-b border-border bg-surface">
+        <section className="value-section border-b border-border bg-surface">
           <div className="site-container section-space">
             <Reveal>
               <p className="section-label">Wintagen</p>
