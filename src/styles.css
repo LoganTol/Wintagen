@@ -818,13 +818,14 @@
   .value-list {
     grid-template-columns: 1fr 1fr;
   }
-  /* The clean vertical line dividing the two equal halves. */
+  /* The clean vertical line dividing the two equal halves; it spans
+     only the content area, not the extended hover space below. */
   .value-list::before {
     content: "";
     position: absolute;
     z-index: 1;
-    top: 0;
-    bottom: 0;
+    top: 3.5rem;
+    bottom: 15.375rem;
     left: 50%;
     width: 1px;
     background: var(--brand);
