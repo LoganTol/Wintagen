@@ -776,12 +776,6 @@
   transform: translateY(6px);
   box-shadow: inset 0 4px 14px rgb(5 132 132 / 0.16);
 }
-.value-half__index {
-  font-size: 0.875rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  color: var(--brand-highlight);
-}
 .value-half__title {
   font-size: 1.75rem;
   line-height: 1.2;
