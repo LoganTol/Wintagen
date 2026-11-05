@@ -17,5 +17,5 @@
 - [x] Review measured traffic, public pages, contact flow, and outreach opportunities; save findings and recommendations.
 
 ## Contentsquare
-- [ ] Install the supplied Contentsquare tag without changing the site experience.
-- [ ] Verify script loading and navigation; identify any publication or account-side verification still needed.
+- [x] Install the supplied Contentsquare tag without changing the site experience.
+- [x] Verify script loading and navigation; identify any publication or account-side verification still needed. Preview tag loaded successfully and service navigation sent one pageview; publication remains owner-controlled.
