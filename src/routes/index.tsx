@@ -1,5 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Compass, Workflow, Code2, Globe } from "lucide-react";
+import {
+  ArrowRight,
+  Compass,
+  Workflow,
+  Code2,
+  Globe,
+  Package,
+  Wrench,
+} from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/Reveal";
@@ -162,6 +170,9 @@ function Index() {
               <span aria-hidden="true" className="section-rule" />
               <div className="value-list mt-10">
                 <Link to="/products" className="value-half group">
+                  <span className="value-half__icon" aria-hidden="true">
+                    <Package strokeWidth={1.5} />
+                  </span>
                   <span className="value-half__title">Products</span>
                   <span className="value-half__text">
                     Focused software designed around clear, real-world needs.
@@ -172,6 +183,9 @@ function Index() {
                   </span>
                 </Link>
                 <Link to="/services" className="value-half group">
+                  <span className="value-half__icon" aria-hidden="true">
+                    <Wrench strokeWidth={1.5} />
+                  </span>
                   <span className="value-half__title">Services</span>
                   <span className="value-half__text">
                     Practical technology support for organizations building or improving digital
