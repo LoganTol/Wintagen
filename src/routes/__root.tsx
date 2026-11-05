@@ -11,6 +11,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import { GetStartedModal } from "@/components/site/GetStartedModal";
+import { ContentsquareTracking } from "@/components/site/ContentsquareTracking";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -136,6 +137,7 @@ function RootComponent() {
       <Outlet />
       {/* Get Started journey (corner pill + popup) is global so it's reachable on every page. */}
       <GetStartedModal />
+      <ContentsquareTracking />
     </QueryClientProvider>
   );
 }
