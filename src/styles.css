@@ -633,6 +633,10 @@
   margin-top: 1.5rem;
   background: var(--brand-accent);
 }
+/* The hero's secondary button carries a teal border. */
+.home-hero .border-brand {
+  border-color: var(--brand);
+}
 .home-hero {
   position: relative;
   isolation: isolate;
