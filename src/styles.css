@@ -824,8 +824,8 @@
     content: "";
     position: absolute;
     z-index: 1;
-    top: 2.5rem;
-    bottom: 16.375rem;
+    top: 0.5rem;
+    bottom: 18.375rem;
     left: 50%;
     width: 1px;
     background: linear-gradient(
