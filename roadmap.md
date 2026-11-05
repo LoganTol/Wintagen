@@ -12,3 +12,10 @@
 ## Dark-theme revision
 - [x] Apply the requested dark palette, readable logo, translucent navigation and restrained visual effects throughout the site.
 - [x] Verify page contrast, desktop/mobile layouts, galleries, and the contact/booking journey without changing functionality.
+
+## Visitor growth
+- [x] Review measured traffic, public pages, contact flow, and outreach opportunities; save findings and recommendations.
+
+## Contentsquare
+- [ ] Install the supplied Contentsquare tag without changing the site experience.
+- [ ] Verify script loading and navigation; identify any publication or account-side verification still needed.
