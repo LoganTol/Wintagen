@@ -775,7 +775,7 @@
     transform 250ms ease,
     box-shadow 250ms ease;
 }
-.value-half:hover {
+.value-half:is(:hover, .is-scroll-active, :active) {
   background:
     linear-gradient(
       0deg,
@@ -793,7 +793,7 @@
   color: var(--brand);
   transition: color 200ms ease;
 }
-.value-half:hover .value-half__title {
+.value-half:is(:hover, .is-scroll-active, :active) .value-half__title {
   color: var(--brand-hover);
 }
 .value-half__text {
@@ -815,7 +815,7 @@
   width: 1rem;
   transition: transform 250ms ease;
 }
-.value-half:hover .value-half__arrow {
+.value-half:is(:hover, .is-scroll-active, :active) .value-half__arrow {
   transform: translateX(4px);
 }
 @media (min-width: 768px) {
@@ -869,7 +869,7 @@
     background 200ms ease,
     transform 200ms ease;
 }
-.service-card:hover {
+.service-card:is(:hover, .is-scroll-active, :active) {
   border-color: var(--brand);
   background: var(--brand-soft);
   transform: translateY(-3px);
@@ -970,7 +970,7 @@
   transition: border-color 250ms ease, box-shadow 350ms ease, transform 250ms ease;
 }
 .portfolio-preview:hover,
-.service-card:hover {
+.service-card:is(:hover, .is-scroll-active, :active) {
   border-color: var(--border-highlight);
   box-shadow: var(--shadow-card), var(--shadow-teal-glow);
 }
@@ -1061,5 +1061,27 @@
 @media (prefers-reduced-motion: reduce) {
   .service-card:hover {
     transform: none;
+  }
+}
+
+/* Touch screens: a finger resting on a card while scrolling must not trigger
+   the hover look; scroll position (.is-scroll-active) and real taps do. */
+@media (hover: none) {
+  .value-half:hover:not(.is-scroll-active):not(:active) {
+    background: none;
+    transform: none;
+    box-shadow: none;
+  }
+  .value-half:hover:not(.is-scroll-active):not(:active) .value-half__title {
+    color: var(--brand);
+  }
+  .value-half:hover:not(.is-scroll-active):not(:active) .value-half__arrow {
+    transform: none;
+  }
+  .service-card:hover:not(.is-scroll-active):not(:active) {
+    border-color: var(--border);
+    background: var(--card);
+    transform: none;
+    box-shadow: var(--shadow-card);
   }
 }
