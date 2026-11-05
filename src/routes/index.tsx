@@ -160,7 +160,6 @@ function Index() {
               <span aria-hidden="true" className="section-rule" />
               <div className="value-list mt-10">
                 <Link to="/products" className="value-half group">
-                  <span className="value-half__index" aria-hidden="true">01</span>
                   <span className="value-half__title">Products</span>
                   <span className="value-half__text">
                     Focused software designed around clear, real-world needs.
@@ -171,7 +170,6 @@ function Index() {
                   </span>
                 </Link>
                 <Link to="/services" className="value-half group">
-                  <span className="value-half__index" aria-hidden="true">02</span>
                   <span className="value-half__title">Services</span>
                   <span className="value-half__text">
                     Practical technology support for organizations building or improving digital
