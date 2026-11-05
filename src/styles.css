@@ -749,16 +749,21 @@
   display: grid;
   grid-template-columns: 1fr;
 }
+/* The hover wash should reach the section's bottom border, so the
+   panels' own bottom padding provides the section's bottom spacing. */
+.value-section .site-container {
+  padding-bottom: 0;
+}
 /* On phones the two halves stack, so the divider runs horizontally. */
 .value-half + .value-half {
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--brand);
 }
 .value-half {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.65rem;
-  padding: 2.75rem 1.5rem;
+  padding: 2.75rem 1.5rem 12.375rem;
   text-align: center;
   text-decoration: none;
   transition:
@@ -769,12 +774,12 @@
 .value-half:hover {
   background:
     linear-gradient(
-      180deg,
-      color-mix(in oklab, var(--brand-soft) 78%, var(--brand)) 0%,
-      color-mix(in oklab, var(--brand-soft) 60%, var(--brand)) 100%
+      0deg,
+      color-mix(in oklab, var(--brand-soft) 55%, var(--brand)) 0%,
+      color-mix(in oklab, var(--brand-soft) 45%, transparent) 100%
     );
   transform: translateY(6px);
-  box-shadow: inset 0 4px 14px rgb(5 132 132 / 0.16);
+  box-shadow: inset 0 -4px 14px rgb(5 132 132 / 0.16);
 }
 .value-half__title {
   font-size: 1.75rem;
@@ -822,7 +827,7 @@
     bottom: 0;
     left: 50%;
     width: 1px;
-    background: var(--border);
+    background: var(--brand);
   }
   .value-list {
     position: relative;
@@ -831,7 +836,7 @@
     border-top: 0;
   }
   .value-half {
-    padding: 3.5rem 3rem;
+    padding: 3.5rem 3rem 15.375rem;
   }
 }
 @media (prefers-reduced-motion: reduce) {
