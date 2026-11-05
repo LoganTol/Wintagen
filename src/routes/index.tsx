@@ -124,8 +124,8 @@ function Index() {
                 We build <span className="text-brand">software</span>—and the company behind it.
               </h1>
               <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-                Wintagen creates focused digital products and provides technology services for
-                businesses ready to build, improve, or move an idea forward.
+                Wintagen develops its own portfolio of digital products alongside custom website
+                and software solutions for businesses.
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-3">
                 <Button asChild size="lg">
