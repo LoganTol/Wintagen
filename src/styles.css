@@ -281,7 +281,7 @@
 
 .product-layer--aether {
   --product-color: oklch(0.80 0.13 145);
-  --product-soft: oklch(0.26 0.025 145);
+  --product-soft: var(--brand-soft);
 }
 
 .product-layer--quicksite {
@@ -291,7 +291,7 @@
 
 .product-layer--proplans {
   --product-color: oklch(0.705 0.19 48);
-  --product-soft: oklch(0.26 0.025 50);
+  --product-soft: var(--brand-soft);
 }
 
 /* Service bands — restrained variations of the Wintagen palette */
@@ -307,7 +307,7 @@
 
 .product-layer--strategy {
   --product-color: var(--brand-accent);
-  --product-soft: oklch(0.26 0.025 62);
+  --product-soft: var(--brand-soft);
 }
 
 .product-layer--automate {
@@ -784,6 +784,20 @@
     );
   transform: translateY(6px);
   box-shadow: inset 0 -4px 14px rgb(5 132 132 / 0.16);
+}
+.value-half__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--brand-soft) 70%, var(--brand) 8%);
+  color: var(--brand);
+}
+.value-half__icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 .value-half__title {
   font-size: 1.75rem;
