@@ -824,11 +824,17 @@
     content: "";
     position: absolute;
     z-index: 1;
-    top: 3.5rem;
-    bottom: 15.375rem;
+    top: 2.5rem;
+    bottom: 16.375rem;
     left: 50%;
     width: 1px;
-    background: var(--brand);
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      var(--brand) 20%,
+      var(--brand) 80%,
+      transparent
+    );
   }
   .value-list {
     position: relative;
