@@ -23,13 +23,13 @@ export function ContentsquareTracking() {
     const trackCurrentPage = () => {
       const path = window.location.pathname;
       if (!loaded || path === lastPath) return;
-      queue.push(["setQuery", ""]);
-      queue.push(["trackPageview", path]);
+      trackingWindow._uxa?.push(["setQuery", ""]);
+      trackingWindow._uxa?.push(["trackPageview", path]);
       lastPath = path;
     };
     const onLoad = () => {
       loaded = true;
-      if (script) script.dataset.loaded = "true";
+      if (script) script.dataset["loaded"] = "true";
       trackCurrentPage();
     };
 
@@ -43,7 +43,7 @@ export function ContentsquareTracking() {
       script.addEventListener("load", onLoad);
       document.head.appendChild(script);
     } else {
-      loaded = script.dataset.loaded === "true";
+      loaded = script.dataset["loaded"] === "true";
       script.addEventListener("load", onLoad);
     }
 
