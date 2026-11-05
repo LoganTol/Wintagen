@@ -159,31 +159,27 @@ function Index() {
               <h2 className="section-heading mt-5">Two ways we create value.</h2>
               <span aria-hidden="true" className="section-rule" />
               <div className="value-list mt-10">
-                <Link to="/products" className="value-row group">
-                  <span className="value-row__index" aria-hidden="true">01</span>
-                  <span className="value-row__body">
-                    <span className="value-row__title">Products</span>
-                    <span className="value-row__text">
-                      Focused software designed around clear, real-world needs.
-                    </span>
+                <Link to="/products" className="value-half group">
+                  <span className="value-half__index" aria-hidden="true">01</span>
+                  <span className="value-half__title">Products</span>
+                  <span className="value-half__text">
+                    Focused software designed around clear, real-world needs.
                   </span>
-                  <span className="value-row__action">
+                  <span className="value-half__action">
                     Explore products
-                    <ArrowRight className="value-row__arrow" aria-hidden="true" />
+                    <ArrowRight className="value-half__arrow" aria-hidden="true" />
                   </span>
                 </Link>
-                <Link to="/services" className="value-row group">
-                  <span className="value-row__index" aria-hidden="true">02</span>
-                  <span className="value-row__body">
-                    <span className="value-row__title">Services</span>
-                    <span className="value-row__text">
-                      Practical technology support for organizations building or improving digital
-                      experiences.
-                    </span>
+                <Link to="/services" className="value-half group">
+                  <span className="value-half__index" aria-hidden="true">02</span>
+                  <span className="value-half__title">Services</span>
+                  <span className="value-half__text">
+                    Practical technology support for organizations building or improving digital
+                    experiences.
                   </span>
-                  <span className="value-row__action">
+                  <span className="value-half__action">
                     Explore services
-                    <ArrowRight className="value-row__arrow" aria-hidden="true" />
+                    <ArrowRight className="value-half__arrow" aria-hidden="true" />
                   </span>
                 </Link>
               </div>
