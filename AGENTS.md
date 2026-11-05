@@ -16,3 +16,6 @@
 - Define the default appearance explicitly in shared root/dark tokens and separate brand fills from readable highlight/focus roles; reference theme naming must not determine appearance or contrast.
 - Use the shared light-wordmark asset in dark navigation/footer, preserving the original symbol pixels; whole-logo inversion changes brand colors.
 - Keep BorderBeam as a masked CSS offset-path effect with separate sharp/glow layers outside image clipping and its vertical turns beyond the viewport; this preserves horizontal-only edge-to-edge hero lighting without reference framework dependencies.
+
+## Visitor analytics
+- Load Contentsquare once from the shared root in a browser-only effect and send pathname-only pageviews on resolved navigation; this avoids duplicate tags, query-string personal data, and SSR browser dependencies. Never send contact-form values or identify visitors through custom tracking commands.
