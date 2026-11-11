@@ -59,7 +59,7 @@ export function Header({ unified = false }: { unified?: boolean }) {
               key={item.href}
               to={item.href}
               activeProps={{ className: "text-brand" }}
-              className="rounded-md text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
+              className="site-nav-link rounded-md text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
             >
               {item.label}
             </Link>

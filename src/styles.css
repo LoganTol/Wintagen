@@ -128,7 +128,9 @@
   --opening-foreground: var(--foreground);
   --opening-muted: var(--muted-foreground);
   --opening-highlight: var(--brand);
-  --opening-glow: color-mix(in oklab, var(--brand) 24%, transparent);
+  --opening-glow: color-mix(in oklab, var(--brand) 40%, transparent);
+  --opening-glow-base: color-mix(in oklab, var(--brand) 18%, transparent);
+  --opening-menu-background: color-mix(in oklab, var(--card) 94%, transparent);
   --separator-glow: 0 0 14px 2px color-mix(in oklab, var(--brand) 40%, transparent);
 }
 
@@ -660,8 +662,8 @@
   z-index: 0;
   inset: 0;
   background:
-    radial-gradient(ellipse 65% 85% at var(--glow-x) var(--glow-y), var(--opening-glow), transparent 80%),
-    radial-gradient(ellipse 85% 100% at 50% 85%, color-mix(in oklab, var(--brand) 12%, transparent), transparent 85%);
+    radial-gradient(ellipse 65% 85% at var(--glow-x) var(--glow-y), var(--opening-glow), transparent 85%),
+    radial-gradient(ellipse 85% 100% at 50% 85%, var(--opening-glow-base), transparent 85%);
   pointer-events: none;
 }
 .home-hero {
@@ -671,10 +673,16 @@
   padding-block: 9rem 6rem;
 }
 .site-header.site-header--unified {
-  background: transparent;
-  border: 0;
-  box-shadow: none;
-  backdrop-filter: none;
+  background: var(--opening-menu-background);
+  border-bottom: 1px solid var(--border-highlight);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(16px);
+}
+.site-header--unified .site-nav-link {
+  color: var(--foreground);
+}
+.site-header--unified .site-nav-link:is(:hover, [aria-current="page"]) {
+  color: var(--brand-hover);
 }
 .site-header--unified.is-scrolled {
   background: var(--opening-background);
