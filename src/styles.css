@@ -130,7 +130,6 @@
   --opening-highlight: var(--brand);
   --opening-glow: color-mix(in oklab, var(--brand) 40%, transparent);
   --opening-glow-base: color-mix(in oklab, var(--brand) 18%, transparent);
-  --opening-menu-background: color-mix(in oklab, var(--card) 94%, transparent);
   --logo-dark: oklch(0.475 0.080 194.8);
   --logo-light: oklch(0.961180134 0.016291384 182.7167090);
   --logo-halo: drop-shadow(0 0 18px color-mix(in oklab, var(--brand) 18%, transparent));
@@ -722,10 +721,10 @@
   }
 }
 .site-header.site-header--unified {
-  background: var(--opening-menu-background);
-  border-bottom: 1px solid var(--border-highlight);
-  box-shadow: var(--shadow-soft);
-  backdrop-filter: blur(16px);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  box-shadow: none;
+  backdrop-filter: none;
 }
 .site-header--unified .site-nav-link {
   color: var(--foreground);
