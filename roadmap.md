@@ -1,5 +1,9 @@
 # Wintagen visual redesign
 
+## Unified homepage opening
+- [x] Remove the skyline, connect the dark navigation and hero, and add smooth cursor glow with a stationary boundary beam.
+- [x] Verify pointer entry/exit, movement across controls, mobile and reduced-motion behavior.
+
 ## Google sitemap
 - [x] Add a router-derived sitemap for public, indexable pages and verify the XML response.
 

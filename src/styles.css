@@ -124,6 +124,12 @@
   --beam-gradient: linear-gradient(to left, var(--brand) 0%, var(--brand) 24%, color-mix(in oklab, var(--brand) 80%, transparent) 58%, color-mix(in oklab, var(--brand-accent) 70%, transparent) 72%, transparent 95%);
   --beam-mask: linear-gradient(var(--foreground), var(--foreground));
   --beam-static: linear-gradient(115deg, var(--brand-hover), var(--brand) 35%, var(--brand) 60%, var(--brand-accent) 72%, var(--brand-hover));
+  --opening-background: oklch(0.19 0.015 196);
+  --opening-foreground: oklch(0.97 0.006 196);
+  --opening-muted: oklch(0.79 0.018 196);
+  --opening-highlight: oklch(0.76 0.105 194.7884);
+  --opening-glow: color-mix(in oklab, var(--brand) 32%, transparent);
+  --separator-glow: 0 0 14px 2px color-mix(in oklab, var(--brand) 40%, transparent);
 }
 
 @layer base {
@@ -637,21 +643,58 @@
 .home-hero .border-brand {
   border-color: var(--brand);
 }
-.home-hero {
+.home-opening {
+  --foreground: var(--opening-foreground);
+  --muted-foreground: var(--opening-muted);
+  --brand-highlight: var(--opening-highlight);
+  --ring: var(--opening-highlight);
+  --accent: var(--brand-hover);
+  --accent-foreground: var(--opening-foreground);
+  --glow-x: 50%;
+  --glow-y: 68%;
   position: relative;
   isolation: isolate;
   overflow: clip;
-  padding-top: 3rem;
-  background: var(--background);
+  background: var(--opening-background);
+  color: var(--foreground);
 }
-.home-hero::before {
+.home-opening::before {
   content: "";
   position: absolute;
   z-index: -1;
   inset: 0;
-  background: var(--hero-glow), var(--hero-accent-glow);
-  filter: blur(40px);
+  background:
+    radial-gradient(ellipse 65% 85% at var(--glow-x) var(--glow-y), var(--opening-glow), transparent 80%),
+    radial-gradient(ellipse 85% 100% at 50% 85%, color-mix(in oklab, var(--brand-hover) 22%, transparent), transparent 85%);
   pointer-events: none;
+}
+.home-hero {
+  padding-block: 9rem 6rem;
+}
+.site-header.site-header--unified {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+.site-header--unified.is-scrolled {
+  background: color-mix(in oklab, var(--opening-background) 94%, transparent);
+  backdrop-filter: blur(16px);
+}
+.site-header--unified #mobile-nav {
+  background: var(--opening-background);
+  border-color: var(--brand-hover);
+}
+.hero-separator {
+  position: absolute;
+  inset: auto 0 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--brand-hover) 15%, var(--brand) 50%, var(--brand-hover) 85%, transparent);
+  box-shadow: var(--separator-glow);
+  pointer-events: none;
+}
+.value-section {
+  background: linear-gradient(to bottom, var(--opening-background), var(--surface) 4rem);
 }
 .home-hero__content {
   max-width: 66rem;
@@ -1020,7 +1063,7 @@
     font-size: 2.75rem;
   }
   .home-hero {
-    padding-top: 4.5rem;
+    padding-block: 11rem 7rem;
   }
   .home-hero__title {
     font-size: 4rem;

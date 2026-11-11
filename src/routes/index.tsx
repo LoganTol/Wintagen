@@ -12,8 +12,7 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/Reveal";
 import { Button } from "@/components/ui/button";
-import { BorderBeam } from "@/components/ui/border-beam";
-import heroSkyline from "@/assets/wintagen-hero-atlanta-skyline.jpg.asset.json";
+import { useHeroGlow } from "@/hooks/use-hero-glow";
 
 export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
@@ -33,15 +32,7 @@ export const Route = createFileRoute("/")({
           "Wintagen creates focused software products and provides practical technology services for businesses building what comes next.",
       },
       { property: "og:type", content: "website" },
-      {
-        property: "og:image",
-        content: `https://wintagen.com${heroSkyline.url}`,
-      },
       { name: "twitter:card", content: "summary_large_image" },
-      {
-        name: "twitter:image",
-        content: `https://wintagen.com${heroSkyline.url}`,
-      },
     ],
     links: [{ rel: "canonical", href: "https://wintagen.com/" }],
     scripts: [
@@ -121,11 +112,13 @@ const SERVICES = [
 ] as const;
 
 function Index() {
+  const glowRef = useHeroGlow();
   return (
     <div id="top" className="min-h-screen bg-background">
-      <Header />
-      <main className="pt-20">
-        <section className="home-hero">
+      <main>
+        <section ref={glowRef} className="home-opening" aria-label="Wintagen introduction">
+          <Header unified />
+          <div className="home-hero">
           <div className="site-container">
             <Reveal className="home-hero__content">
               <h1 className="home-hero__title">
@@ -149,17 +142,8 @@ function Index() {
               </div>
             </Reveal>
           </div>
-          <Reveal delay={120} className="home-hero__photo">
-            <figure className="home-hero__image-clip">
-              <img
-                src={heroSkyline.url}
-                alt="The Atlanta skyline at sunset, including the full spire of Bank of America Plaza"
-                width={1920}
-                height={1280}
-              />
-            </figure>
-            <BorderBeam />
-          </Reveal>
+          </div>
+          <div className="hero-separator" aria-hidden="true" />
         </section>
 
         <section className="value-section border-b border-border bg-surface">

@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import wintagenLogo from "@/assets/Wintagen_Logo_Transparent.png.asset.json";
+import lightLogo from "@/assets/wintagen-logo-light.png.asset.json";
 
 const NAV = [
   { label: "Products", href: "/products" },
@@ -10,7 +11,7 @@ const NAV = [
   { label: "About Us", href: "/about" },
 ];
 
-export function Header() {
+export function Header({ unified = false }: { unified?: boolean }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -34,7 +35,7 @@ export function Header() {
     <header
       className={
         "site-header fixed inset-x-0 top-0 z-50 transition-colors duration-300 " +
-        (scrolled
+        (unified ? "site-header--unified " + (scrolled ? "is-scrolled" : "") : scrolled
           ? "border-b border-border/80 bg-background/85 shadow-soft backdrop-blur-md"
           : "border-b border-border/50 bg-background/80")
       }
@@ -47,7 +48,7 @@ export function Header() {
           aria-label="Wintagen — back to top"
         >
           <img
-            src={wintagenLogo.url}
+            src={unified ? lightLogo.url : wintagenLogo.url}
             alt="Wintagen"
             className="h-13 w-auto max-w-[250px] object-contain sm:h-14 sm:max-w-[290px]"
           />

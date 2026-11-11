@@ -15,7 +15,7 @@
 - Define shared presentation roles and page-layout selectors in src/styles.css and use the existing Button component for controls; this keeps navigation, forms and secondary pages consistent without duplicating a theme.
 - Define the default appearance explicitly in shared root/dark tokens and separate brand fills from readable highlight/focus roles; reference theme naming must not determine appearance or contrast.
 - Use the shared light-wordmark asset in dark navigation/footer, preserving the original symbol pixels; whole-logo inversion changes brand colors.
-- Keep BorderBeam as a masked CSS offset-path effect with separate sharp/glow layers outside image clipping and its vertical turns beyond the viewport; this preserves horizontal-only edge-to-edge hero lighting without reference framework dependencies.
+- Keep the homepage opening glow scoped to its shared header/hero section, updating CSS coordinates with time-based requestAnimationFrame interpolation; this avoids content rerenders and child-hover resets while leaving the boundary separator stationary. Touch and reduced-motion modes remain static.
 
 ## Visitor analytics
 - Load Contentsquare once from the shared root in a browser-only effect and send pathname-only pageviews on resolved navigation; this avoids duplicate tags, query-string personal data, and SSR browser dependencies. Never send contact-form values or identify visitors through custom tracking commands.
