@@ -3,7 +3,6 @@ import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import wintagenLogo from "@/assets/Wintagen_Logo_Transparent.png.asset.json";
-import lightLogo from "@/assets/wintagen-logo-light.png.asset.json";
 
 const NAV = [
   { label: "Products", href: "/products" },
@@ -48,7 +47,7 @@ export function Header({ unified = false }: { unified?: boolean }) {
           aria-label="Wintagen — back to top"
         >
           <img
-            src={unified ? lightLogo.url : wintagenLogo.url}
+            src={wintagenLogo.url}
             alt="Wintagen"
             className="h-13 w-auto max-w-[250px] object-contain sm:h-14 sm:max-w-[290px]"
           />

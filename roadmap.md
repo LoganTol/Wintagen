@@ -1,5 +1,9 @@
 # Wintagen visual redesign
 
+## Light full-window hero
+- [x] Restore light teal glow, retain the separator, and reserve lower hero space within a full-window opening.
+- [x] Fix header stacking and verify scrolling, pointer movement, and mobile/reduced-motion layouts.
+
 ## Unified homepage opening
 - [x] Remove the skyline, connect the dark navigation and hero, and add smooth cursor glow with a stationary boundary beam.
 - [x] Verify pointer entry/exit, movement across controls, mobile and reduced-motion behavior.

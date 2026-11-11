@@ -124,11 +124,11 @@
   --beam-gradient: linear-gradient(to left, var(--brand) 0%, var(--brand) 24%, color-mix(in oklab, var(--brand) 80%, transparent) 58%, color-mix(in oklab, var(--brand-accent) 70%, transparent) 72%, transparent 95%);
   --beam-mask: linear-gradient(var(--foreground), var(--foreground));
   --beam-static: linear-gradient(115deg, var(--brand-hover), var(--brand) 35%, var(--brand) 60%, var(--brand-accent) 72%, var(--brand-hover));
-  --opening-background: oklch(0.19 0.015 196);
-  --opening-foreground: oklch(0.97 0.006 196);
-  --opening-muted: oklch(0.79 0.018 196);
-  --opening-highlight: oklch(0.76 0.105 194.7884);
-  --opening-glow: color-mix(in oklab, var(--brand) 32%, transparent);
+  --opening-background: var(--background);
+  --opening-foreground: var(--foreground);
+  --opening-muted: var(--muted-foreground);
+  --opening-highlight: var(--brand);
+  --opening-glow: color-mix(in oklab, var(--brand) 24%, transparent);
   --separator-glow: 0 0 14px 2px color-mix(in oklab, var(--brand) 40%, transparent);
 }
 
@@ -644,16 +644,12 @@
   border-color: var(--brand);
 }
 .home-opening {
-  --foreground: var(--opening-foreground);
-  --muted-foreground: var(--opening-muted);
-  --brand-highlight: var(--opening-highlight);
   --ring: var(--opening-highlight);
-  --accent: var(--brand-hover);
+  --accent: var(--brand-soft);
   --accent-foreground: var(--opening-foreground);
   --glow-x: 50%;
   --glow-y: 68%;
   position: relative;
-  isolation: isolate;
   overflow: clip;
   background: var(--opening-background);
   color: var(--foreground);
@@ -661,14 +657,17 @@
 .home-opening::before {
   content: "";
   position: absolute;
-  z-index: -1;
+  z-index: 0;
   inset: 0;
   background:
     radial-gradient(ellipse 65% 85% at var(--glow-x) var(--glow-y), var(--opening-glow), transparent 80%),
-    radial-gradient(ellipse 85% 100% at 50% 85%, color-mix(in oklab, var(--brand-hover) 22%, transparent), transparent 85%);
+    radial-gradient(ellipse 85% 100% at 50% 85%, color-mix(in oklab, var(--brand) 12%, transparent), transparent 85%);
   pointer-events: none;
 }
 .home-hero {
+  position: relative;
+  z-index: 1;
+  min-height: 100svh;
   padding-block: 9rem 6rem;
 }
 .site-header.site-header--unified {
@@ -678,7 +677,9 @@
   backdrop-filter: none;
 }
 .site-header--unified.is-scrolled {
-  background: color-mix(in oklab, var(--opening-background) 94%, transparent);
+  background: var(--opening-background);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
   backdrop-filter: blur(16px);
 }
 .site-header--unified #mobile-nav {
@@ -687,14 +688,15 @@
 }
 .hero-separator {
   position: absolute;
+  z-index: 2;
   inset: auto 0 0;
-  height: 1px;
+  height: 2px;
   background: linear-gradient(90deg, transparent, var(--brand-hover) 15%, var(--brand) 50%, var(--brand-hover) 85%, transparent);
   box-shadow: var(--separator-glow);
   pointer-events: none;
 }
 .value-section {
-  background: linear-gradient(to bottom, var(--opening-background), var(--surface) 4rem);
+  background: var(--surface);
 }
 .home-hero__content {
   max-width: 66rem;

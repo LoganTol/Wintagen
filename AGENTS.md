@@ -16,6 +16,7 @@
 - Define the default appearance explicitly in shared root/dark tokens and separate brand fills from readable highlight/focus roles; reference theme naming must not determine appearance or contrast.
 - Use the shared light-wordmark asset in dark navigation/footer, preserving the original symbol pixels; whole-logo inversion changes brand colors.
 - Keep the homepage opening glow scoped to its shared header/hero section, updating CSS coordinates with time-based requestAnimationFrame interpolation; this avoids content rerenders and child-hover resets while leaving the boundary separator stationary. Touch and reduced-motion modes remain static.
+- Keep the homepage opening free of a stacking context, with its background below the hero and the fixed header in the page-level navigation layer; this prevents later sections from painting over the menu during scrolling.
 
 ## Visitor analytics
 - Load Contentsquare once from the shared root in a browser-only effect and send pathname-only pageviews on resolved navigation; this avoids duplicate tags, query-string personal data, and SSR browser dependencies. Never send contact-form values or identify visitors through custom tracking commands.
