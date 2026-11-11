@@ -132,7 +132,7 @@
   --opening-glow-base: color-mix(in oklab, var(--brand) 18%, transparent);
   --opening-menu-background: color-mix(in oklab, var(--card) 94%, transparent);
   --logo-dark: oklch(0.475 0.080 194.8);
-  --logo-light: oklch(0.963 0.016 179);
+  --logo-light: oklch(0.960190085 0.013798029 191.3928079);
   --logo-halo: drop-shadow(0 0 18px color-mix(in oklab, var(--brand) 18%, transparent));
   --separator-glow: 0 0 14px 2px color-mix(in oklab, var(--brand) 40%, transparent);
 }
