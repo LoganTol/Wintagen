@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { X, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GetStartedForm } from "@/components/site/GetStartedForm";
+import { PROMPT_STATE_EVENT } from "@/lib/hero-logo-trigger";
 
 /** Set to "" to show the prompt on every visit; "session" shows it once per browser session. */
 const FREQUENCY: "session" | "always" = "session";
@@ -37,6 +38,12 @@ export function GetStartedModal() {
   const panelRef = useRef<HTMLDivElement>(null);
   const flyingRef = useRef(false);
   const flightTimer = useRef<number | null>(null);
+
+  useEffect(() => {
+    const dismissed = minimized && !open;
+    document.documentElement.dataset["wintagenPromptDismissed"] = String(dismissed);
+    window.dispatchEvent(new CustomEvent(PROMPT_STATE_EVENT, { detail: dismissed }));
+  }, [minimized, open]);
 
   useEffect(() => {
     let alreadySeen = false;

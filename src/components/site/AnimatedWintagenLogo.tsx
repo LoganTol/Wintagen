@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { HeroLogoTrigger, PROMPT_STATE_EVENT } from "@/lib/hero-logo-trigger";
 
 const PARTS = [
   { tone: "dark", d: "M 166.70 12.26 L 168.85 10.52 Q 171.00 8.77 173.74 9.18 L 176.56 9.59 Q 179.34 10.00 181.39 11.92 L 210.16 38.80 Q 213.00 41.45 216.33 39.46 L 219.67 37.46 Q 223.00 35.47 225.81 32.79 L 247.83 11.83 Q 250.00 9.76 253.00 9.78 L 256.00 9.79 Q 259.00 9.80 260.66 12.30 L 262.63 15.27 Q 264.45 18.00 264.33 21.28 L 263.35 47.00 Q 263.20 51.00 260.37 53.83 L 226.16 88.17 Q 223.34 91.00 219.35 91.33 L 212.99 91.86 Q 209.00 92.19 206.11 89.43 L 167.67 52.76 Q 164.78 50.00 164.75 46.00 L 164.57 16.77 Q 164.55 14.00 166.70 12.26 Z", x: 0.02, y: -7.77 },
@@ -12,7 +13,7 @@ const PARTS = [
   { tone: "center", d: "M 166.70 107.94 L 168.85 105.88 Q 171.00 103.81 173.82 104.77 L 179.55 106.71 Q 183.34 108.00 186.23 110.76 L 207.70 131.23 Q 209.00 132.47 210.67 133.15 L 212.33 133.82 Q 214.00 134.50 215.70 133.92 L 218.00 133.15 Q 220.00 132.47 221.53 131.02 L 242.97 110.56 Q 245.66 108.00 249.11 106.62 L 252.55 105.25 Q 256.00 103.87 258.48 106.63 L 261.55 110.03 Q 264.22 113.00 264.26 117.00 L 264.53 146.65 Q 264.55 149.00 266.03 150.82 L 267.52 152.65 Q 269.00 154.47 271.29 155.01 L 275.67 156.05 Q 279.00 156.83 282.42 156.69 L 307.19 155.66 Q 310.00 155.55 312.39 157.03 L 314.79 158.52 Q 317.18 160.00 317.13 162.82 L 317.06 166.20 Q 317.00 169.30 314.82 171.50 L 292.76 193.75 Q 290.53 196.00 289.52 199.00 L 288.41 202.30 Q 287.50 205.00 288.51 207.67 L 289.52 210.33 Q 290.53 213.00 292.50 215.06 L 315.09 238.70 Q 317.00 240.70 317.06 243.47 L 317.15 247.19 Q 317.19 249.00 315.79 250.15 L 314.40 251.30 Q 313.00 252.45 311.19 252.45 L 279.89 252.54 Q 276.00 252.55 272.56 254.37 L 269.06 256.22 Q 265.69 258.00 264.63 261.67 L 263.56 265.33 Q 262.50 269.00 262.79 272.81 L 264.15 291.01 Q 264.45 295.00 262.32 298.38 L 259.30 303.17 Q 258.00 305.22 255.57 305.15 L 253.14 305.07 Q 250.70 305.00 248.92 303.35 L 224.02 280.39 Q 222.00 278.53 219.33 277.85 L 216.35 277.10 Q 214.00 276.50 211.67 277.18 L 209.33 277.85 Q 207.00 278.53 205.21 280.18 L 180.33 303.12 Q 178.30 305.00 175.53 305.06 L 172.75 305.13 Q 170.00 305.19 168.18 303.13 L 166.37 301.06 Q 164.55 299.00 164.54 296.25 L 164.46 266.55 Q 164.45 263.00 162.30 260.18 L 159.09 255.96 Q 158.00 254.53 156.33 253.87 L 154.67 253.21 Q 153.00 252.55 151.21 252.54 L 115.81 252.45 Q 114.00 252.45 112.60 251.30 L 111.21 250.15 Q 109.81 249.00 109.86 247.19 L 109.94 244.13 Q 110.00 241.70 111.70 239.96 L 133.31 217.83 Q 136.07 215.00 137.55 211.33 L 139.83 205.67 Q 140.50 204.00 139.82 202.33 L 139.15 200.67 Q 138.47 199.00 137.22 197.71 L 112.20 171.73 Q 110.53 170.00 109.95 167.67 L 109.36 165.33 Q 108.78 163.00 110.44 161.26 L 112.26 159.37 Q 114.00 157.55 116.51 157.36 L 157.89 154.19 Q 160.31 154.00 161.69 152.00 L 163.07 150.00 Q 164.45 148.00 164.46 145.57 L 164.54 112.98 Q 164.55 110.00 166.70 107.94 Z M 237 204 A 23 23 0 1 0 191 204 A 23 23 0 1 0 237 204 Z", x: -0.01, y: 0.03 },
 ] as const;
 
-/** One viewport-triggered assembly; the background glow remains independent. */
+/** Assemble once on the first downward page scroll after popup dismissal. */
 export function AnimatedWintagenLogo() {
   const ref = useRef<HTMLDivElement>(null);
   const [assembled, setAssembled] = useState(false);
@@ -26,19 +27,27 @@ export function AnimatedWintagenLogo() {
       setAssembled(true);
       return;
     }
-    const observer = new IntersectionObserver((entries) => {
-      if (!entries.some((entry) => entry.isIntersecting)) return;
-      frame = requestAnimationFrame(() => setAssembled(true));
-      observer.disconnect();
-    }, { threshold: 0.4 });
-    const reduce = () => {
-      if (motion.matches) { setAssembled(true); observer.disconnect(); }
+    const trigger = new HeroLogoTrigger(window.scrollY);
+    trigger.setDismissed(document.documentElement.dataset["wintagenPromptDismissed"] === "true", window.scrollY);
+    const promptState = (event: Event) => {
+      if (!(event instanceof CustomEvent)) return;
+      trigger.setDismissed(event.detail === true, window.scrollY);
     };
-    observer.observe(element);
+    const scroll = () => {
+      if (!trigger.scroll(window.scrollY)) return;
+      frame = requestAnimationFrame(() => setAssembled(true));
+      window.removeEventListener("scroll", scroll);
+    };
+    const reduce = () => {
+      if (motion.matches) { setAssembled(true); window.removeEventListener("scroll", scroll); }
+    };
+    window.addEventListener(PROMPT_STATE_EVENT, promptState);
+    window.addEventListener("scroll", scroll, { passive: true });
     motion.addEventListener("change", reduce);
     return () => {
       cancelAnimationFrame(frame);
-      observer.disconnect();
+      window.removeEventListener(PROMPT_STATE_EVENT, promptState);
+      window.removeEventListener("scroll", scroll);
       motion.removeEventListener("change", reduce);
     };
   }, []);
