@@ -13,6 +13,7 @@ import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/Reveal";
 import { Button } from "@/components/ui/button";
 import { useHeroGlow } from "@/hooks/use-hero-glow";
+import { AnimatedWintagenLogo } from "@/components/site/AnimatedWintagenLogo";
 
 export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
@@ -142,6 +143,7 @@ function Index() {
               </div>
             </Reveal>
           </div>
+          <AnimatedWintagenLogo />
           </div>
           <div className="hero-separator" aria-hidden="true" />
         </section>

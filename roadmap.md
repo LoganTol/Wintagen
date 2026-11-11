@@ -1,5 +1,9 @@
 # Wintagen visual redesign
 
+## Hero logo assembly
+- [x] Recreate the original eight-blade logo as clean separate vector paths and animate a once-only clockwise assembly.
+- [x] Center the logo below the hero buttons and verify desktop/mobile timing, spacing, reduced motion, and independent glow.
+
 ## Light full-window hero
 - [x] Restore light teal glow, retain the separator, and reserve lower hero space within a full-window opening.
 - [x] Fix header stacking and verify scrolling, pointer movement, and mobile/reduced-motion layouts.
