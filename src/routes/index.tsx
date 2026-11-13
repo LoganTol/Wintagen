@@ -1,7 +1,10 @@
+import { useEffect, useRef, useState } from "react";
 import type React from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
+  ChevronLeft,
+  ChevronRight,
   Compass,
   Workflow,
   Code2,
@@ -150,14 +153,7 @@ function Index() {
         </section>
 
         <section className="value-section border-b">
-          <div className="site-container pt-20 sm:pt-24">
-            <Reveal>
-              <p className="section-label">Wintagen</p>
-              <h2 className="section-heading mt-5">Two ways we create value.</h2>
-              <span aria-hidden="true" className="section-rule" />
-            </Reveal>
-          </div>
-          <ValueMarquee />
+          <ValueRail />
 
         </section>
 
@@ -254,40 +250,145 @@ const VALUE_CARDS = [
   },
 ] as const;
 
-const WAVE = [0.3, 0.55, 0.8, 0.45, 0.95, 0.6, 0.35, 0.7, 1, 0.5, 0.75, 0.4, 0.85, 0.55, 0.3, 0.65, 0.9, 0.45, 0.7, 0.35, 0.6, 0.8, 0.4, 0.25];
+function wavePaths(seed: number) {
+  // Vertical "mesh" lines whose tops trace layered sine waves, like a sound landscape.
+  const lines: { x: number; top: number; o: number }[] = [];
+  for (let i = 0; i <= 120; i++) {
+    const x = (i / 120) * 640;
+    const t = i / 120;
+    const h =
+      0.45 +
+      0.25 * Math.sin(t * 9 + seed) +
+      0.15 * Math.sin(t * 23 + seed * 2) +
+      0.1 * Math.sin(t * 47 + seed * 3);
+    lines.push({ x, top: 240 - Math.max(0.08, h) * 190, o: 0.25 + 0.6 * Math.max(0, h) });
+  }
+  return lines;
+}
 
-function ValueMarquee() {
-  // Cards repeat so the left-to-right drift loops seamlessly; copies are hidden from assistive tech.
-  const sets = [0, 1, 2, 3];
+function ValueRail() {
+  const railRef = useRef<HTMLDivElement>(null);
+  const [edge, setEdge] = useState({ start: true, end: false });
+
+  useEffect(() => {
+    const rail = railRef.current;
+    if (!rail) return;
+    const update = () =>
+      setEdge({
+        start: rail.scrollLeft < 8,
+        end: rail.scrollLeft + rail.clientWidth > rail.scrollWidth - 8,
+      });
+    update();
+    rail.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    // Mouse drag to scroll horizontally (touch uses native swipe).
+    let startX = 0, startLeft = 0, down = false, moved = false;
+    const onDown = (e: PointerEvent) => {
+      if (e.pointerType !== "mouse") return;
+      down = true; moved = false; startX = e.clientX; startLeft = rail.scrollLeft;
+    };
+    const onMove = (e: PointerEvent) => {
+      if (!down) return;
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 5) { moved = true; rail.classList.add("is-dragging"); }
+      if (moved) rail.scrollLeft = startLeft - dx;
+    };
+    const onUp = () => {
+      if (!down) return;
+      down = false;
+      rail.classList.remove("is-dragging");
+    };
+    const onClick = (e: MouseEvent) => { if (moved) { e.preventDefault(); moved = false; } };
+    rail.addEventListener("pointerdown", onDown);
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onUp);
+    rail.addEventListener("click", onClick, true);
+    return () => {
+      rail.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+      rail.removeEventListener("pointerdown", onDown);
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+      rail.removeEventListener("click", onClick, true);
+    };
+  }, []);
+
+  const step = (dir: 1 | -1) => {
+    const rail = railRef.current;
+    const card = rail?.querySelector<HTMLElement>(".value-card");
+    if (rail && card) rail.scrollBy({ left: dir * (card.offsetWidth + 24), behavior: "smooth" });
+  };
+
+  const shift = (e: React.PointerEvent<HTMLElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    const p = (e.clientX - r.left) / r.width - 0.5;
+    e.currentTarget.style.setProperty("--wave-shift", `${(-p * 24).toFixed(1)}px`);
+  };
+
   return (
-    <div className="value-marquee">
-      <div className="value-track">
-        {sets.flatMap((set) =>
-          VALUE_CARDS.map(({ to, icon: Icon, title, text, action }) => (
-            <Link
-              key={`${set}-${title}`}
-              to={to}
-              className="value-card"
-              aria-hidden={set > 0 ? true : undefined}
-              tabIndex={set > 0 ? -1 : undefined}
-            >
-              <span className="value-card__icon" aria-hidden="true">
-                <Icon strokeWidth={1.5} />
+    <>
+      <div className="site-container pt-20 sm:pt-24">
+        <Reveal className="value-rail-head">
+          <div>
+            <p className="section-label">Wintagen</p>
+            <h2 className="section-heading mt-5">Two ways we create value.</h2>
+            <span aria-hidden="true" className="section-rule" />
+          </div>
+          <div className="value-rail-nav">
+            <button type="button" aria-label="Previous card" disabled={edge.start} onClick={() => step(-1)}>
+              <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+            </button>
+            <button type="button" aria-label="Next card" disabled={edge.end} onClick={() => step(1)}>
+              <ChevronRight className="h-5 w-5" aria-hidden="true" />
+            </button>
+          </div>
+        </Reveal>
+      </div>
+      <div ref={railRef} className="value-rail" aria-label="Products and services">
+        {VALUE_CARDS.map(({ to, icon: Icon, title, text, action }, index) => (
+          <Link
+            key={title}
+            to={to}
+            className="value-card"
+            draggable={false}
+            onPointerMove={shift}
+            onPointerLeave={(e) => e.currentTarget.style.setProperty("--wave-shift", "0px")}
+          >
+            <span className="value-card__art" aria-hidden="true">
+              <span className="value-card__meta">
+                <span>{title}</span>
+                <span>//00{index + 1}</span>
               </span>
-              <span className="value-wave" aria-hidden="true">
-                {WAVE.map((h, i) => (
-                  <span key={i} style={{ "--h": h, "--i": i } as React.CSSProperties} />
+              <svg viewBox="0 0 640 240" preserveAspectRatio="none">
+                {wavePaths(index * 2.3 + 1).map(({ x, top, o }) => (
+                  <line
+                    key={x}
+                    x1={x}
+                    x2={x}
+                    y1={top}
+                    y2={240}
+                    stroke="var(--brand)"
+                    strokeOpacity={o}
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeDasharray="3 3"
+                  />
                 ))}
+              </svg>
+            </span>
+            <span className="value-card__body">
+              <span className="value-card__title">
+                <Icon strokeWidth={1.5} aria-hidden="true" />
+                {title}
               </span>
-              <span className="value-card__title">{title}</span>
               <span className="value-card__text">{text}</span>
               <span className="value-card__action">
                 {action} <ArrowRight aria-hidden="true" />
               </span>
-            </Link>
-          )),
-        )}
+            </span>
+          </Link>
+        ))}
       </div>
-    </div>
+    </>
   );
 }
