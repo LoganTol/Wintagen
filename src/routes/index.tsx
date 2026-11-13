@@ -250,6 +250,12 @@ const VALUE_CARDS = [
   },
 ] as const;
 
+// Scattered, irregular orange accents (deterministic so SSR and client match).
+function isAccent(i: number, seed: number) {
+  const r = Math.sin(i * 12.9898 + seed * 78.233) * 43758.5453;
+  return r - Math.floor(r) > 0.91;
+}
+
 function wavePaths(seed: number) {
   // Vertical "mesh" lines whose tops trace layered sine waves, like a sound landscape.
   const lines: { x: number; top: number; o: number }[] = [];
@@ -367,8 +373,8 @@ function ValueRail() {
                     x2={x}
                     y1={top}
                     y2={240}
-                    stroke={i % 11 === 5 ? "var(--brand-accent)" : "var(--brand)"}
-                    strokeOpacity={i % 11 === 5 ? Math.min(1, o + 0.2) : o}
+                    stroke={isAccent(i, index) ? "var(--brand-accent)" : "var(--brand)"}
+                    strokeOpacity={isAccent(i, index) ? Math.min(1, o + 0.2) : o}
                     strokeWidth={2}
                     strokeLinecap="round"
                     strokeDasharray="3 3"
