@@ -12,6 +12,7 @@ import {
   Package,
   Wrench,
 } from "lucide-react";
+import shareCard from "@/assets/wintagen-share-card.jpg.asset.json";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/Reveal";
@@ -38,6 +39,10 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:image", content: `https://wintagen.com${shareCard.url}` },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { name: "twitter:image", content: `https://wintagen.com${shareCard.url}` },
     ],
     links: [{ rel: "canonical", href: "https://wintagen.com/" }],
     scripts: [
