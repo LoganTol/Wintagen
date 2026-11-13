@@ -1,3 +1,4 @@
+import type React from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -148,43 +149,16 @@ function Index() {
           <div className="hero-separator" aria-hidden="true" />
         </section>
 
-        <section className="value-section border-b border-border bg-surface">
-          <div className="site-container section-space">
+        <section className="value-section border-b">
+          <div className="site-container pt-20 sm:pt-24">
             <Reveal>
               <p className="section-label">Wintagen</p>
               <h2 className="section-heading mt-5">Two ways we create value.</h2>
               <span aria-hidden="true" className="section-rule" />
-              <div className="value-list mt-10">
-                <Link to="/products" className="value-half group">
-                  <span className="value-half__icon" aria-hidden="true">
-                    <Package strokeWidth={1.5} />
-                  </span>
-                  <span className="value-half__title">Products</span>
-                  <span className="value-half__text">
-                    Focused software designed around clear, real-world needs.
-                  </span>
-                  <span className="value-half__action">
-                    Explore products
-                    <ArrowRight className="value-half__arrow" aria-hidden="true" />
-                  </span>
-                </Link>
-                <Link to="/services" className="value-half group">
-                  <span className="value-half__icon" aria-hidden="true">
-                    <Wrench strokeWidth={1.5} />
-                  </span>
-                  <span className="value-half__title">Services</span>
-                  <span className="value-half__text">
-                    Practical technology support for organizations building or improving digital
-                    experiences.
-                  </span>
-                  <span className="value-half__action">
-                    Explore services
-                    <ArrowRight className="value-half__arrow" aria-hidden="true" />
-                  </span>
-                </Link>
-              </div>
             </Reveal>
           </div>
+          <ValueMarquee />
+
         </section>
 
         <section id="services" className="border-y border-border bg-surface">
@@ -259,6 +233,61 @@ function Index() {
         </section>
       </main>
       <Footer />
+    </div>
+  );
+}
+
+const VALUE_CARDS = [
+  {
+    to: "/products",
+    icon: Package,
+    title: "Products",
+    text: "Focused software designed around clear, real-world needs.",
+    action: "Explore products",
+  },
+  {
+    to: "/services",
+    icon: Wrench,
+    title: "Services",
+    text: "Practical technology support for organizations building or improving digital experiences.",
+    action: "Explore services",
+  },
+] as const;
+
+const WAVE = [0.3, 0.55, 0.8, 0.45, 0.95, 0.6, 0.35, 0.7, 1, 0.5, 0.75, 0.4, 0.85, 0.55, 0.3, 0.65, 0.9, 0.45, 0.7, 0.35, 0.6, 0.8, 0.4, 0.25];
+
+function ValueMarquee() {
+  // Cards repeat so the left-to-right drift loops seamlessly; copies are hidden from assistive tech.
+  const sets = [0, 1, 2, 3];
+  return (
+    <div className="value-marquee">
+      <div className="value-track">
+        {sets.flatMap((set) =>
+          VALUE_CARDS.map(({ to, icon: Icon, title, text, action }) => (
+            <Link
+              key={`${set}-${title}`}
+              to={to}
+              className="value-card"
+              aria-hidden={set > 0 ? true : undefined}
+              tabIndex={set > 0 ? -1 : undefined}
+            >
+              <span className="value-card__icon" aria-hidden="true">
+                <Icon strokeWidth={1.5} />
+              </span>
+              <span className="value-wave" aria-hidden="true">
+                {WAVE.map((h, i) => (
+                  <span key={i} style={{ "--h": h, "--i": i } as React.CSSProperties} />
+                ))}
+              </span>
+              <span className="value-card__title">{title}</span>
+              <span className="value-card__text">{text}</span>
+              <span className="value-card__action">
+                {action} <ArrowRight aria-hidden="true" />
+              </span>
+            </Link>
+          )),
+        )}
+      </div>
     </div>
   );
 }
