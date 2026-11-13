@@ -360,15 +360,15 @@ function ValueRail() {
                 <span>//00{index + 1}</span>
               </span>
               <svg viewBox="0 0 640 240" preserveAspectRatio="none">
-                {wavePaths(index * 2.3 + 1).map(({ x, top, o }) => (
+                {wavePaths(index * 2.3 + 1).map(({ x, top, o }, i) => (
                   <line
                     key={x}
                     x1={x}
                     x2={x}
                     y1={top}
                     y2={240}
-                    stroke="var(--brand)"
-                    strokeOpacity={o}
+                    stroke={i % 11 === 5 ? "var(--brand-accent)" : "var(--brand)"}
+                    strokeOpacity={i % 11 === 5 ? Math.min(1, o + 0.2) : o}
                     strokeWidth={2}
                     strokeLinecap="round"
                     strokeDasharray="3 3"
