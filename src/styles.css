@@ -859,11 +859,11 @@
 /* Light "Two ways" section with dark teal sound-wave cards in a snap rail. */
 /* Two identically sized groups include their trailing gap, keeping the loop seamless. */
 .brands-marquee {
-  min-height: 7.5rem;
+  min-height: 5.625rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-block: 1rem;
+  padding-block: 0.75rem;
   background: var(--background);
   border-bottom: 1px solid var(--border);
   overflow: hidden;
@@ -875,8 +875,8 @@
 .brands-marquee__track { display: flex; width: max-content; animation: brands-marquee 30s linear infinite; }
 .brands-marquee__group { display: flex; align-items: center; gap: 4rem; padding-right: 4rem; }
 .brands-marquee__mark {
-  width: 15rem;
-  min-height: 4rem;
+  width: 12rem;
+  min-height: 3rem;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -887,27 +887,27 @@
 }
 .brands-marquee__mark:hover { color: var(--brand); }
 .brands-marquee__symbol {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2rem;
+  height: 2rem;
   flex-shrink: 0;
   background: currentColor;
   mask-repeat: no-repeat;
   mask-position: center;
   mask-size: contain;
 }
-.brands-marquee__symbol--wordmark { width: 11rem; height: 2.75rem; }
-.brands-marquee__symbol--tall { width: 5rem; height: 3.5rem; }
-.brands-marquee__name { font-size: 1.5rem; font-weight: 700; white-space: nowrap; }
+.brands-marquee__symbol--wordmark { width: 9rem; height: 2.25rem; }
+.brands-marquee__symbol--tall { width: 4rem; height: 2.75rem; }
+.brands-marquee__name { font-size: 1.25rem; font-weight: 700; white-space: nowrap; }
 @keyframes brands-marquee { to { transform: translateX(-50%); } }
 @media (min-width: 90rem) {
   .brands-marquee__group { gap: 6rem; padding-right: 6rem; }
-  .brands-marquee__mark { width: 20rem; }
+  .brands-marquee__mark { width: 16rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   .brands-marquee__track { animation: none; width: 100%; }
   .brands-marquee__group { width: 100%; flex-wrap: wrap; justify-content: center; gap: 1.5rem; padding: 0 1.5rem; }
   .brands-marquee__group[aria-hidden="true"] { display: none; }
-  .brands-marquee__mark { width: auto; min-width: 14rem; }
+  .brands-marquee__mark { width: auto; min-width: 11rem; }
   .brands-marquee__viewport { mask-image: none; }
 }
 
