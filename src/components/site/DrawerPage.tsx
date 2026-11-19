@@ -1,0 +1,401 @@
+import { useEffect, useRef, useState } from "react";
+import type { LucideIcon } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { Header } from "@/components/site/Header";
+import { Footer } from "@/components/site/Footer";
+import { Reveal } from "@/components/site/Reveal";
+import { Button } from "@/components/ui/button";
+
+export interface DrawerEntry {
+  slug: string;
+  name: string;
+  category: string;
+  tagline: string;
+  description: string;
+  theme: "build" | "web" | "strategy" | "automate";
+  capabilities: readonly { label: string; icon: LucideIcon }[];
+}
+
+type Service = DrawerEntry;
+
+function ServiceLayer({
+  service,
+  index,
+  total,
+  isOpen,
+  isPointerOver,
+  onHoverOpen,
+  onLeave,
+  onFocusOpen,
+  onClose,
+  onToggle,
+}: {
+  service: Service;
+  index: number;
+  total: number;
+  isOpen: boolean;
+  isPointerOver: (element: HTMLElement, point?: { x: number; y: number }) => boolean;
+  onHoverOpen: () => void;
+  onLeave: () => void;
+  onFocusOpen: () => void;
+  onClose: () => void;
+  onToggle: () => void;
+}) {
+  const panelId = `service-panel-${index}`;
+  const toggledOnPointerDown = useRef(false);
+  const hoverSuppressed = useRef(false);
+  const suppressFocusOpen = useRef(false);
+
+  return (
+    <article
+      id={service.slug}
+      data-index={index}
+      className={`product-layer product-layer--${service.theme} scroll-mt-24 ${isOpen ? "is-open" : ""}`}
+      style={{ zIndex: total - index }}
+      onPointerEnter={(event) => {
+        if (event.pointerType !== "mouse" || hoverSuppressed.current) return;
+        onHoverOpen();
+      }}
+      onPointerLeave={(event) => {
+        if (event.pointerType !== "mouse") return;
+        if (isPointerOver(event.currentTarget, { x: event.clientX, y: event.clientY })) return;
+        hoverSuppressed.current = false;
+        onLeave();
+      }}
+      onFocus={() => {
+        if (suppressFocusOpen.current) {
+          suppressFocusOpen.current = false;
+          return;
+        }
+        onFocusOpen();
+      }}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) {
+          onClose();
+        }
+      }}
+    >
+      <Button
+        type="button"
+        variant="ghost"
+        className="product-layer__trigger h-auto w-full whitespace-normal rounded-none px-6 py-7 hover:bg-transparent sm:px-10 sm:py-9"
+        aria-expanded={isOpen}
+        aria-controls={panelId}
+        onPointerDown={(event) => {
+          toggledOnPointerDown.current = false;
+          suppressFocusOpen.current = event.pointerType === "mouse";
+          if (event.pointerType !== "mouse") {
+            event.preventDefault();
+            toggledOnPointerDown.current = true;
+            onToggle();
+          }
+        }}
+        onClick={() => {
+          if (toggledOnPointerDown.current) {
+            toggledOnPointerDown.current = false;
+            return;
+          }
+          if (isOpen) hoverSuppressed.current = true;
+          onToggle();
+        }}
+      >
+        <span className="text-center">
+          <span className="block text-2xl font-semibold leading-tight sm:text-3xl">
+            {service.name}
+          </span>
+          <span className="mt-2 block text-sm font-medium text-muted-foreground sm:text-base">
+            {service.tagline}
+          </span>
+        </span>
+      </Button>
+
+      <div id={panelId} className="product-layer__panel" aria-hidden={!isOpen}>
+        <div className="product-layer__panel-inner">
+          <div className="mx-auto grid max-w-5xl gap-8 px-7 pb-12 pt-2 sm:px-12 sm:pb-14 md:grid-cols-[1.2fr_1fr] md:gap-16">
+            <div>
+              <p className="product-layer__category text-xs font-semibold uppercase tracking-[0.14em]">
+                {service.category}
+              </p>
+              <p className="mt-4 leading-relaxed text-muted-foreground">{service.description}</p>
+              <a
+                href="mailto:contact@wintagen.com"
+                tabIndex={isOpen ? 0 : -1}
+                className="product-layer__link group mt-7 inline-flex items-center gap-2 rounded-md font-semibold focus-visible:outline-2 focus-visible:outline-offset-4"
+                aria-label={`Discuss a ${service.name.toLowerCase()} project with Wintagen`}
+              >
+                Discuss a project
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </a>
+            </div>
+            <ul
+              className="grid content-start gap-3 sm:grid-cols-2 md:grid-cols-1"
+              aria-label={`${service.name} highlights`}
+            >
+              {service.capabilities.map(({ label, icon: Icon }) => (
+                <li
+                  key={label}
+                  className="flex items-center gap-3 text-sm font-medium text-foreground"
+                >
+                  <span className="product-layer__feature-icon" aria-hidden="true">
+                    <Icon className="h-4 w-4" strokeWidth={1.8} />
+                  </span>
+                  {label}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+export function DrawerPage({ entries: SERVICES, eyebrow, title, description, label }: {
+  entries: readonly DrawerEntry[];
+  eyebrow: string;
+  title: string;
+  description: string;
+  label: string;
+}) {
+  const [active, setActive] = useState<number | null>(null);
+  const activeRef = useRef<number | null>(null);
+  const openedByRef = useRef<"hover" | "manual">("manual");
+  const pendingIndexRef = useRef<number | null>(null);
+  const lastPointerRef = useRef({ x: 0, y: 0 });
+  const stackRef = useRef<HTMLDivElement | null>(null);
+  const openTimer = useRef<number | null>(null);
+  const closeTimer = useRef<number | null>(null);
+  const reconcileTimer = useRef<number | null>(null);
+  const reconcileDepth = useRef(0);
+
+  const isPointerOver = (element: HTMLElement, point?: { x: number; y: number }) => {
+    const { x, y } = point ?? lastPointerRef.current;
+    const hit = document.elementFromPoint(x, y);
+    return hit !== null && element.contains(hit);
+  };
+
+  const layerUnderPointer = () => {
+    const { x, y } = lastPointerRef.current;
+    const hit = document.elementFromPoint(x, y);
+    const layer = hit?.closest?.("article.product-layer");
+    if (!(layer instanceof HTMLElement)) return null;
+    if (!stackRef.current?.contains(layer)) return null;
+    const index = Number(layer.dataset["index"]);
+    return Number.isInteger(index) ? index : null;
+  };
+
+  const clearTimer = (ref: React.MutableRefObject<number | null>) => {
+    if (ref.current !== null) {
+      window.clearTimeout(ref.current);
+      ref.current = null;
+    }
+  };
+
+  const setActiveBoth = (value: number | null) => {
+    activeRef.current = value;
+    setActive(value);
+  };
+
+  const scheduleReconcile = () => {
+    clearTimer(reconcileTimer);
+    reconcileTimer.current = window.setTimeout(() => {
+      if (openedByRef.current !== "hover") return;
+      const under = layerUnderPointer();
+      if (under === activeRef.current) {
+        reconcileDepth.current = 0;
+        return;
+      }
+      if (reconcileDepth.current >= 3) return;
+      reconcileDepth.current += 1;
+      setActiveBoth(under);
+      if (under !== null) scheduleReconcile();
+    }, 750);
+  };
+
+  useEffect(() => {
+    const hash = window.location.hash.replace("#", "");
+    const hashIndex = SERVICES.findIndex((s) => s.slug === hash);
+    const matchedService = SERVICES[hashIndex];
+    if (matchedService) {
+      openedByRef.current = "manual";
+      setActiveBoth(hashIndex);
+      window.setTimeout(() => {
+        document.getElementById(matchedService.slug)?.scrollIntoView({ block: "start" });
+      }, 60);
+    } else if (window.matchMedia("(hover: none), (pointer: coarse)").matches) {
+      setActiveBoth(0);
+    }
+
+    // Hover-opened bands close from a window-level pointer check, not from
+    // boundary events alone: layout shifts during the glide fire phantom
+    // enter/leave events, so a leave that looks genuine can swallow the
+    // close. Here the pointer's real containment in the stack decides.
+    const trackPointer = (event: PointerEvent) => {
+      lastPointerRef.current = { x: event.clientX, y: event.clientY };
+      const stack = stackRef.current;
+      if (!stack || event.pointerType !== "mouse") return;
+      if (openedByRef.current !== "hover" || activeRef.current === null) return;
+      if (stack.contains(event.target as Node)) {
+        clearTimer(closeTimer);
+      } else if (closeTimer.current === null) {
+        closeTimer.current = window.setTimeout(() => setActiveBoth(null), 250);
+      }
+    };
+
+    // A click or tap anywhere outside the stack dismisses any open band,
+    // including ones opened deliberately by click, tap, or keyboard.
+    const handleOutsideClick = (event: MouseEvent) => {
+      const stack = stackRef.current;
+      if (!stack || activeRef.current === null) return;
+      if (!stack.contains(event.target as Node)) setActiveBoth(null);
+    };
+
+    // The cursor left the window: no further pointermove will fire, and the
+    // stale recorded position could otherwise re-open a band via reconcile.
+    const handlePointerOut = (event: PointerEvent) => {
+      if (event.pointerType !== "mouse") return;
+      lastPointerRef.current = { x: -1, y: -1 };
+      if (openedByRef.current === "hover") scheduleStackClose();
+    };
+
+    window.addEventListener("pointermove", trackPointer, { passive: true });
+    document.addEventListener("click", handleOutsideClick);
+    document.documentElement.addEventListener("pointerleave", handlePointerOut);
+    return () => {
+      window.removeEventListener("pointermove", trackPointer);
+      document.removeEventListener("click", handleOutsideClick);
+      document.documentElement.removeEventListener("pointerleave", handlePointerOut);
+      clearTimer(openTimer);
+      clearTimer(closeTimer);
+      clearTimer(reconcileTimer);
+    };
+  }, [SERVICES]);
+
+  const requestOpen = (index: number) => {
+    clearTimer(closeTimer);
+    clearTimer(openTimer);
+    pendingIndexRef.current = index;
+    reconcileDepth.current = 0;
+    openTimer.current = window.setTimeout(() => {
+      pendingIndexRef.current = null;
+      openedByRef.current = "hover";
+      setActiveBoth(index);
+      scheduleReconcile();
+    }, 180);
+  };
+
+  const cancelPending = (index: number) => {
+    if (pendingIndexRef.current === index) {
+      pendingIndexRef.current = null;
+      clearTimer(openTimer);
+    }
+  };
+
+  const openNow = (index: number) => {
+    clearTimer(openTimer);
+    clearTimer(closeTimer);
+    openedByRef.current = "manual";
+    setActiveBoth(index);
+  };
+
+  const toggleBand = (index: number) => {
+    clearTimer(openTimer);
+    clearTimer(closeTimer);
+    openedByRef.current = "manual";
+    setActiveBoth(activeRef.current === index ? null : index);
+  };
+
+  const scheduleStackClose = () => {
+    if (openedByRef.current !== "hover") return;
+    clearTimer(closeTimer);
+    closeTimer.current = window.setTimeout(() => setActiveBoth(null), 250);
+  };
+  const cancelStackClose = () => clearTimer(closeTimer);
+
+  return (
+    <div id="top" className="min-h-screen bg-background">
+      <Header />
+      <main className="pt-20">
+        <section className="site-container page-intro">
+          <Reveal>
+            <Link
+              to="/"
+              className="group inline-flex items-center gap-2 rounded-md text-sm font-semibold text-brand focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
+            >
+              <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
+              Back to Wintagen
+            </Link>
+            <p className="mt-8 flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.12em] text-brand">
+              <span aria-hidden="true" className="h-2 w-2 rounded-full bg-brand-accent" />
+              {eyebrow}
+            </p>
+            <h1 className="page-title mt-5">{title}</h1>
+            <span aria-hidden="true" className="section-rule" />
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+              {description}
+            </p>
+          </Reveal>
+        </section>
+
+        <section className="border-y border-border" aria-label={label}>
+          <Reveal>
+            <div
+              ref={stackRef}
+              className="product-stack"
+              onPointerMove={(event) => {
+                lastPointerRef.current = { x: event.clientX, y: event.clientY };
+              }}
+              onPointerEnter={(event) => {
+                if (event.pointerType === "mouse") cancelStackClose();
+              }}
+              onPointerLeave={(event) => {
+                if (event.pointerType !== "mouse") return;
+                if (isPointerOver(event.currentTarget, { x: event.clientX, y: event.clientY })) {
+                  return;
+                }
+                scheduleStackClose();
+              }}
+            >
+              {SERVICES.map((service, index) => (
+                <ServiceLayer
+                  key={service.slug}
+                  service={service}
+                  index={index}
+                  total={SERVICES.length}
+                  isOpen={active === index}
+                  isPointerOver={isPointerOver}
+                  onHoverOpen={() => requestOpen(index)}
+                  onLeave={() => cancelPending(index)}
+                  onFocusOpen={() => openNow(index)}
+                  onClose={() => {
+                    if (activeRef.current === index) setActiveBoth(null);
+                  }}
+                  onToggle={() => toggleBand(index)}
+                />
+              ))}
+            </div>
+          </Reveal>
+        </section>
+
+        <section className="site-container section-space text-center">
+          <Reveal>
+            <h2 className="section-heading">Have A Project In Mind?</h2>
+            <span
+              aria-hidden="true"
+              className="mx-auto mt-4 block h-1 w-12 rounded-full bg-brand-accent"
+            />
+            <p className="mx-auto mt-5 max-w-xl text-lg text-muted-foreground">
+              Tell us what you are trying to build or improve, and we will take it from there.
+            </p>
+            <div className="mt-9 flex flex-wrap justify-center gap-3">
+              <Button asChild><a href="mailto:contact@wintagen.com">Contact Wintagen</a></Button>
+              <Button asChild variant="outline"><Link to="/products">Explore our products <ArrowRight aria-hidden="true" /></Link></Button>
+            </div>
+          </Reveal>
+        </section>
+      </main>
+      <Footer />
+    </div>
+  );
+}

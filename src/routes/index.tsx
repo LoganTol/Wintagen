@@ -11,6 +11,7 @@ import {
   Globe,
   Package,
   Wrench,
+  PenTool,
 } from "lucide-react";
 import shareCard from "@/assets/wintagen-share-card-v6.jpg.asset.json";
 import { Header } from "@/components/site/Header";
@@ -256,6 +257,13 @@ const VALUE_CARDS = [
     text: "Practical technology support for organizations building or improving digital experiences.",
     action: "Explore services",
   },
+  {
+    to: "/ui-ux-design",
+    icon: PenTool,
+    title: "UI/UX Design",
+    text: "Thoughtful interfaces and user journeys, designed for clarity on every screen.",
+    action: "Explore UI/UX design",
+  },
 ] as const;
 
 // Scattered, irregular orange accents (deterministic so SSR and client match).
@@ -345,20 +353,20 @@ function ValueRail() {
         <Reveal className="value-rail-head">
           <div>
             <p className="section-label">Wintagen</p>
-            <h2 className="section-heading mt-5">Two ways we create value.</h2>
+            <h2 className="section-heading mt-5">Three ways we create value.</h2>
             <span aria-hidden="true" className="section-rule" />
           </div>
           <div className="value-rail-nav">
-            <button type="button" aria-label="Previous card" disabled={edge.start} onClick={() => step(-1)}>
+            <Button type="button" variant="outline" size="icon" aria-label="Previous card" disabled={edge.start} onClick={() => step(-1)}>
               <ChevronLeft className="h-5 w-5" aria-hidden="true" />
-            </button>
-            <button type="button" aria-label="Next card" disabled={edge.end} onClick={() => step(1)}>
+            </Button>
+            <Button type="button" variant="outline" size="icon" aria-label="Next card" disabled={edge.end} onClick={() => step(1)}>
               <ChevronRight className="h-5 w-5" aria-hidden="true" />
-            </button>
+            </Button>
           </div>
         </Reveal>
       </div>
-      <div ref={railRef} className="value-rail" aria-label="Products and services">
+      <div ref={railRef} className="value-rail" aria-label="Products, services, and UI/UX design">
         {VALUE_CARDS.map(({ to, icon: Icon, title, text, action }, index) => (
           <Link
             key={title}

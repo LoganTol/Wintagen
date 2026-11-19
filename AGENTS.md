@@ -10,6 +10,7 @@
 <!-- LOVABLE:END -->
 
 ## Presentation architecture
+- Share the gliding drawer page between Services and UI/UX Design with editable entries; this preserves identical hover, touch, and keyboard behavior without duplicating interaction logic.
 - Derive sitemap URLs from required route-level staticData.sitemap decisions via src/lib/sitemap.ts; this automatically tracks public routes while excluding noindex pages and avoids invented lastmod timestamps.
 - Keep TanStack Start routes and existing client-only contact/booking flows; reference repositories supply visual patterns only, so their auth, schema and runtime are not imported.
 - Define shared presentation roles and page-layout selectors in src/styles.css and use the existing Button component for controls; this keeps navigation, forms and secondary pages consistent without duplicating a theme.

@@ -13,12 +13,12 @@ describe("router-derived sitemap", () => {
       history: createMemoryHistory(),
       routeTree: root.addChildren([
         page("/", true), page("about", true), page("products", true),
-        page("services", true), page("get-started", true), page("privacy", false),
+        page("services", true), page("ui-ux-design", true), page("get-started", true), page("privacy", false),
         page("terms", false), page("sitemap.xml", false),
         privateLayout.addChildren([privateChild]),
       ]),
     });
-    assert.deepEqual(sitemapStaticPaths(router), ["/", "/about", "/get-started", "/products", "/services"]);
+    assert.deepEqual(sitemapStaticPaths(router), ["/", "/about", "/get-started", "/products", "/services", "/ui-ux-design"]);
   });
 
   test("uses the public origin without manufacturing content timestamps", () => {

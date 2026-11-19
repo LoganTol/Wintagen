@@ -1,5 +1,9 @@
 # Wintagen visual redesign
 
+## UI/UX Design
+- [x] Add the third value card and a matching page with four design drawers.
+- [x] Verify navigation, drawer interactions, and desktop/mobile layouts.
+
 ## Homepage brand carousel
 - [x] Adapt the supplied marquee below the hero with teal marks, subtle orange accents, and half-height spacing.
 - [x] Verify motion, pause, placement, mobile layout and reduced motion.
