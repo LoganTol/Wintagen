@@ -859,7 +859,7 @@
 /* Light "Two ways" section with dark teal sound-wave cards in a snap rail. */
 /* Two identically sized groups include their trailing gap, keeping the loop seamless. */
 .brands-marquee {
-  min-height: 8.75rem;
+  min-height: 7.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
