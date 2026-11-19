@@ -756,9 +756,18 @@
   margin-inline: auto;
   text-align: center;
 }
+@font-face {
+  font-family: "Lora";
+  src: url("/__l5e/assets-v1/8e07e544-f454-47ee-8cd0-4db4c018c9a7/Lora-VariableFont.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 .home-hero__title {
   margin: 1.5rem auto 0;
   max-width: 62rem;
+  font-family: "Lora", Georgia, serif;
   font-size: 2.5rem;
   line-height: 1.14;
   font-weight: 600;
