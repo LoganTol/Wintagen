@@ -12,7 +12,7 @@ import {
   Package,
   Wrench,
 } from "lucide-react";
-import shareCard from "@/assets/wintagen-share-card-v5.jpg.asset.json";
+import shareCard from "@/assets/wintagen-share-card-v6.jpg.asset.json";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/Reveal";
