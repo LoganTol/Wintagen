@@ -4,6 +4,7 @@
 - [x] Adapt the supplied marquee below the hero with teal marks, subtle orange accents, and half-height spacing.
 - [x] Verify motion, pause, placement, mobile layout and reduced motion.
 - [x] Replace the temporary ProPlans name with the supplied logo in Wintagen teal.
+- [x] Replace the QuickSite symbol and text with the supplied full wordmark in Wintagen teal.
 - [ ] Replace the temporary Ledger Connect name when its logo is supplied.
 
 ## Hero logo assembly
