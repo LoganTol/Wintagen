@@ -6,7 +6,7 @@
 - [x] Replace the temporary ProPlans name with the supplied logo in Wintagen teal.
 - [x] Replace the QuickSite symbol and text with the supplied full wordmark in Wintagen teal.
 - [x] Replace the Aether name with the supplied tall wordmark in Wintagen teal.
-- [ ] Replace the temporary Ledger Connect name when its logo is supplied.
+- [x] Replace the temporary Ledger Connect name with the supplied wordmark in Wintagen teal.
 
 ## Hero logo assembly
 - [x] Recreate the original eight-blade logo as clean separate vector paths and animate a once-only clockwise assembly.
