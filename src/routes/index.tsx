@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import { useHeroGlow } from "@/hooks/use-hero-glow";
 import { AnimatedWintagenLogo } from "@/components/site/AnimatedWintagenLogo";
 import { BrandsMarquee } from "@/components/site/BrandsMarquee";
+import { FaqSection } from "@/components/site/FaqSection";
 
 export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
@@ -236,6 +237,8 @@ function Index() {
             </div>
           </Reveal>
         </section>
+
+        <FaqSection />
       </main>
       <Footer />
     </div>

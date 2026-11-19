@@ -22,6 +22,7 @@
 
 - Render the homepage brand marquee in two equal groups with continuous CSS motion and a single static group for reduced motion; keep brand entries editable and preserve removed product URLs.
 - Distinguish complete wordmarks from standalone symbols in marquee entries, using cropped transparent asset masks and accessible names to avoid duplicate visible brand text.
+- Keep the homepage FAQ questions and answers in one editable list inside src/components/site/FaqSection.tsx with a single panel open at a time; this keeps copy editable in one place while preserving keyboard toggling and a static open/close under reduced motion.
 
 ## Visitor analytics
 - Load Contentsquare once from the shared root in a browser-only effect and send pathname-only pageviews on resolved navigation; this avoids duplicate tags, query-string personal data, and SSR browser dependencies. Never send contact-form values or identify visitors through custom tracking commands.
