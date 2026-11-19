@@ -5,6 +5,7 @@
 - [x] Verify motion, pause, placement, mobile layout and reduced motion.
 - [x] Replace the temporary ProPlans name with the supplied logo in Wintagen teal.
 - [x] Replace the QuickSite symbol and text with the supplied full wordmark in Wintagen teal.
+- [x] Replace the Aether name with the supplied tall wordmark in Wintagen teal.
 - [ ] Replace the temporary Ledger Connect name when its logo is supplied.
 
 ## Hero logo assembly

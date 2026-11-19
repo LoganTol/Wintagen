@@ -2,13 +2,14 @@ import { useState } from "react";
 import { Pause, Play } from "lucide-react";
 import quicksiteLogo from "@/assets/quicksite-wordmark.png.asset.json";
 import proplansLogo from "@/assets/proplans-wordmark.png.asset.json";
+import aetherLogo from "@/assets/aether-wordmark.png.asset.json";
 import { Button } from "@/components/ui/button";
 
 // Keep previously removed product URLs removed; add approved logos here later.
 const BRANDS = [
   { id: "quicksite", name: "QuickSite", logo: quicksiteLogo.url, wordmark: true },
   { id: "proplans", name: "ProPlans", logo: proplansLogo.url, wordmark: true },
-  { id: "aether", name: "Aether", logo: null, wordmark: false },
+  { id: "aether", name: "Aether", logo: aetherLogo.url, wordmark: true },
   { id: "ledger-connect", name: "Ledger Connect", logo: null, wordmark: false },
 ] as const;
 
@@ -42,7 +43,7 @@ export function BrandsMarquee() {
                 <div key={brand.id} className="brands-marquee__mark">
                   {brand.logo && (
                     <span
-                      className={`brands-marquee__symbol${brand.wordmark ? " brands-marquee__symbol--wordmark" : ""}`}
+                      className={`brands-marquee__symbol${brand.wordmark ? " brands-marquee__symbol--wordmark" : ""}${brand.id === "aether" ? " brands-marquee__symbol--tall" : ""}`}
                       aria-hidden="true"
                       style={{ maskImage: `url(${brand.logo})`, WebkitMaskImage: `url(${brand.logo})` }}
                     />
