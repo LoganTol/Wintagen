@@ -303,6 +303,11 @@ function ValueRail() {
         start: rail.scrollLeft < 8,
         end: rail.scrollLeft + rail.clientWidth > rail.scrollWidth - 8,
       });
+    // Start with the middle card centered so the group reads as centered.
+    rail.scrollTo({
+      left: Math.max(0, (rail.scrollWidth - rail.clientWidth) / 2),
+      behavior: "auto",
+    });
     update();
     rail.addEventListener("scroll", update, { passive: true });
     window.addEventListener("resize", update);

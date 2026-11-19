@@ -8,8 +8,8 @@ import { Reveal } from "@/components/site/Reveal";
 
 /**
  * Homepage FAQ entries.
- * Edit `question` and `answer` freely — the list is rendered in order and the
- * first entry starts open. Keep answers to things Wintagen actually does.
+ * Edit `question` and `answer` freely — the list is rendered in order and every
+ * entry starts closed. Keep answers to things Wintagen actually does.
  */
 const FAQ_ENTRIES = [
   {
@@ -42,24 +42,26 @@ const FAQ_ENTRIES = [
 export function FaqSection() {
   return (
     <section id="faq" className="border-t border-border bg-background">
-      <div className="site-container section-space grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-20">
-        <Reveal>
-          <h2 className="sr-only">FAQ's</h2>
-          <p className="section-label">FAQ's</p>
-        </Reveal>
+      <div className="site-container section-space">
+        <div className="faq-column">
+          <Reveal>
+            <h2 className="sr-only">FAQ's</h2>
+            <p className="section-label faq-label">FAQ's</p>
+          </Reveal>
 
-        <Reveal delay={120}>
-          <Accordion type="single" collapsible className="faq-list">
-            {FAQ_ENTRIES.map(({ question, answer }) => (
-              <AccordionItem key={question} value={question} className="faq-item">
-                <AccordionTrigger className="faq-item__trigger">{question}</AccordionTrigger>
-                <AccordionContent className="faq-item__panel">
-                  <p className="faq-item__answer">{answer}</p>
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </Reveal>
+          <Reveal delay={120}>
+            <Accordion type="single" collapsible className="faq-list">
+              {FAQ_ENTRIES.map(({ question, answer }) => (
+                <AccordionItem key={question} value={question} className="faq-item">
+                  <AccordionTrigger className="faq-item__trigger">{question}</AccordionTrigger>
+                  <AccordionContent className="faq-item__panel">
+                    <p className="faq-item__answer">{answer}</p>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </Reveal>
+        </div>
       </div>
     </section>
   );
