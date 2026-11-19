@@ -19,5 +19,7 @@
 - Keep the homepage opening free of a stacking context, with its background below the hero and the fixed header in the page-level navigation layer; this prevents later sections from painting over the menu during scrolling.
 - Render the hero logo as independent vector paths with fill-box origins and a once-only CSS assembly triggered by the first downward page scroll after the shared popup reports minimized state; reserved space and immediate reduced-motion rendering prevent shifts and interference with the cursor glow.
 
+- Render the homepage brand marquee in two equal groups with CSS motion, an explicit pause control and a single static group for reduced motion; keep brand entries editable and preserve removed product URLs.
+
 ## Visitor analytics
 - Load Contentsquare once from the shared root in a browser-only effect and send pathname-only pageviews on resolved navigation; this avoids duplicate tags, query-string personal data, and SSR browser dependencies. Never send contact-form values or identify visitors through custom tracking commands.

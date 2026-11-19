@@ -848,6 +848,70 @@
   box-shadow: var(--shadow-card);
 }
 /* Light "Two ways" section with dark teal sound-wave cards in a snap rail. */
+/* Two identically sized groups include their trailing gap, keeping the loop seamless. */
+.brands-marquee {
+  min-height: clamp(20rem, 50svh, 28rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2.5rem;
+  padding-block: 3rem;
+  background: var(--background);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.brands-marquee__heading {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+}
+.brands-marquee__pause { position: absolute; right: 1.5rem; color: var(--brand-hover); }
+.brands-marquee__viewport {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, var(--foreground) 8%, var(--foreground) 92%, transparent);
+}
+.brands-marquee__track { display: flex; width: max-content; animation: brands-marquee 30s linear infinite; }
+.brands-marquee__group { display: flex; align-items: center; gap: 4rem; padding-right: 4rem; }
+.brands-marquee__mark {
+  width: 15rem;
+  min-height: 6rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: var(--brand-hover);
+  transition: color 200ms ease;
+}
+.brands-marquee__mark:hover { color: var(--brand); }
+.brands-marquee__symbol {
+  width: 2.75rem;
+  height: 2.75rem;
+  flex-shrink: 0;
+  background: currentColor;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+}
+.brands-marquee__name { font-size: 1.5rem; font-weight: 700; white-space: nowrap; }
+.brands-marquee__accent { width: 0.3rem; height: 0.3rem; background: var(--brand-accent); flex-shrink: 0; }
+.brands-marquee__track.is-paused,
+.brands-marquee__viewport:hover .brands-marquee__track { animation-play-state: paused; }
+@keyframes brands-marquee { to { transform: translateX(-50%); } }
+@media (min-width: 90rem) {
+  .brands-marquee__group { gap: 6rem; padding-right: 6rem; }
+  .brands-marquee__mark { width: 20rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brands-marquee__track { animation: none; width: 100%; }
+  .brands-marquee__group { width: 100%; flex-wrap: wrap; justify-content: center; gap: 1.5rem; padding: 0 1.5rem; }
+  .brands-marquee__group[aria-hidden="true"], .brands-marquee__pause { display: none; }
+  .brands-marquee__mark { width: auto; min-width: 14rem; }
+  .brands-marquee__viewport { mask-image: none; }
+}
+
 .value-section { background: var(--surface); }
 .value-section {
   --value-card: oklch(0.29 0.05 196);

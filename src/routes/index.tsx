@@ -19,6 +19,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { Button } from "@/components/ui/button";
 import { useHeroGlow } from "@/hooks/use-hero-glow";
 import { AnimatedWintagenLogo } from "@/components/site/AnimatedWintagenLogo";
+import { BrandsMarquee } from "@/components/site/BrandsMarquee";
 
 export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
@@ -156,6 +157,8 @@ function Index() {
           </div>
           <div className="hero-separator" aria-hidden="true" />
         </section>
+
+        <BrandsMarquee />
 
         <section className="value-section border-b">
           <ValueRail />
