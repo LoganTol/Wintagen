@@ -1,10 +1,7 @@
-import { useState } from "react";
-import { Pause, Play } from "lucide-react";
 import quicksiteLogo from "@/assets/quicksite-wordmark.png.asset.json";
 import proplansLogo from "@/assets/proplans-wordmark.png.asset.json";
 import aetherLogo from "@/assets/aether-wordmark.png.asset.json";
 import ledgerConnectLogo from "@/assets/ledger-connect-wordmark.png.asset.json";
-import { Button } from "@/components/ui/button";
 
 // Keep previously removed product URLs removed; add approved logos here later.
 const BRANDS = [
@@ -15,25 +12,13 @@ const BRANDS = [
 ] as const;
 
 export function BrandsMarquee() {
-  const [paused, setPaused] = useState(false);
-
   return (
     <section id="our-brands" className="brands-marquee" aria-labelledby="brands-heading">
       <div className="site-container brands-marquee__heading">
         <h2 id="brands-heading" className="brands-marquee__title">Our Products</h2>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="brands-marquee__pause"
-          aria-label={paused ? "Play brand carousel" : "Pause brand carousel"}
-          title={paused ? "Play brand carousel" : "Pause brand carousel"}
-          onClick={() => setPaused((value) => !value)}
-        >
-          {paused ? <Play aria-hidden="true" /> : <Pause aria-hidden="true" />}
-        </Button>
       </div>
       <div className="brands-marquee__viewport">
-        <div className={`brands-marquee__track${paused ? " is-paused" : ""}`}>
+        <div className="brands-marquee__track">
           {[0, 1].map((copy) => (
             <div
               key={copy}

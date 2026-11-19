@@ -7,7 +7,7 @@
 - [x] Replace the QuickSite symbol and text with the supplied full wordmark in Wintagen teal.
 - [x] Replace the Aether name with the supplied tall wordmark in Wintagen teal.
 - [x] Replace the temporary Ledger Connect name with the supplied wordmark in Wintagen teal.
-- [x] Remove orange dots, enlarge the Our Products heading, and keep the glide running on hover while retaining accessible pause and reduced-motion controls.
+- [x] Remove orange dots, set the bold Our Products heading to 20px, and remove the pause button while retaining continuous glide and reduced-motion support.
 
 ## Hero logo assembly
 - [x] Recreate the original eight-blade logo as clean separate vector paths and animate a once-only clockwise assembly.
