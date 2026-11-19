@@ -850,24 +850,15 @@
 /* Light "Two ways" section with dark teal sound-wave cards in a snap rail. */
 /* Two identically sized groups include their trailing gap, keeping the loop seamless. */
 .brands-marquee {
-  min-height: 8.75rem;
+  min-height: 10rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 0.75rem;
-  padding-block: 0.75rem;
+  padding-block: 1rem;
   background: var(--background);
   border-bottom: 1px solid var(--border);
   overflow: hidden;
 }
-.brands-marquee__heading {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 1.75rem;
-}
-.brands-marquee__title { font-size: 1.25rem; font-weight: 700; line-height: 1.2; color: var(--brand-hover); }
 .brands-marquee__viewport {
   overflow: hidden;
   mask-image: linear-gradient(to right, transparent, var(--foreground) 8%, var(--foreground) 92%, transparent);
@@ -876,7 +867,7 @@
 .brands-marquee__group { display: flex; align-items: center; gap: 4rem; padding-right: 4rem; }
 .brands-marquee__mark {
   width: 15rem;
-  min-height: 3rem;
+  min-height: 4rem;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -887,16 +878,16 @@
 }
 .brands-marquee__mark:hover { color: var(--brand); }
 .brands-marquee__symbol {
-  width: 2rem;
-  height: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
   flex-shrink: 0;
   background: currentColor;
   mask-repeat: no-repeat;
   mask-position: center;
   mask-size: contain;
 }
-.brands-marquee__symbol--wordmark { width: 9rem; height: 2.25rem; }
-.brands-marquee__symbol--tall { width: 4rem; height: 2.75rem; }
+.brands-marquee__symbol--wordmark { width: 11rem; height: 2.75rem; }
+.brands-marquee__symbol--tall { width: 5rem; height: 3.5rem; }
 .brands-marquee__name { font-size: 1.5rem; font-weight: 700; white-space: nowrap; }
 @keyframes brands-marquee { to { transform: translateX(-50%); } }
 @media (min-width: 90rem) {

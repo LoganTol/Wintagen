@@ -13,10 +13,7 @@ const BRANDS = [
 
 export function BrandsMarquee() {
   return (
-    <section id="our-brands" className="brands-marquee" aria-labelledby="brands-heading">
-      <div className="site-container brands-marquee__heading">
-        <h2 id="brands-heading" className="brands-marquee__title">Our Products</h2>
-      </div>
+    <section id="our-brands" className="brands-marquee" aria-label="Our products">
       <div className="brands-marquee__viewport">
         <div className="brands-marquee__track">
           {[0, 1].map((copy) => (
