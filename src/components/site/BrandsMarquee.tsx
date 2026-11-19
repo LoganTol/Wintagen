@@ -20,7 +20,7 @@ export function BrandsMarquee() {
   return (
     <section id="our-brands" className="brands-marquee" aria-labelledby="brands-heading">
       <div className="site-container brands-marquee__heading">
-        <h2 id="brands-heading" className="section-label">Our Brands</h2>
+        <h2 id="brands-heading" className="brands-marquee__title">Our Products</h2>
         <Button
           variant="ghost"
           size="icon"
@@ -50,7 +50,6 @@ export function BrandsMarquee() {
                     />
                   )}
                   <span className={brand.wordmark ? "sr-only" : "brands-marquee__name"}>{brand.name}</span>
-                  <span className="brands-marquee__accent" aria-hidden="true" />
                 </div>
               ))}
             </div>
