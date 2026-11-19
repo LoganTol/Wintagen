@@ -3,7 +3,8 @@
 ## Homepage brand carousel
 - [x] Adapt the supplied marquee below the hero with teal marks, subtle orange accents, and half-height spacing.
 - [x] Verify motion, pause, placement, mobile layout and reduced motion.
-- [ ] Replace temporary ProPlans and Ledger Connect names when their logos are supplied.
+- [x] Replace the temporary ProPlans name with the supplied logo in Wintagen teal.
+- [ ] Replace the temporary Ledger Connect name when its logo is supplied.
 
 ## Hero logo assembly
 - [x] Recreate the original eight-blade logo as clean separate vector paths and animate a once-only clockwise assembly.

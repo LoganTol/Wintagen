@@ -20,6 +20,7 @@
 - Render the hero logo as independent vector paths with fill-box origins and a once-only CSS assembly triggered by the first downward page scroll after the shared popup reports minimized state; reserved space and immediate reduced-motion rendering prevent shifts and interference with the cursor glow.
 
 - Render the homepage brand marquee in two equal groups with CSS motion, an explicit pause control and a single static group for reduced motion; keep brand entries editable and preserve removed product URLs.
+- Distinguish complete wordmarks from standalone symbols in marquee entries, using cropped transparent asset masks and accessible names to avoid duplicate visible brand text.
 
 ## Visitor analytics
 - Load Contentsquare once from the shared root in a browser-only effect and send pathname-only pageviews on resolved navigation; this avoids duplicate tags, query-string personal data, and SSR browser dependencies. Never send contact-form values or identify visitors through custom tracking commands.

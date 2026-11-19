@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { Pause, Play } from "lucide-react";
 import quicksiteLogo from "@/assets/quicksite-logo.png.asset.json";
+import proplansLogo from "@/assets/proplans-wordmark.png.asset.json";
 import { Button } from "@/components/ui/button";
 
 // Keep previously removed product URLs removed; add approved logos here later.
 const BRANDS = [
-  { id: "quicksite", name: "QuickSite", logo: quicksiteLogo.url },
-  { id: "proplans", name: "ProPlans", logo: null },
-  { id: "aether", name: "Aether", logo: null },
-  { id: "ledger-connect", name: "Ledger Connect", logo: null },
+  { id: "quicksite", name: "QuickSite", logo: quicksiteLogo.url, wordmark: false },
+  { id: "proplans", name: "ProPlans", logo: proplansLogo.url, wordmark: true },
+  { id: "aether", name: "Aether", logo: null, wordmark: false },
+  { id: "ledger-connect", name: "Ledger Connect", logo: null, wordmark: false },
 ] as const;
 
 export function BrandsMarquee() {
@@ -41,12 +42,12 @@ export function BrandsMarquee() {
                 <div key={brand.id} className="brands-marquee__mark">
                   {brand.logo && (
                     <span
-                      className="brands-marquee__symbol"
+                      className={`brands-marquee__symbol${brand.wordmark ? " brands-marquee__symbol--wordmark" : ""}`}
                       aria-hidden="true"
                       style={{ maskImage: `url(${brand.logo})`, WebkitMaskImage: `url(${brand.logo})` }}
                     />
                   )}
-                  <span className="brands-marquee__name">{brand.name}</span>
+                  <span className={brand.wordmark ? "sr-only" : "brands-marquee__name"}>{brand.name}</span>
                   <span className="brands-marquee__accent" aria-hidden="true" />
                 </div>
               ))}
