@@ -353,7 +353,7 @@ function ValueRail() {
         <Reveal className="value-rail-head">
           <div>
             <p className="section-label">Wintagen</p>
-            <h2 className="section-heading mt-5">Three ways we create value.</h2>
+            <h2 className="section-heading mt-5">How we create value.</h2>
             <span aria-hidden="true" className="section-rule" />
           </div>
           <div className="value-rail-nav">
