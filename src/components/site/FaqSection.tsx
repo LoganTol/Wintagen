@@ -4,7 +4,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/Reveal";
 
 /**
@@ -40,27 +39,17 @@ const FAQ_ENTRIES = [
   },
 ];
 
-/** The first entry starts open; the empty fallback only matters if the list is emptied. */
-const FIRST_FAQ_QUESTION = FAQ_ENTRIES[0]?.question ?? "";
-
 export function FaqSection() {
   return (
     <section id="faq" className="border-t border-border bg-background">
       <div className="site-container section-space grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-20">
-        <Reveal className="flex flex-col items-start">
-          <p className="section-label">FAQ</p>
-          <Button asChild variant="outline" className="mt-7">
-            <a href="mailto:contact@wintagen.com">Ask a question</a>
-          </Button>
+        <Reveal>
+          <h2 className="sr-only">FAQ's</h2>
+          <p className="section-label">FAQ's</p>
         </Reveal>
 
         <Reveal delay={120}>
-          <Accordion
-            type="single"
-            collapsible
-            defaultValue={FIRST_FAQ_QUESTION}
-            className="faq-list"
-          >
+          <Accordion type="single" collapsible className="faq-list">
             {FAQ_ENTRIES.map(({ question, answer }) => (
               <AccordionItem key={question} value={question} className="faq-item">
                 <AccordionTrigger className="faq-item__trigger">{question}</AccordionTrigger>
