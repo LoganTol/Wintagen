@@ -47,14 +47,8 @@ export function FaqSection() {
   return (
     <section id="faq" className="border-t border-border bg-background">
       <div className="site-container section-space grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-20">
-        <Reveal>
+        <Reveal className="flex flex-col items-start">
           <p className="section-label">FAQ</p>
-          <h2 className="section-heading mt-5 max-w-md">Questions, answered.</h2>
-          <span aria-hidden="true" className="section-rule" />
-          <p className="mt-6 max-w-sm text-lg leading-relaxed text-muted-foreground">
-            The things people usually ask before reaching out. If yours isn't here, we're happy
-            to answer it directly.
-          </p>
           <Button asChild variant="outline" className="mt-7">
             <a href="mailto:contact@wintagen.com">Ask a question</a>
           </Button>
