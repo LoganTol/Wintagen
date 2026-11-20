@@ -10,6 +10,7 @@
 <!-- LOVABLE:END -->
 
 ## Presentation architecture
+- Define shared Organization and WebSite entities in one browser-safe data module and emit their linked JSON-LD graph through the root head; this gives every content page consistent identity without duplicate homepage entities.
 - Keep canonical links and Open Graph page addresses in leaf-route head metadata, never the root; this preserves self-referencing URLs without duplicate canonical tags.
 - Share the gliding drawer page between Services and UI/UX Design with editable entries; this preserves identical hover, touch, and keyboard behavior without duplicating interaction logic.
 - Derive sitemap URLs from required route-level staticData.sitemap decisions via src/lib/sitemap.ts; this automatically tracks public routes while excluding noindex pages and avoids invented lastmod timestamps.

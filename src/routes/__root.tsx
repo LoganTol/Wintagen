@@ -15,6 +15,7 @@ import { ContentsquareTracking } from "@/components/site/ContentsquareTracking";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { siteStructuredData } from "../lib/structured-data";
 
 function NotFoundComponent() {
   return (
@@ -106,6 +107,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", href: "/favicon.ico", sizes: "any" },
       { rel: "icon", href: "/favicon.png", type: "image/png", sizes: "48x48" },
       { rel: "icon", href: "/favicon-96.png", type: "image/png", sizes: "96x96" },
+    ],
+    scripts: [
+      { type: "application/ld+json", children: JSON.stringify(siteStructuredData) },
     ],
   }),
   shellComponent: RootShell,
