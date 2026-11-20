@@ -36,8 +36,10 @@ export const Route = createFileRoute("/services")({
           "Software development, websites, product strategy, and automation and integrations — practical technology services from Wintagen.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://wintagen.com/services" },
       { name: "twitter:card", content: "summary" },
     ],
+    links: [{ rel: "canonical", href: "https://wintagen.com/services" }],
   }),
   component: ServicesPage,
 });

@@ -10,6 +10,7 @@
 <!-- LOVABLE:END -->
 
 ## Presentation architecture
+- Keep canonical links and Open Graph page addresses in leaf-route head metadata, never the root; this preserves self-referencing URLs without duplicate canonical tags.
 - Share the gliding drawer page between Services and UI/UX Design with editable entries; this preserves identical hover, touch, and keyboard behavior without duplicating interaction logic.
 - Derive sitemap URLs from required route-level staticData.sitemap decisions via src/lib/sitemap.ts; this automatically tracks public routes while excluding noindex pages and avoids invented lastmod timestamps.
 - Keep TanStack Start routes and existing client-only contact/booking flows; reference repositories supply visual patterns only, so their auth, schema and runtime are not imported.

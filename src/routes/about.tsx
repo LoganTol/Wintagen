@@ -20,8 +20,10 @@ export const Route = createFileRoute("/about")({
           "Wintagen is an Atlanta-based software company building digital products and working with businesses to create custom software, applications, and websites.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://wintagen.com/about" },
       { name: "twitter:card", content: "summary" },
     ],
+    links: [{ rel: "canonical", href: "https://wintagen.com/about" }],
   }),
   component: AboutPage,
 });

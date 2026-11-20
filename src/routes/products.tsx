@@ -47,8 +47,10 @@ export const Route = createFileRoute("/products")({
           "Explore Aether Tennis, QuickSite, and ProPlans — focused digital products in the Wintagen portfolio.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://wintagen.com/products" },
       { name: "twitter:card", content: "summary" },
     ],
+    links: [{ rel: "canonical", href: "https://wintagen.com/products" }],
   }),
   component: ProductsPage,
 });

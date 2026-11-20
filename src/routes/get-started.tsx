@@ -21,8 +21,10 @@ export const Route = createFileRoute("/get-started")({
           "Tell Wintagen what you need, the features you have in mind, and how you'd like to talk. A short interest form to start the conversation.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://wintagen.com/get-started" },
       { name: "twitter:card", content: "summary" },
     ],
+    links: [{ rel: "canonical", href: "https://wintagen.com/get-started" }],
   }),
   component: GetStartedPage,
 });
