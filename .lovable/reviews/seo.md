@@ -76,4 +76,14 @@ Live checks found distinct titles and descriptions on all six public pages, one 
 
 Google controls whether extra page links appear beneath your homepage in search results. A sitemap helps discovery but does not guarantee these sitelinks.
 
-**No website code, sitemap submissions, or Google settings were changed by this review.**
+## Approved cleanup completed — November 20, 2026
+
+- Removed the three incorrect HTML-page sitemap submissions from Logan's Google Search Console; Google returned HTTP 204 for each removal.
+- Refreshed the XML sitemap submission once. A fresh read confirms it is the only remaining sitemap, last submitted at 04:28:31 UTC and downloaded at 04:28:32 UTC, with **six submitted URLs, zero errors, and zero warnings**. Submitted URL counts do not establish indexing.
+- Added self-referencing canonical links and matching Open Graph page addresses to About, Products, Services, and Get Started. Verified the preview's server-rendered HTML: all four return HTTP 200 with exactly one correct canonical and page address. Sitemap tests pass and the preview build is healthy.
+
+**Publication remains necessary:** the four page-address changes reach the live website on the next publish. No page content, crawler rules, or legal-page indexing exclusions were changed.
+
+**Manual next step:** use URL Inspection in Google Search Console for the five inner pages listed above and choose Request indexing. The API cannot perform that action, and sitemap acceptance does not guarantee indexing. No new indexing verdict is claimed by this cleanup.
+
+There were no failing current scanner findings to mark fixed; these were the additional cleanup recommendations approved after the review.

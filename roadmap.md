@@ -1,9 +1,9 @@
 # Wintagen visual redesign
 
 ## Approved SEO cleanup
-- [ ] Add and verify self-referencing page addresses on About, Products, Services, and Get Started.
-- [ ] Remove the three HTML-page sitemap submissions and refresh the XML sitemap submission once.
-- [ ] Verify Google’s remaining sitemap entries and document publication and manual indexing steps.
+- [x] Add and verify self-referencing page addresses on About, Products, Services, and Get Started.
+- [x] Remove the three HTML-page sitemap submissions and refresh the XML sitemap submission once.
+- [x] Verify Google’s remaining sitemap entries and document publication and manual indexing steps.
 
 ## UI/UX Design
 - [x] Add the third value card and a matching page with four design drawers.
